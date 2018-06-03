@@ -9,7 +9,7 @@ const AuthInput = props => {
 			iconClass = "fas fa-user";
 			break;
 		case "email":
-			iconClass = "fas fa-enveloper";
+			iconClass = "fas fa-envelope";
 			break;
 		case "password":
 			iconClass = "fas fa-unlock";
