@@ -21,7 +21,13 @@ const AuthInput = props => {
 	return (
 		<div className="auth-input">
 			<i className={`${iconClass} auth-input__icon`}></i>
-			<input type="text" value={props.value} onChange={props.onChange} className="auth-input__input" />
+			<input
+				type="text"
+				value={props.value}
+				onChange={props.onChange}
+				className="auth-input__input"
+				placeholder={props.placeholder}
+			/>
 		</div>
 	);
 };
@@ -30,6 +36,7 @@ AuthInput.propTypes = {
 	icon: PropTypes.string,
 	value: PropTypes.string.isRequired,
 	onChange: PropTypes.func.isRequired,
+	placeholder: PropTypes.string,
 };
 
 export default AuthInput;

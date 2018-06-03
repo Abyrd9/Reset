@@ -1,0 +1,9 @@
+.auth-button {
+	height: 10%;
+	background-color: $color-red;
+	width: 100%;
+	border: none;
+	outline: none;
+	@include font(400, 16px);
+	color: $color-white;
+}

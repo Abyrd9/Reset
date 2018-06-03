@@ -20,40 +20,53 @@ class SignUp extends Component {
 		return (
 			<div className="sign-up">
 
-				{/* Inputs */}
-				<div className="sign-up__inputs-container">
-					<AuthInput
-						icon="name"
-						value={this.state.name}
-						onChange={(e) => this.setState({name: e.target.value})}
-					/>
-					<AuthInput 
-						icon="email"
-						value={this.state.email}
-						onChange={(e) => this.setState({name: e.target.value})}
-					/>
-					<AuthInput
-						icon="password"
-						value={this.state.password}
-						onChange={(e) => this.setState({name: e.target.value})}
-					/>
+				<div className="sign-up__logo-container">
+					<img src={'../../src/assets/img/Logo.png'} alt={"logo image"} className="sign-up__logo-container__logo" />
 				</div>
 
-				{/* Divider */}
-				<div className="sign-up__divider">
-					<span className="sign-up__divider__line"></span>
-					or
-					<span className="sign-up__divider__line"></span>
-				</div>
+				{/* form */}
+				<div className="sign-up__form-container">
+					{/* Inputs */}
+					<div className="sign-up__input-container">
+						<AuthInput
+							icon="name"
+							value={this.state.name}
+							onChange={(e) => this.setState({name: e.target.value})}
+							placeholder="full name"
+						/>
+						<AuthInput 
+							icon="email"
+							value={this.state.email}
+							onChange={(e) => this.setState({name: e.target.value})}
+							placeholder="email@example.com"
+						/>
+						<AuthInput
+							icon="password"
+							value={this.state.password}
+							onChange={(e) => this.setState({name: e.target.value})}
+							placeholder="password"
+						/>
+					</div>
 
-				{/* Social Buttons */}
-				<div className="sign-up__social-buttons-container">
-					<AuthSocialButtons icon="facebook" onClick={() => {return;}} />
-					<AuthSocialButtons icon="google" onClick={() => {return;}} />
+					{/* Divider */}
+					<div className="sign-up__divider">
+						<span className="sign-up__divider__line"></span>
+						or
+						<span className="sign-up__divider__line"></span>
+					</div>
+
+					{/* Social Buttons */}
+					<div className="sign-up__social-buttons-container">
+						<AuthSocialButtons icon="facebook" onClick={() => {return;}} />
+						<AuthSocialButtons icon="google" onClick={() => {return;}} />
+					</div>
 				</div>
 
 				{/* Auth Toggle - Sign In */}
-				<AuthToggleLink />
+				<AuthToggleLink
+					text="Already have an account? "
+					linkText="Sign In"
+				/>
 
 				{/* Sign Up Button */}
 				<AuthButton>

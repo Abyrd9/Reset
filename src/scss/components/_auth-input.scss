@@ -1,0 +1,24 @@
+.auth-input {
+	width: 90%;
+	padding: 8px 10px;
+	margin: 10px 0px;
+	border-bottom: solid 2px $color-gray;
+	display: flex;
+	align-items: center;
+	&__icon {
+		color: $color-gray;
+		margin-right: 10px;
+	}
+	&__input {
+		width: 90%;
+		background: transparent;
+		border: none;
+		outline: none;
+		@include font(400, 16px);
+		color: $color-white;
+		&::placeholder {
+			@include font(400, 16px);
+			color: $color-gray;
+		}
+	}
+}
