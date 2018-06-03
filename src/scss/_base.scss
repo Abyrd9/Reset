@@ -5,11 +5,13 @@
 @import './partials/breakpoints';
 
 //modules
-@import './components/auth-input';
-@import './components/auth-social-buttons';
-@import './components/auth-toggle-link';
+@import './components/common/auth-input';
+@import './components/common/auth-social-buttons';
+@import './components/common/auth-toggle-link';
+@import './components/common/logo-container';
+@import './components/common/footer-button';
+@import './components/common/pill-button';
+@import './components/common/quote-block';
+
+@import './components/base-container';
 @import './components/auth';
-@import './components/footer-button';
-@import './components/pill-button';
-@import './components/quote-block';
-@import './components/home-empty';

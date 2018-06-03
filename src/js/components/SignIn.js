@@ -5,6 +5,7 @@ import AuthInput from './common/AuthInput';
 import AuthSocialButtons from './common/AuthSocialButtons';
 import AuthToggleLink from './common/AuthToggleLink';
 import FooterButton from './common/FooterButton';
+import LogoHeader from './common/LogoHeader';
 
 class SignIn extends Component {
 	constructor(props) {
@@ -18,12 +19,10 @@ class SignIn extends Component {
 
 	render() {
 		return (
-			<div className="auth">
+			<div className="base auth">
 
 				{/* logo */}
-				<div className="auth__logo-container">
-					<img src={'../../src/assets/img/Logo.png'} alt={"logo image"} className="auth__logo-container__logo" />
-				</div>
+				<LogoHeader />
 
 				{/* form */}
 				<div className="auth__form-container">
@@ -64,7 +63,7 @@ class SignIn extends Component {
 				/>
 
 				{/* Sign In Button */}
-				<FooterButton className="auth-button">
+				<FooterButton>
 					Sign In
 				</FooterButton>
 

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 const FooterButton = props => {
 	return (
-		<button className={props.className}>
+		<button className="footer-button">
 			{props.children}
 		</button>
 	);
@@ -11,7 +11,7 @@ const FooterButton = props => {
 
 FooterButton.propTypes = {
 	className: PropTypes.string,
-	children: PropTypes.element.isRequired
+	children: PropTypes.node.isRequired
 };
 
 export default FooterButton;

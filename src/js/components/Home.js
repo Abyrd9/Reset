@@ -2,9 +2,10 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import QuoteBlock from './common/QuoteBlock';
 import PillButton from './common/PillButton';
+import FooterButton from './common/FooterButton';
 import LogoHeader from './common/LogoHeader';
 
-class HomeEmpty extends Component {
+class Home extends Component {
 	render() {
 		return (
 			<div className="base">
@@ -17,13 +18,18 @@ class HomeEmpty extends Component {
 
 				{/* Add New Quote Button */}
 				<PillButton>
+					I Believe this is true.
+				</PillButton>
+
+				{/* Sign In Button */}
+				<FooterButton>
 					<i className="fas fa-plus-circle"></i>
 					Add New
-				</PillButton>
+				</FooterButton>
 
 			</div>
 		);
 	}
 }
 
-export default HomeEmpty;
+export default Home;
