@@ -18,17 +18,17 @@ class SignIn extends Component {
 
 	render() {
 		return (
-			<div className="sign-up">
+			<div className="auth">
 
 				{/* logo */}
-				<div className="sign-up__logo-container">
-					<img src={'../../src/assets/img/Logo.png'} alt={"logo image"} className="sign-up__logo-container__logo" />
+				<div className="auth__logo-container">
+					<img src={'../../src/assets/img/Logo.png'} alt={"logo image"} className="auth__logo-container__logo" />
 				</div>
 
 				{/* form */}
-				<div className="sign-up__form-container">
+				<div className="auth__form-container">
 					{/* Inputs */}
-					<div className="sign-up__input-container">
+					<div className="auth__input-container">
 						<AuthInput 
 							icon="email"
 							value={this.state.email}
@@ -44,14 +44,14 @@ class SignIn extends Component {
 					</div>
 
 					{/* Divider */}
-					<div className="sign-up__divider">
-						<span className="sign-up__divider__line"></span>
+					<div className="auth__divider">
+						<span className="auth__divider__line"></span>
 						or
-						<span className="sign-up__divider__line"></span>
+						<span className="auth__divider__line"></span>
 					</div>
 
 					{/* Social Buttons */}
-					<div className="sign-up__social-buttons-container">
+					<div className="auth__social-buttons-container">
 						<AuthSocialButtons icon="facebook" onClick={() => {return;}} />
 						<AuthSocialButtons icon="google" onClick={() => {return;}} />
 					</div>

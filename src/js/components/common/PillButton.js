@@ -10,8 +10,8 @@ const PillButton = props => {
 };
 
 PillButton.propTypes = {
-	onClick: PropTypes.onClick,
-	children: PropTypes.element,
+	onClick: PropTypes.func,
+	children: PropTypes.node,
 };
 
 export default PillButton;

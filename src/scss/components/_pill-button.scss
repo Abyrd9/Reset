@@ -1,0 +1,15 @@
+.pill-button {
+	width: 80%;
+	border-radius: 15px;
+	padding: 15px 0px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	border: none;
+	background-color: $color-red;
+	@include font(400, 16px);
+	color: $color-white;
+	i {
+		margin-right: 5px;
+	}
+}

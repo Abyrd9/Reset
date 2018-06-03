@@ -5,8 +5,11 @@
 @import './partials/breakpoints';
 
 //modules
-@import './components/auth-button';
 @import './components/auth-input';
 @import './components/auth-social-buttons';
 @import './components/auth-toggle-link';
-@import './components/sign-up';
+@import './components/auth';
+@import './components/footer-button';
+@import './components/pill-button';
+@import './components/quote-block';
+@import './components/home-empty';

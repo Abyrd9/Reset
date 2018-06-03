@@ -14,11 +14,11 @@ class HomeEmpty extends Component {
 				</div>
 
 				{/* Quote Block */}
-				<QuoteBlock quote="You don’t have any truth statements yet.Click the button below to create one." />
+				<QuoteBlock quote="You don’t have any truth statements yet. Click the button below to create one." />
 
 				{/* Add New Quote Button */}
 				<PillButton>
-					<i class="fas fa-plus-circle"></i>
+					<i className="fas fa-plus-circle"></i>
 					Add New
 				</PillButton>
 

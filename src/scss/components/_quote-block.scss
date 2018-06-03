@@ -1,0 +1,15 @@
+.quote-block {
+	width: 90%;
+	height: 65%;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	text-align: center;
+	@include font(500, 20px);
+	color: $color-white;
+	&__icon {
+		color: $color-gray;
+		margin: 15px;
+	}
+}
