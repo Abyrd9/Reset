@@ -20,6 +20,7 @@ class SignUp extends Component {
 		return (
 			<div className="sign-up">
 
+				{/* logo */}
 				<div className="sign-up__logo-container">
 					<img src={'../../src/assets/img/Logo.png'} alt={"logo image"} className="sign-up__logo-container__logo" />
 				</div>
