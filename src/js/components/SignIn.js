@@ -6,7 +6,7 @@ import AuthSocialButtons from './common/AuthSocialButtons';
 import AuthToggleLink from './common/AuthToggleLink';
 import FooterButton from './common/FooterButton';
 
-class SignUp extends Component {
+class SignIn extends Component {
 	constructor(props) {
 		super(props);
 		this.state ={
@@ -28,12 +28,6 @@ class SignUp extends Component {
 				<div className="sign-up__form-container">
 					{/* Inputs */}
 					<div className="sign-up__input-container">
-						<AuthInput
-							icon="name"
-							value={this.state.name}
-							onChange={(e) => this.setState({name: e.target.value})}
-							placeholder="full name"
-						/>
 						<AuthInput 
 							icon="email"
 							value={this.state.email}
@@ -62,15 +56,15 @@ class SignUp extends Component {
 					</div>
 				</div>
 
-				{/* Auth Toggle - Sign In */}
+				{/* Auth Toggle - Sign Up */}
 				<AuthToggleLink
-					text="Already have an account? "
+					text="Don't have an account? "
 					linkText="Sign In"
 				/>
 
-				{/* Sign Up Button */}
+				{/* Sign In Button */}
 				<FooterButton className="auth-button">
-					Sign Up
+					Sign In
 				</FooterButton>
 
 			</div>
@@ -78,4 +72,4 @@ class SignUp extends Component {
 	}
 }
 
-export default SignUp;
+export default SignIn;
