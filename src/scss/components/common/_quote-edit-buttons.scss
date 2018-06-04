@@ -1,0 +1,22 @@
+.quote-edit-buttons {
+	width: 100%;
+	display: flex;
+	justify-content: space-evenly;
+	&__button {
+		flex: auto;
+		border: none;
+		outline: none;
+		background-color: $color-red;
+		padding: 8px 0px;
+		&:nth-child(1) {
+			border-right: 1px solid $color-white !important;
+		}
+		&:nth-child(2) {
+			border-left: 1px solid $color-white !important;
+		}
+	}
+	&__button-icon {
+		color: $color-white;
+		font-size: 22px;
+	}
+}

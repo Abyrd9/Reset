@@ -1,0 +1,29 @@
+.quote-list-item {
+	padding: 15px 25px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	min-height: 115px;
+	position: relative;
+	border-bottom: solid 1px $color-gray;
+	&__content {
+		@include font(500, 18px);
+		color: $color-black;
+		flex: auto;
+	}
+	&__input {
+		background-color: transparent;
+		box-sizing: border-box;
+		width: 100%;
+		overflow: hidden;
+		resize: none;
+		border: none;
+		outline: none;
+		@include font(500, 18px);
+		color: $color-black;
+	}
+}
+
+.quote-list-item.is-editable {
+	min-height: auto;
+}

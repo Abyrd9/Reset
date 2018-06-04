@@ -1,0 +1,13 @@
+.quote-list {
+	flex: auto;
+	display: flex;
+	width: 100%;
+	flex-direction: column;
+	justify-content: space-between;
+	align-items: center;
+	&__quotes {
+		overflow-y: scroll;
+		flex: auto;
+		width: 100%;
+	}
+}

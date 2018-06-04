@@ -1,0 +1,13 @@
+.tool-buttons {
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	padding-right: 30px;
+	margin-right: 20px;
+	border-right: solid 1px $color-gray;
+	&__icon {
+		margin: 10px 0px;
+		font-size: 22px;
+		color: $color-red;
+	}
+}
