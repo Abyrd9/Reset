@@ -1,8 +1,9 @@
 .quote-creator {
 	width: 100%;
 	border-top: 2px $color-gray solid;
+	position: relative;
+	@include depth(top);
 	&__input {
-		background-color: transparent;
 		box-sizing: border-box;
 		width: 100%;
 		overflow: hidden;

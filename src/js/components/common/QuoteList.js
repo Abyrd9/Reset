@@ -19,6 +19,10 @@ class QuoteList extends Component {
 	}
 
 	createQuote = () => {
+		const isActive = this.state.quotes.some(quote => 
+			quote.toolsVisible || quote.isDeletable || quote.isEditable
+		);
+		console.log(isActive);
 		const quoteKey = KeyGen(this.state.quotes);
 		const value = this.state.creatorValue;
 		const quote = {
@@ -28,7 +32,7 @@ class QuoteList extends Component {
 			isDeletable: false,
 			isEditable: false,
 		}
-		if (value !== '') {
+		if (value !== '' && !isActive) {
 			this.setState(
 				produce(draft => {
 					draft.creatorValue = '';
@@ -39,12 +43,21 @@ class QuoteList extends Component {
 	}
 
 	quoteChange = (keyToChange, value, key) => {
-		console.log('This ran');
-		console.log(keyToChange, value, key);
 		this.setState(
 			produce(draft => {
+
+				// Make sure clicking a non-active quote doesn't trigger anything
+				const filteredQuotes = draft.quotes.filter(quote => quote.quoteKey !== key);
+				const notActive = filteredQuotes.every(quote => {
+					if (!quote.isDeletable && !quote.isEditable && !quote.toolsVisible) {
+						return true;
+					} else {
+						return false;
+					}
+				})
+
 				draft.quotes.forEach((quote, index) => {
-					if (quote.quoteKey === key) {
+					if (quote.quoteKey === key && notActive) {
 						switch(keyToChange) {
 							case 'value':
 								quote.value = value;
@@ -81,6 +94,8 @@ class QuoteList extends Component {
 	render() {
 		const { quotes } = this.state;
 
+		const editActive = quotes.some(quote => quote.isEditable);
+
 		const cleanUpText = e => {
 			const newText = e.target.value.replace(/\n/g, '');
 			this.setState({ creatorValue: newText })
@@ -89,8 +104,8 @@ class QuoteList extends Component {
 		return (
 			<div className="quote-list">
 				<div className="quote-list__quotes">
-					{
-						quotes.length > 0 && quotes.map(quote => (
+
+					{quotes.length > 0 && quotes.map(quote => (
 							<QuoteListItem
 								key={quote.quoteKey}
 								quoteKey={quote.quoteKey}
@@ -99,9 +114,9 @@ class QuoteList extends Component {
 								isDeletable={quote.isDeletable}
 								isEditable={quote.isEditable}
 								quoteChange={this.quoteChange}
+								editActive={editActive}
 							/>
-						))
-					}
+					))}
 				</div>
 
 				<QuoteCreator

@@ -5,6 +5,7 @@
 	flex-direction: column;
 	justify-content: space-between;
 	align-items: center;
+	position: relative;
 	&__quotes {
 		overflow-y: scroll;
 		flex: auto;

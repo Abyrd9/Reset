@@ -6,7 +6,7 @@ const QuoteCreator = props => {
 	return (
 		<div className="quote-creator">
 			<AutoSizeInput
-				defaultHeight={50}
+				defaultHeight={52}
 				className="quote-creator__input"
 				value={props.value}
 				placeholder="Add New Truth..."

@@ -16,10 +16,9 @@ class AutoSizeInput extends Component {
 	}
 
 	componentDidUpdate(prevProps, prevState) {
-		console.log(prevState.height, this.ghost.clientHeight)
-		// if (prevState.height !== this.ghost.clientHeight) {
-		// 	this.setFilledTextareaHeight(this.props.defaultHeight);
-		// }
+		if (prevProps.value !== this.props.value) {
+			this.setFilledTextareaHeight(this.props.defaultHeight);
+		}
 	}
 
   setFilledTextareaHeight(defaultHeight) {
@@ -52,7 +51,6 @@ class AutoSizeInput extends Component {
             height,
             resize: isOneLine ? "none" : null
 					}}
-					onKeyUp={() => {this.setFilledTextareaHeight(props.defaultHeight)}}
 					onChange={onChange}
         />
     );
@@ -77,7 +75,7 @@ class AutoSizeInput extends Component {
 
 	render() {
 			return (
-				<div style={{position: 'relative', width: '100%'}}>
+				<div style={{position: 'relative', width: '100%', backgroundColor: 'white'}}>
 					{this.getExpandableField(this.props)}
 					{this.getGhostField(this.props)}
 				</div>

@@ -27,6 +27,7 @@ class QuoteListItem extends Component {
 			isDeletable,
 			isEditable,
 			quoteChange,
+			editActive
 		} = this.props;
 
 		const cleanUpText = e => {
@@ -34,10 +35,13 @@ class QuoteListItem extends Component {
 			this.setState({ inputValue: newText })
 		}
 
+		const isEditableClass = isEditable ? 'is-editable' : '';
+		const isOverlayClass = editActive && !isEditable ? 'quote-list-item__overlay' : '';
+
 		return (
 			<React.Fragment>
 			<div
-				className={`quote-list-item ${isEditable ? 'is-editable' : ''}`}
+				className={`quote-list-item ${isEditableClass} ${isOverlayClass}`}
 				onClick={() => quoteChange('toolsVisible', !toolsVisible, quoteKey)}
 			>
 				{isDeletable && (
