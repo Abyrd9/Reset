@@ -1,16 +1,44 @@
 import React, {Component} from 'react';
 
-import SignUp from './components/SignUp';
-import SignIn from './components/SignIn';
-import HomeEmpty from './components/HomeEmpty';
+import { UserTheme } from './components/UserTheme';
+
+import Auth from './components/Auth';
 import Home from './components/Home';
-import Edit from './components/Edit';
 
 class App extends Component {
-    render() {
+	constructor() {
+		super();
+		this.state = {
+			isUserActive: false,
+			isRunningAuth: false,
+		}
+		this.isUserActive = this.isUserActive.bind(this);
+		this.isRunningAuth = this.isRunningAuth.bind(this);
+	}
+
+	isUserActive = () => {
+		this.setState({ isUserActive: !this.state.isUserActive })
+	}
+
+	isRunningAuth = () => {
+		this.setState({ isRunningAuth: !this.state.isRunningAuth })
+	}
+
+	render() {
         return (
             <div className='global-container'>
-                <Edit />
+                <UserTheme
+									isUserActive={this.isUserActive}
+									isRunningAuth={this.isRunningAuth}
+								>
+									{
+										!this.state.isUserActive ? (
+											<Auth />
+										) : (
+											<Home />
+										)
+									}
+                </UserTheme>
             </div>
         )
     }

@@ -26,7 +26,7 @@ class QuoteListItem extends Component {
 			toolsVisible,
 			isDeletable,
 			isEditable,
-			quoteChange,
+			changeQuote,
 			editActive
 		} = this.props;
 
@@ -42,19 +42,19 @@ class QuoteListItem extends Component {
 			<React.Fragment>
 			<div
 				className={`quote-list-item ${isEditableClass} ${isOverlayClass}`}
-				onClick={() => quoteChange('toolsVisible', !toolsVisible, quoteKey)}
+				onClick={() => changeQuote('toolsVisible', !toolsVisible, quoteKey)}
 			>
 				{isDeletable && (
 					<QuoteDelete
 						text="Are you sure you want to delete this?"
-						cancelClick={() => quoteChange('isDeletable', false, quoteKey)}
-						approveClick={() => quoteChange('deleteQuote', null, quoteKey)}
+						cancelClick={() => changeQuote('isDeletable', false, quoteKey)}
+						approveClick={() => changeQuote('deleteQuote', null, quoteKey)}
 					/>
 				)}
 				{toolsVisible && (
 					<ToolButtons
-						deleteClick={() => quoteChange('isDeletable', true, quoteKey)}
-						editClick={() => quoteChange('isEditable', true, quoteKey)}
+						deleteClick={() => changeQuote('isDeletable', true, quoteKey)}
+						editClick={() => changeQuote('isEditable', true, quoteKey)}
 					/>
 				)}
 				{isEditable ? (
@@ -72,8 +72,8 @@ class QuoteListItem extends Component {
 			</div>
 			{isEditable && (
 				<QuoteEditButtons
-					cancelClick={() => quoteChange('isEditable', false, quoteKey)}
-					approveClick={() => quoteChange('value', this.state.inputValue, quoteKey)}
+					cancelClick={() => changeQuote('isEditable', false, quoteKey)}
+					approveClick={() => changeQuote('value', this.state.inputValue, quoteKey)}
 				/>
 			)}
 			</React.Fragment>
@@ -87,7 +87,7 @@ QuoteListItem.propTypes = {
 	toolsVisible: PropTypes.bool,
 	isDeletable: PropTypes.bool,
 	isEditable: PropTypes.bool,
-	quoteChange: PropTypes.func,
+	changeQuote: PropTypes.func,
 };
 
 export default QuoteListItem;

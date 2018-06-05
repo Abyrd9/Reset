@@ -1,33 +1,23 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import QuoteBlock from './common/QuoteBlock';
-import PillButton from './common/PillButton';
-import FooterButton from './common/FooterButton';
-import LogoHeader from './common/LogoHeader';
+
+import EditQuotes from './EditQuotes';
+import ShowQuotes from './ShowQuotes';
+
+import { UserContext } from './UserTheme';
 
 class Home extends Component {
 	render() {
 		return (
-			<div className="base">
-				
-				{/* logo */}
-				<LogoHeader />
-
-				{/* Quote Block */}
-				<QuoteBlock quote="You don’t have any truth statements yet. Click the button below to create one." />
-
-				{/* Add New Quote Button */}
-				<PillButton>
-					I Believe this is true.
-				</PillButton>
-
-				{/* Sign In Button */}
-				<FooterButton>
-					<i className="fas fa-plus-circle"></i>
-					Add New
-				</FooterButton>
-
-			</div>
+			<UserContext.Consumer>
+				{
+					context => (
+						<React.Fragment>
+							{context.page === 'home' && ( <ShowQuotes /> )}
+							{context.page === 'edit' && ( <EditQuotes /> )}
+						</React.Fragment>
+					)
+				}
+			</UserContext.Consumer>
 		);
 	}
 }
