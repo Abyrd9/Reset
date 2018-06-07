@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const QuoteBlock = props => {
+	console.log(props)
 	return (
 		<div className="quote-block">
 			<i className="fas fa-quote-left quote-block__icon"></i>

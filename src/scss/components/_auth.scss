@@ -20,6 +20,7 @@
 		width: 100%;
 		@include centerColumn;
 		margin: 10px 0px;
+		min-height: 250px;
 	}
 	&__divider {
 		margin: 10px 0px;

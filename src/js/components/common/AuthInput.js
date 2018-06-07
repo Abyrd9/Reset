@@ -21,13 +21,20 @@ const AuthInput = props => {
 	return (
 		<div className="auth-input">
 			<i className={`${iconClass} auth-input__icon`}></i>
-			<input
-				type="text"
-				value={props.value}
-				onChange={props.onChange}
-				className="auth-input__input"
-				placeholder={props.placeholder}
-			/>
+			<label className="auth-input__label" >
+				<input
+					type="text"
+					value={props.value}
+					onChange={props.onChange}
+					className="auth-input__input"
+				/>
+				<p
+					className={`auth-input__placeholder ${props.value.length > 0 ? 'hidden' : ''}`}
+				>
+					{props.placeholder}
+				</p>
+			</label>
+
 		</div>
 	);
 };

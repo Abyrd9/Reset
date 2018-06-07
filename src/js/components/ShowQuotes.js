@@ -17,8 +17,8 @@ class ShowQuotes extends Component {
 	}
 
 	nextQuote = (quotes) => {
-		const newIndex = this.state.index++;
-		if (newIndex > quotes.length) {
+		const newIndex = this.state.index + 1;
+		if (newIndex >= quotes.length) {
 			this.setState({ index: 0 });
 		} else {
 			this.setState({ index: newIndex })
@@ -41,7 +41,7 @@ class ShowQuotes extends Component {
                   <React.Fragment>
 
                     {/* Quote Block */}
-                    <QuoteBlock quote={context.quotes[this.state.index]} />
+                    <QuoteBlock quote={context.quotes[this.state.index].value} />
                     
                     {/* Continue to Next Quote Button */}
                     <PillButton onClick={() => this.nextQuote(context.quotes)}>
@@ -66,7 +66,7 @@ class ShowQuotes extends Component {
 
                 {/* Sign In Button */}
                 {context.quotes.length > 0 && (
-                  <FooterButton>
+                  <FooterButton onClick={() => context.changePage('edit')}>
                     <i className="fas fa-plus-circle"></i>
                     Add New
                   </FooterButton>

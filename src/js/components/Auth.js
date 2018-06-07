@@ -20,6 +20,7 @@ class Auth extends Component {
 	}
 
 	render() {
+
 		return (
 			<div className="base auth">
 				<UserContext.Consumer>
@@ -35,14 +36,14 @@ class Auth extends Component {
 
 									{/* Inputs */}
 									<div className="auth__input-container">
-										{context.page === 'signUp' && (
+										<div className={`${context.page === 'signUp' ? 'name-input-container visible' : 'name-input-container'}`}>
 											<AuthInput
 												icon="name"
 												value={this.state.name}
 												onChange={(e) => this.setState({name: e.target.value})}
 												placeholder="full name"
 											/>
-										)}
+										</div>
 										<AuthInput 
 											icon="email"
 											value={this.state.email}
@@ -66,8 +67,8 @@ class Auth extends Component {
 
 									{/* Social Buttons */}
 									<div className="auth__social-buttons-container">
-										<AuthSocialButtons icon="facebook" onClick={() => {return;}} />
-										<AuthSocialButtons icon="google" onClick={() => {return;}} />
+										<AuthSocialButtons icon="facebook" onClick={() => context.facebookAuth()} />
+										<AuthSocialButtons icon="google" onClick={() => context.googleAuth()} />
 									</div>
 
 								</div>

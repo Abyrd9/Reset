@@ -18,6 +18,7 @@ class EditQuotes extends Component {
 								/>
 								<QuoteList
 									quotes={context.quotes}
+									quoteCreatorValue={context.quoteCreatorValue}
 									changeQuote={context.changeQuote}
 									createQuote={context.createQuote}
 									changeCreatorValue={context.changeCreatorValue}

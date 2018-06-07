@@ -9,6 +9,7 @@
 	background-color: $color-red;
 	@include font(400, 16px);
 	color: $color-white;
+	margin-bottom: 60px;
 	i {
 		margin-right: 5px;
 	}

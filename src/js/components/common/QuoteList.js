@@ -11,6 +11,7 @@ class QuoteList extends Component {
 	render() {
 		const {
 			quotes,
+			quoteCreatorValue,
 			changeQuote,
 			createQuote,
 			changeCreatorValue,
@@ -42,9 +43,9 @@ class QuoteList extends Component {
 				</div>
 
 				<QuoteCreator
-					value={this.state.quoteCreatorValue}
+					value={quoteCreatorValue}
 					onChange={(e) => cleanUpText(e)}
-					onClick={() => createQuote(this.state.quoteCreatorValue)}
+					onClick={() => createQuote(quoteCreatorValue)}
 				/>
 			</div>
 		);

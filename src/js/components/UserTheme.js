@@ -7,6 +7,8 @@ import firebase from '../utils/Firebase';
 import { KeyGen } from '../utils/KeyGen';
 
 export const UserContext = React.createContext('user');
+const googleProvider = new firebase.auth.GoogleAuthProvider();
+const facebookProvider = new firebase.auth.FacebookAuthProvider();
 
 export class UserTheme extends Component {
   constructor(props) {
@@ -20,7 +22,9 @@ export class UserTheme extends Component {
       },
     }
     this.changePage = this.changePage.bind(this);
-    this.emailAuth = this.emailAuth.bind(this);
+		this.emailAuth = this.emailAuth.bind(this);
+		this.googleAuth = this.googleAuth.bind(this);
+		this.facebookAuth = this.facebookAuth.bind(this);
     this.changeQuote = this.changeQuote.bind(this);
     this.createQuote = this.createQuote.bind(this);
     this.changeCreatorValue = this.changeCreatorValue.bind(this);
@@ -86,7 +90,27 @@ export class UserTheme extends Component {
           console.log(error.code, error.message);
         })
     }
-  }
+	}
+	
+	googleAuth = () => {
+		firebase.auth().signInWithPopup(googleProvider).then(result => {
+			const token = result.credential.accessToken;
+			const user = result.user;
+			console.log(token, user)
+		}).catch(error => {
+			console.log(error.code, error.message, error.email, error.credential);
+		})
+	}
+
+	facebookAuth = () => {
+		firebase.auth().signInWithPopup(facebookProvider).then(result => {
+			const token = result.credential.accessToken;
+			const user = result.user;
+			console.log(token, user)
+		}).catch(error => {
+			console.log(error.code, error.message, error.email, error.credential);
+		})
+	}
 
   createQuote = (value) => {
 		const isActive = this.state.user.userQuotes.some(quote => 
@@ -163,9 +187,12 @@ export class UserTheme extends Component {
     return (
       <UserContext.Provider value={{
         page: this.state.page,
-        quotes: this.state.user.userQuotes,
+				quotes: this.state.user.userQuotes,
+				quoteCreatorValue: this.state.quoteCreatorValue,
         changePage: this.changePage,
-        emailAuth: this.emailAuth,
+				emailAuth: this.emailAuth,
+				googleAuth: this.googleAuth,
+				facebookAuth: this.facebookAuth,
         changeQuote: this.changeQuote,
         createQuote: this.createQuote,
         changeCreatorValue: this.changeCreatorValue,
