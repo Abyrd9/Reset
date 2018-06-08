@@ -12,15 +12,15 @@ class App extends Component {
 			isUserActive: false,
 			isRunningAuth: false,
 		}
-		this.isUserActive = this.isUserActive.bind(this);
-		this.isRunningAuth = this.isRunningAuth.bind(this);
+		this.setIsUserActive = this.setIsUserActive.bind(this);
+		this.setIsRunningAuth = this.setIsRunningAuth.bind(this);
 	}
 
-	isUserActive = () => {
+	setIsUserActive = () => {
 		this.setState({ isUserActive: !this.state.isUserActive })
 	}
 
-	isRunningAuth = () => {
+	setIsRunningAuth = () => {
 		this.setState({ isRunningAuth: !this.state.isRunningAuth })
 	}
 
@@ -28,8 +28,9 @@ class App extends Component {
         return (
             <div className='global-container'>
                 <UserTheme
-									isUserActive={this.isUserActive}
-									isRunningAuth={this.isRunningAuth}
+									setIsUserActive={this.setIsUserActive}
+									setIsRunningAuth={this.setIsRunningAuth}
+									isUserActive={this.state.isUserActive}
 								>
 									{
 										!this.state.isUserActive ? (

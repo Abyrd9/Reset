@@ -18,7 +18,10 @@
 	}
 	&__input-container {
 		width: 100%;
-		@include centerColumn;
+		display: flex;
+		flex-direction: column;
+		justify-content: flex-end;
+		align-items: center;
 		margin: 10px 0px;
 		min-height: 250px;
 	}

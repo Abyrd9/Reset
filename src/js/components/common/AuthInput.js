@@ -27,6 +27,7 @@ const AuthInput = props => {
 					value={props.value}
 					onChange={props.onChange}
 					className="auth-input__input"
+					disabled={props.disabled}
 				/>
 				<p
 					className={`auth-input__placeholder ${props.value.length > 0 ? 'hidden' : ''}`}
@@ -44,6 +45,7 @@ AuthInput.propTypes = {
 	value: PropTypes.string.isRequired,
 	onChange: PropTypes.func.isRequired,
 	placeholder: PropTypes.string,
+	disabled: PropTypes.bool,
 };
 
 export default AuthInput;

@@ -42,6 +42,7 @@ class Auth extends Component {
 												value={this.state.name}
 												onChange={(e) => this.setState({name: e.target.value})}
 												placeholder="full name"
+												disabled={context.page !== 'signUp'}
 											/>
 										</div>
 										<AuthInput 

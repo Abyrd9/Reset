@@ -31,7 +31,7 @@ export class UserTheme extends Component {
   }
 
   componentDidMount() {
-    this.props.isRunningAuth();
+    this.props.setIsRunningAuth();
     firebase.auth().onAuthStateChanged(user => {
       if (!!user) {
         this.setState(
@@ -40,18 +40,41 @@ export class UserTheme extends Component {
             draft.page = 'home';
           })
         )
-        this.props.isUserActive();
-        this.props.isRunningAuth();
+        this.props.setIsUserActive();
+        this.props.setIsRunningAuth();
       } else {
         this.setState(
           produce(draft => {
             draft.page = 'signUp';
           })
         )
-        this.props.isRunningAuth();
+        this.props.setIsRunningAuth();
       }
     })
-  }
+	}
+
+	componentDidUpdate() {
+		console.log(this.props);
+		firebase.auth().onAuthStateChanged(user => {
+      if (!!user && !!user !== this.props.isUserActive) {
+				this.props.setIsUserActive()
+				if (!!user) {
+					this.setState(
+						produce(draft => {
+							draft.user.userId = user;
+							draft.page = 'home';
+						})
+					)
+				} else {
+					this.setState(
+						produce(draft => {
+							draft.page = 'signUp';
+						})
+					)
+				}
+			}
+    });
+	}
 
   changePage = (value) => {
     this.setState(
@@ -70,12 +93,12 @@ export class UserTheme extends Component {
   }
 
   emailAuth = (email, password, name) => {
-    this.props.isRunningAuth();
+    this.props.setIsRunningAuth();
     if (this.state.page === 'signUp') {
       firebase.auth().createUserWithEmailAndPassword(email, password)
         .then(response => {
-          this.props.isRunningAuth();
-          this.props.isUserActive();
+          this.props.setIsRunningAuth();
+          this.props.setIsUserActive();
         })
         .catch(error => {
           console.log(error.code, error.message);
@@ -83,8 +106,8 @@ export class UserTheme extends Component {
     } else if (this.state.page === 'signIn') {
       firebase.auth().signInWithEmailAndPassword(email, password)
         .then(response => {
-          this.props.isRunningAuth();
-          this.props.isUserActive();
+          this.props.setIsRunningAuth();
+          this.props.setIsUserActive();
         })
         .catch(error => {
           console.log(error.code, error.message);
