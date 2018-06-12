@@ -23,16 +23,27 @@
 	}
 	&__button {
 		width: 100%;
-		background-color: $color-red;
+		background-color: $color-gray;
 		display: flex;
 		justify-content: center;
 		align-items: center;
 		border: none;
+		transition: background-color .3s cubic-bezier(.4, 0, .6, 1);
+		&:focus, &:active {
+			outline: none;
+			border: none;
+		}
 		i {
 			font-size: 26px;
 			color: $color-white;
 			padding: 10px 0px;
 		}
+	}
+}
+
+.quote-creator{
+	div:focus-within ~ button {
+		background-color: $color-red;
 	}
 }
 

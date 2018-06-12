@@ -11,6 +11,11 @@
 	background-color: $color-red;
 	@include font(500, 18px);
 	color: $color-white;
+	z-index: 2;
+	transform: translateY(-15px);
+	opacity: 0;
+	visibility: hidden;
+	transition: transform .3s cubic-bezier(.4, 0, .6, 1), opacity .3s cubic-bezier(.4, 0, .6, 1), visibility 0s linear .3s;
 	&__button-container {
 		margin-top: 15px;
 		&__icon {
@@ -18,4 +23,11 @@
 			margin: 0px 10px;
 		}
 	}
+}
+
+.quote-delete.visible {
+	transform: translateY(0);
+	opacity: 1;
+	visibility: visible;
+	transition: visibility, opacity .3s cubic-bezier(.4, 0, .6, 1), transform .3s cubic-bezier(.4, 0, .6, 1);
 }

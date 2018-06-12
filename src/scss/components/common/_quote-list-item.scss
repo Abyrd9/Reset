@@ -12,6 +12,7 @@
 		@include font(500, 18px);
 		color: $color-black;
 		flex: auto;
+		margin: 0 15px;
 	}
 	&__input {
 		background-color: transparent;
@@ -40,4 +41,7 @@
 .quote-list-item.is-editable {
 	min-height: auto;
 	@include depth(middle);
+	.tool-buttons {
+		display: none;
+	}
 }

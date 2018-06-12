@@ -44,19 +44,20 @@ class QuoteListItem extends Component {
 				className={`quote-list-item ${isEditableClass} ${isOverlayClass}`}
 				onClick={() => changeQuote('toolsVisible', !toolsVisible, quoteKey)}
 			>
-				{isDeletable && (
-					<QuoteDelete
-						text="Are you sure you want to delete this?"
-						cancelClick={() => changeQuote('isDeletable', false, quoteKey)}
-						approveClick={() => changeQuote('deleteQuote', null, quoteKey)}
-					/>
-				)}
-				{toolsVisible && (
-					<ToolButtons
-						deleteClick={() => changeQuote('isDeletable', true, quoteKey)}
-						editClick={() => changeQuote('isEditable', true, quoteKey)}
-					/>
-				)}
+
+				<QuoteDelete
+					className={isDeletable ? 'visible' : ''}
+					text="Are you sure you want to delete this?"
+					cancelClick={() => changeQuote('isDeletable', false, quoteKey)}
+					approveClick={() => changeQuote('deleteQuote', null, quoteKey)}
+				/>
+
+				<ToolButtons
+					className={toolsVisible ? 'visible' : ''}
+					deleteClick={() => changeQuote('isDeletable', true, quoteKey)}
+					editClick={() => changeQuote('isEditable', true, quoteKey)}
+				/>
+
 				{isEditable ? (
 						<AutoSizeInput
 							defaultHeight={21}

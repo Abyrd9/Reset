@@ -10,6 +10,8 @@ export const UserContext = React.createContext('user');
 const googleProvider = new firebase.auth.GoogleAuthProvider();
 const facebookProvider = new firebase.auth.FacebookAuthProvider();
 
+const database = firebase.database();
+
 export class UserTheme extends Component {
   constructor(props) {
     super(props);
@@ -34,14 +36,21 @@ export class UserTheme extends Component {
     this.props.setIsRunningAuth();
     firebase.auth().onAuthStateChanged(user => {
       if (!!user) {
-        this.setState(
-          produce(draft => {
-            draft.user.userId = user;
-            draft.page = 'home';
-          })
-        )
-        this.props.setIsUserActive();
-        this.props.setIsRunningAuth();
+				const userId = user.uid;
+				firebase.database().ref(`users/${userId}/quotes`).once(`value`).then(snapshot => {
+					let quotes = snapshot.val();
+					quotes = quotes === null ? [] : quotes;
+					this.setState(
+						produce(draft => {
+							draft.user.userId = user;
+							draft.user.userQuotes = Object.values(quotes);;
+							draft.page = 'home';
+						})
+					)
+					this.props.setIsUserActive();
+					this.props.setIsRunningAuth();
+				})
+
       } else {
         this.setState(
           produce(draft => {
@@ -54,14 +63,22 @@ export class UserTheme extends Component {
 	}
 
 	componentDidUpdate() {
-		console.log(this.props);
+		if (this.props.isUserActive) {
+			const userId = firebase.auth().currentUser.uid;
+			const quotes = this.state.user.userQuotes;
+			firebase.database().ref(`users/${userId}`).update({
+				quotes,
+			}, error => {
+				console.log(error);
+			})
+		}
 		firebase.auth().onAuthStateChanged(user => {
       if (!!user && !!user !== this.props.isUserActive) {
 				this.props.setIsUserActive()
 				if (!!user) {
 					this.setState(
 						produce(draft => {
-							draft.user.userId = user;
+							draft.user.userId = user.uid;
 							draft.page = 'home';
 						})
 					)
@@ -182,7 +199,7 @@ export class UserTheme extends Component {
 								break;
 							case 'toolsVisible':
 								if (!quote.isEditable) {
-									quote.toolsVisible = value;
+									quote.toolsVisible = value; 
 								}
 								break;
 							case 'isDeletable':

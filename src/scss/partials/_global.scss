@@ -4,6 +4,12 @@
   padding: 0;
 }
 
+.global-container {
+	height: 100vh;
+	position: relative;
+	overflow: hidden;
+}
+
 @mixin depth($depth) {
   @if $depth == top {
     z-index: 3;

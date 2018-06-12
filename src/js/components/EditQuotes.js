@@ -8,7 +8,7 @@ import { UserContext } from './UserTheme';
 class EditQuotes extends Component {
 	render() {
 		return (
-			<div className="edit">
+			<div className={`edit ${this.props.className}`}>
 				<UserContext.Consumer>
 					{
 						context => (

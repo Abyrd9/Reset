@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 const ToolButtons = props => {
 	return (
-		<div className="tool-buttons">
+		<div className={`tool-buttons ${props.className}`}>
 			<i className="fas fa-trash tool-buttons__icon" onClick={props.deleteClick} ></i>
 			<i className="fas fa-edit tool-buttons__icon" onClick={props.editClick} ></i>
 		</div>
@@ -11,6 +11,7 @@ const ToolButtons = props => {
 };
 
 ToolButtons.propTypes = {
+	className: PropTypes.string,
 	deleteClick: PropTypes.func,
 	editClick: PropTypes.func,
 };

@@ -12,8 +12,8 @@ class Home extends Component {
 				{
 					context => (
 						<React.Fragment>
-							{context.page === 'home' && ( <ShowQuotes /> )}
-							{context.page === 'edit' && ( <EditQuotes /> )}
+							<ShowQuotes />
+							<EditQuotes className={context.page === 'edit' ? 'is-open' : ''} />
 						</React.Fragment>
 					)
 				}

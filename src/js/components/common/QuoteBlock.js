@@ -4,15 +4,16 @@ import PropTypes from 'prop-types';
 const QuoteBlock = props => {
 	console.log(props)
 	return (
-		<div className="quote-block">
+		<div className={`quote-block ${props.className}`}>
 			<i className="fas fa-quote-left quote-block__icon"></i>
-			{props.quote}
+			<p>{props.quote}</p>
 			<i className="fas fa-quote-right quote-block__icon"></i>
 		</div>
 	);
 };
 
 QuoteBlock.propTypes = {
+	className: PropTypes.string,
 	quote: PropTypes.string
 };
 

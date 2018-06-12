@@ -3,15 +3,15 @@ import PropTypes from 'prop-types';
 
 const QuoteDelete = props => {
 	return (
-		<div className="quote-delete">
+		<div className={`quote-delete ${props.className}`}>
 			{props.text}
 			<div className="quote-delete__button-container">
 				<i
-					class="fas fa-check-circle quote-delete__button-container__icon"
+					className="fas fa-check-circle quote-delete__button-container__icon"
 					onClick={props.approveClick}
 				></i>
 				<i
-					class="fas fa-times-circle quote-delete__button-container__icon"
+					className="fas fa-times-circle quote-delete__button-container__icon"
 					onClick={props.cancelClick}
 				></i>
 			</div>
@@ -20,6 +20,8 @@ const QuoteDelete = props => {
 };
 
 QuoteDelete.propTypes = {
+	className: PropTypes.string,
+	text: PropTypes.string,
 	cancelClick: PropTypes.func,
 	approveClick: PropTypes.func,
 };

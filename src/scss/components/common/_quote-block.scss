@@ -1,3 +1,7 @@
+@mixin quoteAnimation($delay) {
+	transition: transform .5s cubic-bezier(0.325, 0.005, 0.560, 1.000) $delay, opacity .5s cubic-bezier(0.325, 0.005, 0.560, 1.000) $delay;
+}
+
 .quote-block {
 	width: 90%;
 	display: flex;
@@ -10,5 +14,40 @@
 	&__icon {
 		color: $color-gray;
 		margin: 15px;
+		&:nth-child(1) {
+			transform: translateY(-30px);
+			opacity: 0;
+			@include quoteAnimation(0s)
+		}
+		&:nth-child(3) {
+			transform: translateY(-30px);
+			opacity: 0;
+			@include quoteAnimation(.4s)
+		}
+	}
+	p {
+		transform: translateY(-30px);
+		opacity: 0;
+		@include quoteAnimation(.2s)
+	}
+}
+
+.quote-block.visible {
+	.quote-block__icon {
+		&:nth-child(1) {
+			transform: translateY(0);
+			opacity: 1;
+			@include quoteAnimation(.4s)
+		}
+		&:nth-child(3) {
+			transform: translateY(0);
+			opacity: 1;
+			@include quoteAnimation(0s)
+		}
+	}
+	p {
+		transform: translateY(0);
+		opacity: 1;
+		@include quoteAnimation(.2s)
 	}
 }
