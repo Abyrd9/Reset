@@ -74,7 +74,7 @@ class AutoSizeInput extends Component {
 			onChange,
 			disabled
 		} = props;
-		console.log(props);
+
     return (
         <TextArea
           name="textarea"

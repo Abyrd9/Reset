@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 import List from './List';
 import ListItem from './ListItem';
-import { Animation } from '../../../Mixins';
+import { Animation, Depth } from '../../../Mixins';
 
 const MenuStyles = styled.div`
 	position: absolute;
@@ -16,6 +16,7 @@ const MenuStyles = styled.div`
 	visibility: hidden;
 	transform: translateX(20px);
 	${Animation('all', '.2s', 'ease-in-out')}
+	${Depth('top')}
 	${props => {
 		if (props.isOpen) {
 			return `

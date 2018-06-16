@@ -8,7 +8,7 @@ const Button = styled.button`
 	width: 100%;
 	${Font(400, '16px')}
 	color: ${Color.White};
-	${Shadow(2)}
+	${Shadow(3)}
 	background-color: ${Color.Red};
 	border-radius: 5px;
 	outline: none;
@@ -17,6 +17,7 @@ const Button = styled.button`
 	margin: 15px 0px;
 	transform: scale(1);
 	${Animation('all', '.1s', 'ease-in-out', '0s')}
+	margin-top: 80px;
 	&:focus, &:active {
 		border: none;
 		outline: none;
@@ -28,6 +29,12 @@ const Button = styled.button`
 	i {
 		margin-right: 8px;
 	}
+	&:disabled {
+		box-shadow: none;
+		background-color: ${Color.Gray};
+		color: ${Color.BlackLight};
+	}
+	position: relative;
 `
 
 export default Button;

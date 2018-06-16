@@ -14,18 +14,39 @@ class ShowQuotes extends Component {
 		this.state = {
 			index: 0,
 			isMenuOpen: false,
+			quotes: {
+				buttonDisableDelayTime: 10000,
+				buttonDisabled: false,
+				quoteTransition: false,
+				countDownNumber: 0,
+			}
 		}
-		this.nextQuote = this.nextQuote.bind(this);
+		this.buttonDisableCountdown = this.buttonDisableCountdown.bind(this);
 	}
 
 	nextQuote = (quotes) => {
-		this.setState({ className: '' });
 		const newIndex = this.state.index + 1;
+		this.setState({ quotes: {...this.state.quotes, quoteTransition: true, buttonDisabled: true }})
 		setTimeout(() => {
 			if (newIndex >= quotes.length) {
 				this.setState({ index: 0 });
 			} else {
 				this.setState({ index: newIndex })
+			}
+			this.setState({ quotes: {...this.state.quotes, quoteTransition: false }})
+			const countDownNumber = this.state.quotes.buttonDisableDelayTime/1000;
+			this.setState({ quotes: {...this.state.quotes, countDownNumber: countDownNumber} })
+			this.buttonDisableCountdown();
+		}, 1000)
+	}
+
+	buttonDisableCountdown = () => {
+			const Interval = setInterval(() => {
+			const newNumber = this.state.quotes.countDownNumber - 1;
+			this.setState({ quotes: {...this.state.quotes, countDownNumber: newNumber }})
+			if (newNumber === 0) {
+				clearInterval(Interval);
+				this.setState({quotes: {...this.state.quotes, buttonDisabled: false}})
 			}
 		}, 1000)
 	}
@@ -52,24 +73,30 @@ class ShowQuotes extends Component {
 
 
 								<QuotesBlock>
-									<QuotesBlock.Icon iconClassname="fas fa-quote-left" left />
-									<QuotesBlock.Icon iconClassname="fas fa-quote-right" right />
-									<QuotesBlock.Text>
-										{context.quotes.length > 0 ? context.quotes[this.state.index].value : 'You don’t have any truth statements yet. Click the button below to create one.'}
-									</QuotesBlock.Text>
+									<QuotesBlock.QuoteContainer isTransition={this.state.quotes.quoteTransition} >
+										<QuotesBlock.Icon iconClassname="fas fa-quote-left" left />
+										<QuotesBlock.Icon iconClassname="fas fa-quote-right" right />
+										<QuotesBlock.Text isTransition={this.state.quotes.quoteTransition} >
+											{context.quotes.length > 0 ? context.quotes[this.state.index].value : 'You don’t have any truth statements yet. Click the button below to create one.'}
+										</QuotesBlock.Text>
+									</QuotesBlock.QuoteContainer>
+									<QuotesBlock.Button
+										onClick={() => {
+											context.quotes.length > 0 
+												? this.nextQuote(context.quotes) 
+												: context.changePage('edit')}
+										}
+										disabled={this.state.quotes.buttonDisabled}
+									>
+										{context.quotes.length > 0
+											? 'I Believe this is true' 
+											: <React.Fragment><i className="fas fa-plus-circle"></i> Add New Quote</React.Fragment>
+										}
+										{this.state.quotes.buttonDisabled && this.state.quotes.countDownNumber > 0 && (
+											<QuotesBlock.ButtonCountdown>This button will enabled in {this.state.quotes.countDownNumber}s. <br /><b>Please take time to reflect on the above truth.</b></QuotesBlock.ButtonCountdown>
+										)}
+									</QuotesBlock.Button>
 								</QuotesBlock>
-								<QuotesBlock.Button
-									onClick={() => {
-										context.quotes.length > 0 
-											? this.nextQuote(context.quotes) 
-											: context.changePage('edit')}
-									}
-								>
-									{context.quotes.length > 0
-										? 'I Believe this is true' 
-										: <React.Fragment><i className="fas fa-plus-circle"></i> Add New Quote</React.Fragment>
-									}
-								</QuotesBlock.Button>
 
 
                 {context.quotes.length > 0 && (
