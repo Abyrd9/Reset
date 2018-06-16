@@ -1,21 +1,23 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import NavBar from './common/NavBar';
-import QuoteList from './common/QuoteList';
+import QuoteList from './common/Edit/QuoteList';
 
 import { UserContext } from './UserTheme';
+import EditNav from './common/Edit/EditNav';
+import EditBackdrop from './common/Edit/EditBackdrop';
 
 class EditQuotes extends Component {
 	render() {
 		return (
-			<div className={`edit ${this.props.className}`}>
+			<EditBackdrop isOpen={this.props.isOpen}>
 				<UserContext.Consumer>
 					{
 						context => (
 							<React.Fragment>
-								<NavBar
-									onClick={() => context.changePage('home')}
-								/>
+								<EditNav>
+									<EditNav.Icon onClick={() => context.changePage('home')} />
+									<EditNav.Image src="../../../src/assets/img/LogoWhite.png" />
+								</EditNav>
 								<QuoteList
 									quotes={context.quotes}
 									quoteCreatorValue={context.quoteCreatorValue}
@@ -26,7 +28,7 @@ class EditQuotes extends Component {
 							</React.Fragment>
 					)}
 				</UserContext.Consumer>
-			</div>
+			</EditBackdrop>
 		);
 	}
 }

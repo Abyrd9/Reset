@@ -1,13 +1,12 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-import AuthInput from './common/AuthInput';
-import AuthSocialButtons from './common/AuthSocialButtons';
-import AuthToggleLink from './common/AuthToggleLink';
-import FooterButton from './common/FooterButton';
-import LogoHeader from './common/LogoHeader';
-
 import { UserContext } from './UserTheme';
+import Backdrop from './common/Backdrop';
+import AuthHeader from './common/Auth/AuthHeader';
+import AuthForm from './common/Auth/AuthForm';
+import AuthFooter from './common/Auth/AuthFooter';
+
 
 class Auth extends Component {
 	constructor(props) {
@@ -16,93 +15,95 @@ class Auth extends Component {
 			name: "",
 			email: "",
 			password: "",
+			confirmPassword: "",
 		}
 	}
 
 	render() {
-
 		return (
-			<div className="base auth">
+			<Backdrop auth>
 				<UserContext.Consumer>
 					{
 						context => (
 							<React.Fragment>
-
-								{/* logo */}
-								<LogoHeader />
-
-								{/* form */}
-								<div className="auth__form-container">
-
-									{/* Inputs */}
-									<div className="auth__input-container">
-										<div className={`${context.page === 'signUp' ? 'name-input-container visible' : 'name-input-container'}`}>
-											<AuthInput
-												icon="name"
-												value={this.state.name}
-												onChange={(e) => this.setState({name: e.target.value})}
-												placeholder="full name"
-												disabled={context.page !== 'signUp'}
-											/>
-										</div>
-										<AuthInput 
-											icon="email"
-											value={this.state.email}
-											onChange={(e) => this.setState({email: e.target.value})}
-											placeholder="email@example.com"
+								<AuthHeader>
+									<AuthHeader.Image src="../../../src/assets/img/Logo.png" />
+									<AuthHeader.Title>Reset</AuthHeader.Title>
+								</AuthHeader>
+								<AuthForm>
+									{context.page === "signUp" && (
+										<AuthForm.AuthInput
+											icon="name"
+											value={this.state.name}
+											onChange={(e) => this.setState({name: e.target.value})}
+											placeholder="Name"
 										/>
-										<AuthInput
-											icon="password"
-											value={this.state.password}
-											onChange={(e) => this.setState({password: e.target.value})}
-											placeholder="password"
+									)}
+									<AuthForm.AuthInput 
+										icon="email"
+										value={this.state.email}
+										onChange={(e) => this.setState({email: e.target.value})}
+										placeholder="Email"
+									/>
+									<AuthForm.AuthInput
+										icon="password"
+										value={this.state.password}
+										onChange={(e) => this.setState({password: e.target.value})}
+										placeholder="Password"
+									/>
+									{context.page === "signUp" && (
+										<AuthForm.AuthInput
+											icon="confirm"
+											value={this.state.confirmPassword}
+											onChange={(e) => this.setState({confirmPassword: e.target.value})}
+											placeholder="Confirm Password"
 										/>
-									</div>
+									)}
+									<AuthForm.Button
+										onClick={() => context.emailAuth(this.state.email, this.state.password, this.state.name)}
+									>
+										{context.page === "signUp" && 'Sign Up'}
+										{context.page === "signIn" && 'Sign In'}
+									</AuthForm.Button>
 
-									{/* Divider */}
-									<div className="auth__divider">
-										<span className="auth__divider__line"></span>
-										or
-										<span className="auth__divider__line"></span>
-									</div>
-
-									{/* Social Buttons */}
-									<div className="auth__social-buttons-container">
-										<AuthSocialButtons icon="facebook" onClick={() => context.facebookAuth()} />
-										<AuthSocialButtons icon="google" onClick={() => context.googleAuth()} />
-									</div>
-
-								</div>
-
-								{/* Auth Toggle - Sign In */}
-								{context.page === "signIn" && (
-									<AuthToggleLink
-										text="Don't have an account? "
-										linkText="Sign Up"
-										onClick={() => context.changePage('signUp')}
+									{context.page === "signIn" && (
+										<AuthForm.ForgotPassword
+											onClick={() => {}}
+										>
+											I forgot my password.
+										</AuthForm.ForgotPassword>
+									)}
+								</AuthForm>
+								<AuthFooter>
+									<AuthFooter.Divider>or</AuthFooter.Divider>
+									<AuthFooter.SocialButton
+										icon="facebook"
+										onClick={() => context.facebookAuth()}
 									/>
-								)}
-								{context.page === "signUp" && (
-									<AuthToggleLink
-										text="Already have an account? "
-										linkText="Sign In"
-										onClick={() => context.changePage('signIn')}
+									<AuthFooter.SocialButton
+										icon="google"
+										onClick={() => context.googleAuth()}
 									/>
-								)}
-
-								{/* Sign Up Button */}
-								<FooterButton onClick={
-									() => context.emailAuth(this.state.email, this.state.password, this.state.name)
-								}>
-									{context.page === "signUp" && 'Sign Up'}
-									{context.page === "signIn" && 'Sign In'}
-								</FooterButton>
-
+									{context.page === 'signIn' && (
+										<AuthFooter.ToggleLink 
+											linkText="Sign Up"
+											text="Don't have an account? "
+											onClick={() => context.changePage('signUp')}
+										/>
+									)}
+									{context.page === 'signUp' && (
+										<AuthFooter.ToggleLink 
+											linkText="Sign In"
+											text="Already have an account? "
+											onClick={() => context.changePage('signIn')}
+										/>
+									)}
+								</AuthFooter>
 							</React.Fragment>
 						)
 					}
 				</UserContext.Consumer>
-			</div>
+			</Backdrop>
 		);
 	}
 }

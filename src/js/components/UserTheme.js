@@ -69,7 +69,6 @@ export class UserTheme extends Component {
 			firebase.database().ref(`users/${userId}`).update({
 				quotes,
 			}, error => {
-				console.log(error);
 			})
 		}
 		firebase.auth().onAuthStateChanged(user => {
@@ -102,11 +101,11 @@ export class UserTheme extends Component {
   }
 
   changeCreatorValue = (value) => {
-    this.setState(
-      produce(draft => {
-        draft.quoteCreatorValue = value;
-      })
-    )
+		this.setState(
+			produce(draft => {
+				draft.quoteCreatorValue = value;
+			})
+		)
   }
 
   emailAuth = (email, password, name) => {
@@ -114,6 +113,12 @@ export class UserTheme extends Component {
     if (this.state.page === 'signUp') {
       firebase.auth().createUserWithEmailAndPassword(email, password)
         .then(response => {
+					console.log(response);
+					const userId = response.user.uid;
+					console.log(userId);
+					firebase.database().ref(`users/${userId}`).update({
+						name,
+					}, error => console.log(error))
           this.props.setIsRunningAuth();
           this.props.setIsUserActive();
         })
@@ -136,7 +141,9 @@ export class UserTheme extends Component {
 		firebase.auth().signInWithPopup(googleProvider).then(result => {
 			const token = result.credential.accessToken;
 			const user = result.user;
-			console.log(token, user)
+			firebase.database().ref(`users/${userId}`).update({
+				name: user.displayName,
+			}, error => console.log(error))
 		}).catch(error => {
 			console.log(error.code, error.message, error.email, error.credential);
 		})
@@ -144,6 +151,7 @@ export class UserTheme extends Component {
 
 	facebookAuth = () => {
 		firebase.auth().signInWithPopup(facebookProvider).then(result => {
+			console.log(result)
 			const token = result.credential.accessToken;
 			const user = result.user;
 			console.log(token, user)
@@ -203,6 +211,7 @@ export class UserTheme extends Component {
 								}
 								break;
 							case 'isDeletable':
+								console.log("is this running?")
 								quote.isDeletable = value;
 								quote.toolsVisible = false;
 								quote.isEditable = false;

@@ -1,6 +1,39 @@
 import React, { Component } from 'react';
 import { isAbsolute } from 'path';
 
+import styled from 'styled-components';
+import { Color, Font } from '../components/common/Mixins';
+const TextArea = styled.textarea`
+    box-sizing: border-box;
+    width: 100%;
+    overflow: hidden;
+    resize: none;
+    padding: 20px;
+    border: none;
+    outline: none;
+		${Font(500, '18px')}
+    color: ${Color.Black};
+`
+
+const Ghost = styled.div`
+	box-sizing: border-box;
+	width: 100%;
+	overflow: hidden;
+	resize: none;
+	padding: 20px;
+	border: none;
+	outline: none;
+	${Font(500, '18px')}
+	color: ${Color.Black};
+	opacity: 0.3;
+	display: block;
+	white-space: pre-wrap;
+	word-wrap: break-word;
+	visibility: hidden;
+	position: absolute;
+	top: 0;
+`
+
 class AutoSizeInput extends Component {
 	constructor(props) {
 		super(props);
@@ -39,11 +72,11 @@ class AutoSizeInput extends Component {
 			value,
 			placeholder,
 			onChange,
+			disabled
 		} = props;
-
+		console.log(props);
     return (
-        <textarea
-          className={className}
+        <TextArea
           name="textarea"
 					value={value}
 					placeholder={placeholder}
@@ -52,6 +85,7 @@ class AutoSizeInput extends Component {
             resize: isOneLine ? "none" : null
 					}}
 					onChange={onChange}
+					disabled={disabled}
         />
     );
 	}
@@ -63,19 +97,24 @@ class AutoSizeInput extends Component {
 		} = props
 
     return (
-      <div
-        className={`${className} ghost`}
-        ref={(c) => this.ghost = c}
+      <Ghost
+        innerRef={(c) => this.ghost = c}
         aria-hidden="true"
       >
         {value}
-      </div>
+      </Ghost>
     );
   }
 
 	render() {
 			return (
-				<div style={{position: 'relative', width: '100%', backgroundColor: 'white'}}>
+				<div style={{
+					position: 'relative',
+					width: '100%',
+					backgroundColor: 'white',
+					display: 'flex',
+					flexDirection: 'column',
+				}}>
 					{this.getExpandableField(this.props)}
 					{this.getGhostField(this.props)}
 				</div>

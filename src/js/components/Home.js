@@ -13,7 +13,7 @@ class Home extends Component {
 					context => (
 						<React.Fragment>
 							<ShowQuotes />
-							<EditQuotes className={context.page === 'edit' ? 'is-open' : ''} />
+							<EditQuotes isOpen={context.page === 'edit'} />
 						</React.Fragment>
 					)
 				}

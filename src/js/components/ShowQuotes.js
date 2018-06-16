@@ -1,18 +1,19 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import QuoteBlock from './common/QuoteBlock';
-import PillButton from './common/PillButton';
-import FooterButton from './common/FooterButton';
-import LogoHeader from './common/LogoHeader';
+
+import QuotesNav from './common/Quotes/QuotesNav';
+import QuotesBlock from './common/Quotes/QuotesBlock';
+import QuotesFooter from './common/Quotes/QuotesFooter';
 
 import { UserContext } from './UserTheme';
+import Backdrop from './common/Backdrop';
 
 class ShowQuotes extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
 			index: 0,
-			className: 'visible',
+			isMenuOpen: false,
 		}
 		this.nextQuote = this.nextQuote.bind(this);
 	}
@@ -26,64 +27,64 @@ class ShowQuotes extends Component {
 			} else {
 				this.setState({ index: newIndex })
 			}
-			this.setState({ className: 'visible' })
 		}, 1000)
 	}
 
 	render() {
 		return (
-			<div className="base">
+			<Backdrop quotes>
         <UserContext.Consumer>
           {
             context => (
               <React.Fragment>
+								<QuotesNav>
+									<QuotesNav.Menu 
+										isOpen={this.state.isMenuOpen} 
+										menuList={[
+											{text: 'Sign Out', onClick: () => console.log('signOut')}
+										]}
+									/>
+									<QuotesNav.Image src="../../../src/assets/img/Logo.png" />
+									<QuotesNav.Icon onClick={() => this.setState({ isMenuOpen: !this.state.isMenuOpen })}/>
+								</QuotesNav>
 
-                {/* logo */}
-                <LogoHeader />
 
-                {/* Quote Block */}
-                {context.quotes.length > 0 ? (
-                  <React.Fragment>
+								<QuotesBlock>
+									<QuotesBlock.Icon iconClassname="fas fa-quote-left" left />
+									<QuotesBlock.Icon iconClassname="fas fa-quote-right" right />
+									<QuotesBlock.Text>
+										{context.quotes.length > 0 ? context.quotes[this.state.index].value : 'You don’t have any truth statements yet. Click the button below to create one.'}
+									</QuotesBlock.Text>
+								</QuotesBlock>
+								<QuotesBlock.Button
+									onClick={() => {
+										context.quotes.length > 0 
+											? this.nextQuote(context.quotes) 
+											: context.changePage('edit')}
+									}
+								>
+									{context.quotes.length > 0
+										? 'I Believe this is true' 
+										: <React.Fragment><i className="fas fa-plus-circle"></i> Add New Quote</React.Fragment>
+									}
+								</QuotesBlock.Button>
 
-                    {/* Quote Block */}
-                    <QuoteBlock quote={context.quotes[this.state.index].value} className={this.state.className} />
-                    
-                    {/* Continue to Next Quote Button */}
-                    <PillButton onClick={() => this.nextQuote(context.quotes)}>
-                      I Believe this is true.
-                    </PillButton>
 
-                  </React.Fragment>
-                ) : (
-                  <React.Fragment>
-
-                    {/* No Quotes Quote Block */}
-                    <QuoteBlock
-											quote="You don’t have any truth statements yet. Click the button below to create one."
-											className="visible"
-										/>
-                    
-                    {/* Add New Quote Button */}
-                    <PillButton onClick={() => context.changePage('edit')}>
-                      <i className="fas fa-plus-circle"></i>
-                      Add New
-                    </PillButton>
-
-                  </React.Fragment>
-                )}
-
-                {/* Sign In Button */}
                 {context.quotes.length > 0 && (
-                  <FooterButton onClick={() => context.changePage('edit')}>
-                    <i className="fas fa-plus-circle"></i>
-                    Add New
-                  </FooterButton>
-                )}
-              </React.Fragment>
+									<QuotesFooter>
+										<QuotesFooter.Button
+											onClick={() => context.changePage('edit')}
+										>
+											<i className="fas fa-plus-circle"></i>
+											Add New
+										</QuotesFooter.Button>
+									</QuotesFooter>
+								)}
+							</React.Fragment>
             )
           }
         </UserContext.Consumer>
-			</div>
+			</Backdrop>
 		);
 	}
 }
