@@ -39,13 +39,15 @@ class ShowQuotes extends Component {
               <React.Fragment>
 								<QuotesNav>
 									<QuotesNav.Menu 
-										isOpen={this.state.isMenuOpen} 
-										menuList={[
-											{text: 'Sign Out', onClick: () => context.signOut()}
-										]}
+										isOpen={this.state.isMenuOpen}
+										onClose={() => this.setState({ isMenuOpen: false })}
+										menuList={[{text: 'Sign Out', onClick: () => context.signOut()}]}
 									/>
 									<QuotesNav.Image src="../../../src/assets/img/Logo.png" />
-									<QuotesNav.Icon onClick={() => this.setState({ isMenuOpen: !this.state.isMenuOpen })}/>
+									<QuotesNav.Icon
+										iconClassname={this.state.isMenuOpen ? 'fa fa-times' : 'fas fa-bars'}
+										onClick={() => this.setState({ isMenuOpen: !this.state.isMenuOpen })}
+									/>
 								</QuotesNav>
 
 

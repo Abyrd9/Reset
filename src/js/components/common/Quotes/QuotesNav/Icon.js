@@ -4,7 +4,7 @@ import { Color } from '../../Mixins';
 
 const IconComponent = props => {
 	return (
-		<i className={`fas fa-bars ${props.className}`} onClick={props.onClick}></i>
+		<i className={`${props.iconClassname} ${props.className}`} onClick={props.onClick}></i>
 	)
 }
 

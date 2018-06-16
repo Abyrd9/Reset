@@ -21,6 +21,7 @@ class Menu extends Component {
 
 Menu.propTypes = {
 	isOpen: PropTypes.bool,
+	onClose: PropTypes.func,
 	menuList: PropTypes.arrayOf(PropTypes.shape({
 		onClick: PropTypes.func,
 		text: PropTypes.string
