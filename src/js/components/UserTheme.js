@@ -23,13 +23,6 @@ export class UserTheme extends Component {
         userQuotes: [],
       },
     }
-    this.changePage = this.changePage.bind(this);
-		this.emailAuth = this.emailAuth.bind(this);
-		this.googleAuth = this.googleAuth.bind(this);
-		this.facebookAuth = this.facebookAuth.bind(this);
-    this.changeQuote = this.changeQuote.bind(this);
-    this.createQuote = this.createQuote.bind(this);
-    this.changeCreatorValue = this.changeCreatorValue.bind(this);
   }
 
   componentDidMount() {
@@ -54,7 +47,7 @@ export class UserTheme extends Component {
       } else {
         this.setState(
           produce(draft => {
-            draft.page = 'signUp';
+            draft.page = 'signIn';
           })
         )
         this.props.setIsRunningAuth();
@@ -84,7 +77,7 @@ export class UserTheme extends Component {
 				} else {
 					this.setState(
 						produce(draft => {
-							draft.page = 'signUp';
+							draft.page = 'signIn';
 						})
 					)
 				}
@@ -158,6 +151,13 @@ export class UserTheme extends Component {
 		}).catch(error => {
 			console.log(error.code, error.message, error.email, error.credential);
 		})
+	}
+
+	signOut = () => {
+		firebase.auth().signOut().then(() => {
+			console.log("User successfuly signed out")
+			this.props.setIsUserActive(false);
+		}).catch(error => console.log(error))
 	}
 
   createQuote = (value) => {
@@ -242,9 +242,10 @@ export class UserTheme extends Component {
 				emailAuth: this.emailAuth,
 				googleAuth: this.googleAuth,
 				facebookAuth: this.facebookAuth,
+				signOut: this.signOut,
         changeQuote: this.changeQuote,
         createQuote: this.createQuote,
-        changeCreatorValue: this.changeCreatorValue,
+				changeCreatorValue: this.changeCreatorValue,
       }}>
         {this.props.children}
       </UserContext.Provider>

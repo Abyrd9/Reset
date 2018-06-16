@@ -41,7 +41,7 @@ class ShowQuotes extends Component {
 									<QuotesNav.Menu 
 										isOpen={this.state.isMenuOpen} 
 										menuList={[
-											{text: 'Sign Out', onClick: () => console.log('signOut')}
+											{text: 'Sign Out', onClick: () => context.signOut()}
 										]}
 									/>
 									<QuotesNav.Image src="../../../src/assets/img/Logo.png" />
