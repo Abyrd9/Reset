@@ -41,12 +41,14 @@ class App extends Component {
 	}
 
 	render() {
+		console.log(this.state.isUserActive, this.state.isRunningAuth, 'App')
         return (
             <AppContainer>
                 <UserTheme
 									setIsUserActive={this.setIsUserActive}
 									setIsRunningAuth={this.setIsRunningAuth}
 									isUserActive={this.state.isUserActive}
+									isRunningAuth={this.state.isRunningAuth}
 								>
 									{
 										!this.state.isUserActive ? (
