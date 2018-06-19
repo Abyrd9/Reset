@@ -8,11 +8,15 @@ import ButtonCountdown from './ButtonCountdown';
 
 const QuotesBlock = styled.div`
 	width: 100%;
+	max-width: 500px;
 	position: relative;
 	flex: auto;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+	justify-content: center;
+	@media (min-width: 760px) {
+		margin-top: 100px;
+	}
 `
 
 QuotesBlock.Icon = Icon;

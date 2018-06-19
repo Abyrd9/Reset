@@ -13,6 +13,9 @@ const Title = styled.h1`
 	}
 	@media (max-width: 320px) {
 		${Font(700, '40px')}
+		&:after {
+			${Font(700, '40px')}
+		}
 	}
 `
 

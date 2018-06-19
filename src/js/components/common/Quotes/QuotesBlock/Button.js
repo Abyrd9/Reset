@@ -6,14 +6,14 @@ const Button = styled.button`
 	align-items: center;
 	justify-content: center;
 	width: 100%;
-	${Font(400, '16px')}
+	${Font(500, '16px')}
 	color: ${Color.White};
 	${Shadow(3)}
 	background-color: ${Color.Red};
 	border-radius: 5px;
 	outline: none;
 	border: none;
-	padding: 10px 0px;
+	padding: 12px 0px;
 	margin: 15px 0px;
 	transform: scale(1);
 	${Animation('all', '.1s', 'ease-in-out', '0s')}
@@ -35,6 +35,11 @@ const Button = styled.button`
 		color: ${Color.BlackLight};
 	}
 	position: relative;
+	@media (min-width: 760px) {
+		max-width: 500px;
+		margin-top: 0;
+		margin-bottom: ${props => props.hasQuote ? '30px' : '200px'};
+	}
 `
 
 export default Button;

@@ -43,6 +43,9 @@ const QuoteContainer = styled.div`
 			`
 		}
 	}}
+	@media (max-width: 760px) {
+		margin-top: 80px;
+	}
 `
 
 export default QuoteContainer;

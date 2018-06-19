@@ -14,6 +14,9 @@ const EditNav = styled.div`
 	padding: 20px;
 	${Shadow(2)}
 	${Depth('top')}
+	@media (min-width: 760px) {
+		justify-content: center;
+	}
 `
 
 EditNav.Icon = Icon;

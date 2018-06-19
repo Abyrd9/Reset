@@ -12,7 +12,7 @@ const TextArea = styled.textarea`
     border: none;
     outline: none;
 		${Font(500, '18px')}
-    color: ${Color.Black};
+		color: ${Color.Black};
 `
 
 const Ghost = styled.div`
@@ -77,6 +77,7 @@ class AutoSizeInput extends Component {
 
     return (
         <TextArea
+					maxLength="300"
           name="textarea"
 					value={value}
 					placeholder={placeholder}

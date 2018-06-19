@@ -25,6 +25,16 @@ const EditBackdrop = styled.div`
 			`
 		}
 	}}
+	@media (min-width: 760px) {
+		transform: translateY(40px);
+		${props => {
+			if (props.isOpen) {
+				return `
+				transform: translateY(0);
+				`
+			}
+		}}
+	}
 `
 
 export default EditBackdrop;

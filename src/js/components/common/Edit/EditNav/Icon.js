@@ -11,6 +11,9 @@ const IconComponent = props => {
 const IconStyled = styled(IconComponent)`
 	color: ${Color.White};
 	font-size: 28px;
+	@media (min-width: 760px) {
+		margin-right: 330px;
+	}
 `
 
 const Icon = (props) => {

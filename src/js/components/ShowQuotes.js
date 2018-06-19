@@ -52,6 +52,7 @@ class ShowQuotes extends Component {
 	}
 
 	render() {
+		const buttonText = this.state.quotes.buttonDisabled ? 'Reflect on the above truth.' : 'I Believe this is true';
 		return (
 			<Backdrop quotes>
         <UserContext.Consumer>
@@ -80,25 +81,25 @@ class ShowQuotes extends Component {
 											{context.quotes.length > 0 ? context.quotes[this.state.index].value : 'You don’t have any truth statements yet. Click the button below to create one.'}
 										</QuotesBlock.Text>
 									</QuotesBlock.QuoteContainer>
-									<QuotesBlock.Button
-										onClick={() => {
-											context.quotes.length > 0 
-												? this.nextQuote(context.quotes) 
-												: context.changePage('edit')}
-										}
-										disabled={this.state.quotes.buttonDisabled}
-									>
-										{context.quotes.length > 0
-											? 'I Believe this is true' 
-											: <React.Fragment><i className="fas fa-plus-circle"></i> Add New Quote</React.Fragment>
-										}
-										{this.state.quotes.buttonDisabled && this.state.quotes.countDownNumber > 0 && (
-											<QuotesBlock.ButtonCountdown>This button will enabled in {this.state.quotes.countDownNumber}s. <br /><b>Please take time to reflect on the above truth.</b></QuotesBlock.ButtonCountdown>
-										)}
-									</QuotesBlock.Button>
 								</QuotesBlock>
 
-
+								<QuotesBlock.Button
+									onClick={() => {
+										context.quotes.length > 0 
+											? this.nextQuote(context.quotes) 
+											: context.changePage('edit')}
+									}
+									disabled={this.state.quotes.buttonDisabled}
+									hasQuote={context.quotes.length > 0}
+								>
+									{context.quotes.length > 0
+										? buttonText
+										: <React.Fragment><i className="fas fa-plus-circle"></i> Add New Quote</React.Fragment>
+									}
+									{this.state.quotes.buttonDisabled && this.state.quotes.countDownNumber > 0 && (
+										<QuotesBlock.ButtonCountdown>This button will enabled in {this.state.quotes.countDownNumber}s.</QuotesBlock.ButtonCountdown>
+									)}
+								</QuotesBlock.Button>
                 {context.quotes.length > 0 && (
 									<QuotesFooter>
 										<QuotesFooter.Button

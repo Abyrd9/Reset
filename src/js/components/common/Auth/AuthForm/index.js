@@ -6,11 +6,12 @@ import AuthInput from './AuthInput';
 
 const AuthForm = styled.div`
 	width: 100%;
+	max-width: 500px;
+	min-height: 280px;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
-	margin-bottom: 20px;
 	@media (max-width: 320px) {
 		margin-bottom: 0;
 	}
