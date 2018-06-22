@@ -13,7 +13,8 @@ const Button = styled.button`
 	border-radius: 5px;
 	outline: none;
 	border: none;
-	padding: 8px 0px;
+	max-width: 400px;
+	padding: 12px 0px;
 	margin: 15px 0px;
 	transform: scale(1);
 	${Animation('all', '.1s', 'ease-in-out', '0s')}
@@ -27,6 +28,9 @@ const Button = styled.button`
 	}
 	i {
 		margin-right: 8px;
+	}
+	@media (min-width: 760px) {
+		margin-bottom: 200px;
 	}
 `
 

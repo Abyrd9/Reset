@@ -27,6 +27,14 @@ const EditQuoteItem = styled.div`
 			`
 		}
 	}}
+	@media (min-width: 760px) {
+		&:first-child {
+			border-top: solid 1px #d7dadb;
+		}
+		&:last-child {
+			margin-bottom: 20px;
+		}
+	}
 `
 EditQuoteItem.ItemContent = ItemContent;
 

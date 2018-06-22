@@ -15,7 +15,7 @@ class EditQuotes extends Component {
 						context => (
 							<React.Fragment>
 								<EditNav>
-									<EditNav.Icon onClick={() => context.changePage('home')} />
+									<EditNav.Icon onClick={() => {context.changePage('home'); context.changeQuote('reset');}} />
 									<EditNav.Image src="../../../src/assets/img/LogoWhite.png" />
 								</EditNav>
 								<QuoteList

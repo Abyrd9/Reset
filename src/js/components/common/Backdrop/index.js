@@ -1,12 +1,9 @@
 import styled from 'styled-components';
-import { Color } from '../Mixins';
 
 const Backdrop = styled.div`
 	height: 100vh;
 	width: 100vw;
-	position: relative;
 	overflow: hidden;
-	background-color: ${Color.White};
 	padding: 20px;
 	display: flex;
 	flex-direction: column;
@@ -15,6 +12,10 @@ const Backdrop = styled.div`
 		if (props.quotes) return 'space-between';
 	}};
 	align-items: center;
+	@media (min-width: 760px) {
+		height: 100vh;
+		justify-content: flex-start;
+	}
 `
 
 export default Backdrop;

@@ -15,6 +15,11 @@ const Button = styled.button`
 		border: none;
 		outline: none;
 	}
+	@media (min-width: 760px) {
+		border-radius: 50px;
+		margin: 10px 0px;
+		margin-bottom: 80px;
+	}
 `
 
 export default Button;

@@ -1,9 +1,25 @@
 import React, {Component} from 'react';
+import styled from 'styled-components';
 
 import { UserTheme } from './components/UserTheme';
+import { Color } from './components/common/Mixins';
 
 import Auth from './components/Auth';
 import Home from './components/Home';
+
+const AppContainer = styled.div`
+	height: 100vh;
+	width: 100vw;
+	display: flex;
+	justify-content: center;
+	align-items: space-between;
+	background-color: ${Color.White};
+	position: relative;
+	overflow: hidden;
+	* {
+		box-sizing: border-box;
+	}
+`
 
 class App extends Component {
 	constructor() {
@@ -25,12 +41,14 @@ class App extends Component {
 	}
 
 	render() {
+		console.log(this.state.isUserActive, this.state.isRunningAuth, 'App')
         return (
-            <div className='global-container'>
+            <AppContainer>
                 <UserTheme
 									setIsUserActive={this.setIsUserActive}
 									setIsRunningAuth={this.setIsRunningAuth}
 									isUserActive={this.state.isUserActive}
+									isRunningAuth={this.state.isRunningAuth}
 								>
 									{
 										!this.state.isUserActive ? (
@@ -40,7 +58,7 @@ class App extends Component {
 										)
 									}
                 </UserTheme>
-            </div>
+            </AppContainer>
         )
     }
 }

@@ -92,7 +92,10 @@ class QuoteListItem extends Component {
 					<EditQuoteButtons.Button onClick={() => {changeQuote('isEditable', false, quoteKey); this.setState({inputValue: value})}}>
 						<i className="fas fa-times"></i>
 					</EditQuoteButtons.Button>
-					<EditQuoteButtons.Button onClick={() => changeQuote('value', this.state.inputValue, quoteKey)}>
+					<EditQuoteButtons.Button
+						onClick={() => changeQuote('value', this.state.inputValue, quoteKey)}
+						disabled={this.state.inputValue.length === 0}
+					>
 						<i className="fas fa-check"></i>
 					</EditQuoteButtons.Button>
 				</EditQuoteButtons>

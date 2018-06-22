@@ -32,6 +32,7 @@ export class UserTheme extends Component {
 				const userId = user.uid;
 				firebase.database().ref(`users/${userId}/quotes`).once(`value`).then(snapshot => {
 					let quotes = snapshot.val();
+					console.log(quotes);
 					quotes = quotes === null ? [] : quotes;
 					this.setState(
 						produce(draft => {
@@ -56,14 +57,7 @@ export class UserTheme extends Component {
 	}
 
 	componentDidUpdate() {
-		if (this.props.isUserActive) {
-			const userId = firebase.auth().currentUser.uid;
-			const quotes = this.state.user.userQuotes;
-			firebase.database().ref(`users/${userId}`).update({
-				quotes,
-			}, error => {
-			})
-		}
+		if (this.props.isUserActive && !this.props.isRunningAuth) this.updateFirebase();
 		firebase.auth().onAuthStateChanged(user => {
       if (!!user && !!user !== this.props.isUserActive) {
 				this.props.setIsUserActive()
@@ -83,6 +77,18 @@ export class UserTheme extends Component {
 				}
 			}
     });
+	}
+
+	updateFirebase = () => {
+		if (this.props.isUserActive) {
+			const userId = firebase.auth().currentUser.uid;
+			const quotes = this.state.user.userQuotes;
+			firebase.database().ref(`users/${userId}`).update({
+				quotes,
+			}, error => {
+				console.log(error);
+			})
+		}
 	}
 
   changePage = (value) => {
@@ -197,6 +203,11 @@ export class UserTheme extends Component {
 				})
 
 				draft.user.userQuotes.forEach((quote, index) => {
+					if (keyToChange === 'reset') {
+						quote.toolsVisible = false;
+						quote.isDeletable = false;
+						quote.isEditable = false;
+					}
 					if (quote.quoteKey === key && notActive) {
 						switch(keyToChange) {
 							case 'value':

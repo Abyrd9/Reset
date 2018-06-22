@@ -10,6 +10,9 @@ const Text = styled.p`
 	transform-origin: left;
 	${Animation('all', '.15s', 'ease-out')}
 	text-align: center;
+	@media (min-width: 760px) {
+		${Font(600, '28px')}
+	}
 `
 
 export default Text;

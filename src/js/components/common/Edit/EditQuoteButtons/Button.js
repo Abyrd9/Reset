@@ -14,6 +14,12 @@ const Button = styled.button`
 		color: ${Color.White};
 		font-size: 22px;
 	}
+	&:disabled {
+		background-color: #DA2037;
+		i {
+			color: ${Color.Red};
+		}
+	}
 `
 
 export default Button;

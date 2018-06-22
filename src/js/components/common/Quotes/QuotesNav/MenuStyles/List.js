@@ -10,6 +10,7 @@ const List = styled.ul`
 	justify-content: space-evenly;
 	align-items: center;
 	list-style: none;
+	max-height: 50px;
 `
 
 export default List;
