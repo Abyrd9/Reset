@@ -8,7 +8,7 @@ import Auth from './components/Auth';
 import Home from './components/Home';
 
 const AppContainer = styled.div`
-	height: 100vh;
+	height: calc(100vh - 80px);
 	width: 100vw;
 	display: flex;
 	justify-content: center;
