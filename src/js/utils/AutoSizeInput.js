@@ -46,6 +46,7 @@ class AutoSizeInput extends Component {
 		this.mounted = true;
 		const { defaultHeight } = this.props;
 		this.setFilledTextareaHeight(defaultHeight);
+		this.props.changeParentHeight(defaultHeight);
 	}
 
 	componentDidUpdate(prevProps, prevState) {
@@ -60,8 +61,9 @@ class AutoSizeInput extends Component {
 			const height = element.clientHeight > defaultHeight ? element.clientHeight : defaultHeight;
       this.setState({
         height,
-      });
-    }
+			});
+			this.props.changeParentHeight(height);
+		}
 	}
 	
 	getExpandableField(props) {
@@ -72,7 +74,8 @@ class AutoSizeInput extends Component {
 			value,
 			placeholder,
 			onChange,
-			disabled
+			disabled,
+			onFocus,
 		} = props;
 
     return (
@@ -87,6 +90,7 @@ class AutoSizeInput extends Component {
 					}}
 					onChange={onChange}
 					disabled={disabled}
+					onFocus={onFocus}
         />
     );
 	}

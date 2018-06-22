@@ -1,7 +1,8 @@
 import styled from 'styled-components';
 
 const Backdrop = styled.div`
-	height: calc(100vh - 80px);
+	height: 100%;
+	min-height: 570px;
 	width: 100vw;
 	overflow: hidden;
 	padding: 20px;

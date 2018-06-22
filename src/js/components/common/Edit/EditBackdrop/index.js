@@ -6,7 +6,7 @@ const EditBackdrop = styled.div`
 	top: 0;
 	left: 0;
 	width: 100%;
-	height: calc(100vh - 80px);
+	height: 100%;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
@@ -27,6 +27,7 @@ const EditBackdrop = styled.div`
 	}}
 	@media (min-width: 760px) {
 		transform: translateY(40px);
+		height: 100vh;
 		${props => {
 			if (props.isOpen) {
 				return `

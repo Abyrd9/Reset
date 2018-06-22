@@ -8,7 +8,6 @@ import EditList from './EditList';
 import produce from 'immer';
 
 class QuoteList extends Component {
-
 	render() {
 		const {
 			quotes,

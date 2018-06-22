@@ -6,7 +6,10 @@ import { Color } from '../../Mixins';
 const EditCreatorStyles = styled.div`
 		width: 100%;
     border-top: 2px #d7dadb solid;
-		position: relative;
+		position: fixed;
+		min-height: 110px;
+		${props => `top: calc(100% - ${props.height}px);`}
+		left: 0;
 		@media (min-width: 760px) {
 			max-width: 700px;
 			border: none;

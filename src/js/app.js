@@ -8,11 +8,12 @@ import Auth from './components/Auth';
 import Home from './components/Home';
 
 const AppContainer = styled.div`
-	height: calc(100vh - 80px);
+	height: 100vh;
 	width: 100vw;
 	display: flex;
-	justify-content: center;
-	align-items: space-between;
+	flex-direction: column;
+	justify-content: space-between;
+	align-items: center;
 	background-color: ${Color.White};
 	position: relative;
 	overflow: hidden;
@@ -28,8 +29,12 @@ class App extends Component {
 			isUserActive: false,
 			isRunningAuth: false,
 		}
-		this.setIsUserActive = this.setIsUserActive.bind(this);
-		this.setIsRunningAuth = this.setIsRunningAuth.bind(this);
+	}
+
+	componentDidUpdate(prevProps, prevState) {
+		if (prevState.isRunningAuth !== this.state.isRunningAuth && this.state.isRunningAuth) {
+			this.scrollToBottom();
+		}
 	}
 
 	setIsUserActive = () => {
@@ -40,11 +45,17 @@ class App extends Component {
 		this.setState({ isRunningAuth: !this.state.isRunningAuth })
 	}
 
+	scrollToBottom = () => {
+		console.log("Scrolled to bottom");
+		console.log(this.pageEnd);
+		if (!!this.pageEnd) this.pageEnd.scrollIntoView({ behavior: "smooth" });
+	}
+
 	render() {
-		console.log(this.state.isUserActive, this.state.isRunningAuth, 'App')
         return (
             <AppContainer>
                 <UserTheme
+									scrollToBottom={this.scrollToBottom}
 									setIsUserActive={this.setIsUserActive}
 									setIsRunningAuth={this.setIsRunningAuth}
 									isUserActive={this.state.isUserActive}
@@ -52,12 +63,13 @@ class App extends Component {
 								>
 									{
 										!this.state.isUserActive ? (
-											<Auth />
+											<Auth scrollToBottom={this.scrollToBottom} />
 										) : (
-											<Home />
+											<Home scrollToBottom={this.scrollToBottom}/>
 										)
 									}
                 </UserTheme>
+								<div style={{height: "0", width: "100%"}} ref={el => { this.pageEnd = el; }}></div>
             </AppContainer>
         )
     }
