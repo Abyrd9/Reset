@@ -7,6 +7,8 @@ import AuthHeader from './common/Auth/AuthHeader';
 import AuthForm from './common/Auth/AuthForm';
 import AuthFooter from './common/Auth/AuthFooter';
 
+import Logo from '../../assets/img/Logo.png'
+
 
 class Auth extends Component {
 	constructor(props) {
@@ -27,7 +29,7 @@ class Auth extends Component {
 						context => (
 							<React.Fragment>
 								<AuthHeader>
-									<AuthHeader.Image src="../../../src/assets/img/Logo.png" />
+									<AuthHeader.Image src={Logo} />
 									<AuthHeader.Title>Reset</AuthHeader.Title>
 								</AuthHeader>
 								<AuthForm>

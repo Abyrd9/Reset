@@ -7,7 +7,7 @@ import AuthInput from './AuthInput';
 const AuthForm = styled.div`
 	width: 100%;
 	max-width: 500px;
-	min-height: 280px;
+	height: 260px;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;

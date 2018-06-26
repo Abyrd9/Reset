@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import styled from 'styled-components';
 
 import { UserTheme } from './components/UserTheme';
@@ -8,7 +8,7 @@ import Auth from './components/Auth';
 import Home from './components/Home';
 
 const AppContainer = styled.div`
-	height: 100vh;
+	height: 100%;
 	width: 100vw;
 	display: flex;
 	flex-direction: column;
@@ -48,31 +48,31 @@ class App extends Component {
 	scrollToBottom = () => {
 		console.log("Scrolled to bottom");
 		console.log(this.pageEnd);
-		if (!!this.pageEnd) this.pageEnd.scrollIntoView({ behavior: "smooth" });
+		// if (!!this.pageEnd) this.pageEnd.scrollIntoView({ behavior: "smooth" });
 	}
 
 	render() {
-        return (
-            <AppContainer>
-                <UserTheme
-									scrollToBottom={this.scrollToBottom}
-									setIsUserActive={this.setIsUserActive}
-									setIsRunningAuth={this.setIsRunningAuth}
-									isUserActive={this.state.isUserActive}
-									isRunningAuth={this.state.isRunningAuth}
-								>
-									{
-										!this.state.isUserActive ? (
-											<Auth scrollToBottom={this.scrollToBottom} />
-										) : (
-											<Home scrollToBottom={this.scrollToBottom}/>
-										)
-									}
-                </UserTheme>
-								<div style={{height: "0", width: "100%"}} ref={el => { this.pageEnd = el; }}></div>
-            </AppContainer>
-        )
-    }
+		return (
+			<AppContainer>
+				<UserTheme
+					scrollToBottom={this.scrollToBottom}
+					setIsUserActive={this.setIsUserActive}
+					setIsRunningAuth={this.setIsRunningAuth}
+					isUserActive={this.state.isUserActive}
+					isRunningAuth={this.state.isRunningAuth}
+				>
+					{
+						!this.state.isUserActive ? (
+							<Auth scrollToBottom={this.scrollToBottom} />
+						) : (
+								<Home scrollToBottom={this.scrollToBottom} />
+							)
+					}
+				</UserTheme>
+				<div style={{ height: "0", width: "100%" }} ref={el => { this.pageEnd = el; }}></div>
+			</AppContainer>
+		)
+	}
 }
 
 export default App;

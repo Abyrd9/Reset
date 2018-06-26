@@ -8,6 +8,8 @@ import QuotesFooter from './common/Quotes/QuotesFooter';
 import { UserContext } from './UserTheme';
 import Backdrop from './common/Backdrop';
 
+import Logo from '../../assets/img/Logo.png';
+
 class ShowQuotes extends Component {
 	constructor(props) {
 		super(props);
@@ -65,7 +67,7 @@ class ShowQuotes extends Component {
 										onClose={() => this.setState({ isMenuOpen: false })}
 										menuList={[{text: 'Sign Out', onClick: () => context.signOut()}]}
 									/>
-									<QuotesNav.Image src="../../../src/assets/img/Logo.png" />
+									<QuotesNav.Image src={Logo} />
 									<QuotesNav.Icon
 										iconClassname={this.state.isMenuOpen ? 'fa fa-times' : 'fas fa-bars'}
 										onClick={() => this.setState({ isMenuOpen: !this.state.isMenuOpen })}

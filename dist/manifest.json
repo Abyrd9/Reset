@@ -1,0 +1,15 @@
+{
+    "short_name": "Reset",
+    "name": "Reset",
+    "icons": [
+      {
+        "src":"/981802b30d355d6a40ab67d1bb4fbab0.png",
+        "sizes": "33x70",
+        "type": "image/png"
+      }
+    ],
+    "start_url": "/?utm_source=homescreen",
+    "background_color": "#edf2f4",
+    "Theme_color": "#ef233c",
+    "display": "standalone"
+  }

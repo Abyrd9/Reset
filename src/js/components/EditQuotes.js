@@ -6,6 +6,8 @@ import { UserContext } from './UserTheme';
 import EditNav from './common/Edit/EditNav';
 import EditBackdrop from './common/Edit/EditBackdrop';
 
+import LogoWhite from '../../assets/img/LogoWhite.png';
+
 class EditQuotes extends Component {
 	render() {
 		return (
@@ -16,7 +18,7 @@ class EditQuotes extends Component {
 							<React.Fragment>
 								<EditNav>
 									<EditNav.Icon onClick={() => {context.changePage('home'); context.changeQuote('reset');}} />
-									<EditNav.Image src="../../../src/assets/img/LogoWhite.png" />
+									<EditNav.Image src={LogoWhite} />
 								</EditNav>
 								<QuoteList
 									quotes={context.quotes}

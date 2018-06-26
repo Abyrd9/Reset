@@ -11,14 +11,14 @@ const IconComponent = props => {
 const IconStyled = styled(IconComponent)`
 	color: ${Color.White};
 	position: absolute;
-	font-size: 16px;
-	top: calc(50% - 9px);
+	font-size: 14px;
+	top: calc(50% - 7px);
 	left: 10px;
 `
 
 const Button = styled.button`
 	width: 85%;
-	${Font(400, '14px')}
+	${Font(400, '12px')}
 	color: ${Color.White};
 	${Shadow(2)}
 	background-color: ${props => {

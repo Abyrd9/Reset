@@ -5,9 +5,10 @@ import { Font, Color, Shadow } from '../../Mixins';
 const Text = styled.p`
 	${Font(700, '14px')}
 	color: ${Color.Red};
-	margin-top: 50px;
+	margin-top: 30px;
+	margin-bottom: 20px;
 	@media (max-width: 320px) {
-		margin-top: 20px;
+		margin-top: 8px;
 	}
 `
 

@@ -3,7 +3,7 @@ import { Font, Color, Shadow, Animation } from '../../Mixins';
 
 const Button = styled.button`
 	width: 100%;
-	${Font(400, '16px')}
+	${Font(400, '14px')}
 	color: ${Color.White};
 	${Shadow(2)}
 	background-color: ${Color.Red};
@@ -11,8 +11,8 @@ const Button = styled.button`
 	outline: none;
 	border: none;
 	padding: 8px 0px;
-	margin: 15px 0px;
 	transform: scale(1);
+	margin-top: 8px;
 	${Animation('all', '.1s', 'ease-in-out', '0s')}
 	&:focus, &:active {
 		border: none;
