@@ -1,28 +1,21 @@
 import styled from 'styled-components';
 
-const ModalContainer = styled.div`
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 100%;
-  width: 100%;
-  display: flex;
-  justify-content: 0;
-  align-items: 0;
-  background-color: rgba(0, 0, 0, .3);
-`
+import Button from './Button';
+import Icon from './Icon';
+import Input from './Input';
+import Text from './Text';
 
-const ModalContent = styled.div`
+const Auth = styled.div`
   width: 100%;
-  margin: 20px;
-  max-width: 400px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 15px;
-`
+`;
 
-ModalContainer.ModalContent = ModalContent;
+Auth.Button = Button;
+Auth.Icon = Icon;
+Auth.Input = Input;
+Auth.Text = Text;
 
-export default ModalContainer;
+export default Auth;

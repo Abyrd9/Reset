@@ -6,6 +6,7 @@ import Backdrop from './common/Backdrop';
 import AuthHeader from './common/Auth/AuthHeader';
 import AuthForm from './common/Auth/AuthForm';
 import AuthFooter from './common/Auth/AuthFooter';
+import Modal from './common/Modal';
 
 
 class Auth extends Component {
@@ -99,6 +100,9 @@ class Auth extends Component {
 										/>
 									)}
 								</AuthFooter>
+								<Modal isOpen={true}>
+									this Is Text
+								</Modal>
 							</React.Fragment>
 						)
 					}
