@@ -40,6 +40,6 @@ module.exports = {
 			filename: 'style.css',
 			allChunks: true,
 			disable: process.env.NODE_ENV !== 'production'
-		})
+    })
   ]
 }

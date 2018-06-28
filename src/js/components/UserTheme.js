@@ -19,6 +19,8 @@ export class UserTheme extends Component {
       page: '',
       quoteCreatorValue: '',
       user: {
+				name: '',
+				email: '',
         userId: '',
         userQuotes: [],
       },
@@ -36,7 +38,9 @@ export class UserTheme extends Component {
 					quotes = quotes === null ? [] : quotes;
 					this.setState(
 						produce(draft => {
-							draft.user.userId = user;
+							draft.user.name = user.displayName;
+							draft.user.email = user.email;
+							draft.user.userId = user.uid;
 							draft.user.userQuotes = Object.values(quotes);;
 							draft.page = 'home';
 						})
@@ -64,6 +68,8 @@ export class UserTheme extends Component {
 				if (!!user) {
 					this.setState(
 						produce(draft => {
+							draft.user.name = user.displayName;
+							draft.user.email = user.email;
 							draft.user.userId = user.uid;
 							draft.page = 'home';
 						})
@@ -157,6 +163,16 @@ export class UserTheme extends Component {
 		}).catch(error => {
 			console.log(error.code, error.message, error.email, error.credential);
 		})
+	}
+
+	passwordReset = (email) => {
+		firebase.auth().sendPasswordResetEmail(email)
+			.then(() => {
+				console.log("Email Has Been Sent!");
+			})
+			.catch(err => {
+				console.log(err)
+			})
 	}
 
 	signOut = () => {

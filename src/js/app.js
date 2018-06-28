@@ -16,7 +16,7 @@ const AppContainer = styled.div`
 	align-items: center;
 	background-color: ${Color.White};
 	position: relative;
-	overflow: hidden;
+	overflow-y: scroll;
 	* {
 		box-sizing: border-box;
 	}
