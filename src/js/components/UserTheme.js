@@ -123,6 +123,7 @@ export class UserTheme extends Component {
 					console.log(userId);
 					firebase.database().ref(`users/${userId}`).update({
 						name,
+						email
 					}, error => console.log(error))
           this.props.setIsRunningAuth();
           this.props.setIsUserActive();
@@ -146,8 +147,9 @@ export class UserTheme extends Component {
 		firebase.auth().signInWithPopup(googleProvider).then(result => {
 			const token = result.credential.accessToken;
 			const user = result.user;
-			firebase.database().ref(`users/${userId}`).update({
+			firebase.database().ref(`users/${user.uid}`).update({
 				name: user.displayName,
+				email: user.email
 			}, error => console.log(error))
 		}).catch(error => {
 			console.log(error.code, error.message, error.email, error.credential);
@@ -163,16 +165,6 @@ export class UserTheme extends Component {
 		}).catch(error => {
 			console.log(error.code, error.message, error.email, error.credential);
 		})
-	}
-
-	passwordReset = (email) => {
-		firebase.auth().sendPasswordResetEmail(email)
-			.then(() => {
-				console.log("Email Has Been Sent!");
-			})
-			.catch(err => {
-				console.log(err)
-			})
 	}
 
 	signOut = () => {

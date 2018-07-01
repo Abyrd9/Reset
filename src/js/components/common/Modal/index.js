@@ -10,14 +10,15 @@ const ModalContainer = styled.div`
   height: 100%;
   width: 100%;
   display: flex;
-  justify-content: 0;
-  align-items: 0;
+  justify-content: center;
+  align-items: center;
   background-color: rgba(0, 0, 0, .3);
   ${props => props.isOpen ? '' : 'display: none;'}
 `
 
 const ModalContent = styled.div`
- width: 100%;
+	background-color: ${Color.White};
+ 	width: 100%;
   margin: 20px;
   max-width: 400px;
   display: flex;
@@ -36,11 +37,10 @@ const IconComponent = props => {
 
 const IconStyled = styled(IconComponent)`
 	color: ${Color.White};
-	font-size: 36px;
-  margin: 0px 10px;
+	font-size: 28px;
   position: absolute;
-  top: 0;
-  left: 100%;
+  top: calc(0px - 28px);
+  left: calc(100% - 19px);
 `
 
 const Icon = (props) => {
@@ -63,7 +63,7 @@ class Modal extends Component {
   }
 
   componentDidUpdate(prevProps) {
-    const isDifferent = this.props.isOpen !== this.state.isOpen || prevProps.isOpen !== this.props.isOpen;
+    const isDifferent = this.props.isOpen !== this.state.isOpen && prevProps.isOpen !== this.props.isOpen;
     if (isDifferent) {
       this.setState({ isOpen: this.props.isOpen })
     }
