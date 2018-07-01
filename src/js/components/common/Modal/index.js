@@ -17,7 +17,8 @@ const ModalContainer = styled.div`
 `
 
 const ModalContent = styled.div`
- width: 100%;
+	background-color: ${Color.White};
+ 	width: 100%;
   margin: 20px;
   max-width: 400px;
   display: flex;

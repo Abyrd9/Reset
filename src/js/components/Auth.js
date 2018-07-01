@@ -6,7 +6,7 @@ import Backdrop from './common/Backdrop';
 import AuthHeader from './common/Auth/AuthHeader';
 import AuthForm from './common/Auth/AuthForm';
 import AuthFooter from './common/Auth/AuthFooter';
-import Modal from './common/Modal';
+import AuthModal from './common/Auth/AuthModal';
 
 import Logo from '../../assets/img/Logo.png'
 
@@ -19,6 +19,7 @@ class Auth extends Component {
 			email: "",
 			password: "",
 			confirmPassword: "",
+			authModalOpen: false,
 		}
 	}
 
@@ -71,7 +72,7 @@ class Auth extends Component {
 
 									{context.page === "signIn" && (
 										<AuthForm.ForgotPassword
-											onClick={() => {}}
+											onClick={() => this.setState({ authModalOpen: !this.state.authModalOpen })}
 										>
 											I forgot my password.
 										</AuthForm.ForgotPassword>
@@ -102,9 +103,7 @@ class Auth extends Component {
 										/>
 									)}
 								</AuthFooter>
-								<Modal isOpen={true}>
-									this Is Text
-								</Modal>
+								<AuthModal isOpen={this.state.authModalOpen} />
 							</React.Fragment>
 						)
 					}

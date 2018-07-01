@@ -46,7 +46,7 @@ class AutoSizeInput extends Component {
 		this.mounted = true;
 		const { defaultHeight } = this.props;
 		this.setFilledTextareaHeight(defaultHeight);
-		this.props.changeParentHeight(defaultHeight);
+		!!this.props.changeParentHeight && this.props.changeParentHeight(defaultHeight);
 	}
 
 	componentDidUpdate(prevProps, prevState) {
@@ -62,7 +62,7 @@ class AutoSizeInput extends Component {
       this.setState({
         height,
 			});
-			this.props.changeParentHeight(height);
+			!!this.props.changeParentHeight && this.props.changeParentHeight(height);
 		}
 	}
 	
