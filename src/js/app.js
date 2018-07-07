@@ -6,6 +6,8 @@ import { Color } from './components/common/Mixins';
 
 import Auth from './components/Auth';
 import Home from './components/Home';
+import produce from 'immer';
+import firebase from './utils/Firebase';
 
 const AppContainer = styled.div`
 	height: 100%;
@@ -26,50 +28,66 @@ class App extends Component {
 	constructor() {
 		super();
 		this.state = {
-			isUserActive: false,
-			isRunningAuth: false,
+			user: {
+				userActive: false,
+				userId: ''
+			},
+			authLoading: false,
 		}
 	}
 
-	componentDidUpdate(prevProps, prevState) {
-		if (prevState.isRunningAuth !== this.state.isRunningAuth && this.state.isRunningAuth) {
-			this.scrollToBottom();
+	componentDidMount() {
+		this.authListener();
+	}
+
+	authListener = () => {
+		firebase.auth().onAuthStateChanged(user => {
+			console.log("this Changed")
+			this.setAuthLoading(true);
+			if (user) {
+				this.setUser(user.uid);
+				this.setAuthLoading(false);
+			} else {
+				this.setUser('');
+				this.setAuthLoading(false);
+			}
+		})
+	}
+
+	setAuthLoading = value => {
+		this.setState(
+			produce(draft => { draft.authLoading = value })
+		)
+	}
+
+	setUser = (uid) => {
+		if (uid.length > 0) {
+			this.setState(
+				produce(draft => {
+					draft.user.userActive = true;
+					draft.user.userId = uid;
+				})
+			)
+		} else {
+			this.setState(
+				produce(draft => {
+					draft.user.userActive = false;
+					draft.user.userId = '';
+				})
+			)
 		}
-	}
-
-	setIsUserActive = () => {
-		this.setState({ isUserActive: !this.state.isUserActive })
-	}
-
-	setIsRunningAuth = () => {
-		this.setState({ isRunningAuth: !this.state.isRunningAuth })
-	}
-
-	scrollToBottom = () => {
-		console.log("Scrolled to bottom");
-		console.log(this.pageEnd);
-		// if (!!this.pageEnd) this.pageEnd.scrollIntoView({ behavior: "smooth" });
 	}
 
 	render() {
 		return (
 			<AppContainer>
 				<UserTheme
-					scrollToBottom={this.scrollToBottom}
-					setIsUserActive={this.setIsUserActive}
-					setIsRunningAuth={this.setIsRunningAuth}
-					isUserActive={this.state.isUserActive}
-					isRunningAuth={this.state.isRunningAuth}
+					user={this.state.user}
 				>
 					{
-						!this.state.isUserActive ? (
-							<Auth scrollToBottom={this.scrollToBottom} />
-						) : (
-								<Home scrollToBottom={this.scrollToBottom} />
-							)
+						!this.state.user.userActive ? ( <Auth /> ) : ( <Home /> )
 					}
 				</UserTheme>
-				<div style={{ height: "0", width: "100%" }} ref={el => { this.pageEnd = el; }}></div>
 			</AppContainer>
 		)
 	}

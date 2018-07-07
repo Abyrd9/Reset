@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import React from 'react';
-import { Font, Color, Shadow } from '../../Mixins';
+import PropTypes from 'prop-types';
+import { Font, Color, Shadow } from '../../common/Mixins';
 
 const Text = styled.p`
 	${Font(700, '14px')}
@@ -18,13 +19,19 @@ const Link = styled.a`
 	text-decoration: underline;
 `
 
-const ToggleLink = (props) => {
+const AuthToggleLink = (props) => {
 	return (
 		<Text>
 			{props.text}
 			<Link onClick={props.onClick}>{props.linkText}</Link>
 		</Text>
 	)
-}
+} 
 
-export default ToggleLink;
+AuthToggleLink.propTypes = {
+	onClick: PropTypes.func,
+	linkText: PropTypes.string.isRequired,
+	text: PropTypes.string,
+};
+
+export default AuthToggleLink;

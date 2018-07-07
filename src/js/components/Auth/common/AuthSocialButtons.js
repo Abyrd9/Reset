@@ -1,6 +1,7 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { Color, Font, Shadow, Animation } from '../../Mixins';
+import { Color, Font, Shadow, Animation } from '../../common/Mixins';
 
 const IconComponent = props => {
 	return (
@@ -24,15 +25,15 @@ const Button = styled.button`
 	background-color: ${props => {
 		switch (props.icon) {
 		case 'google':
-			return `${Color.GoogleOrange}`;
+			return '#dc483c';
 			break;
 		case 'facebook':
-			return `${Color.FacebookBlue}`;
+			return '#3b5998';
 			break;
 		default:
 			return '';
 	}
-}}
+	}};
 	border-radius: 5px;
 	outline: none;
 	border: none;
@@ -53,7 +54,7 @@ const Button = styled.button`
 	}
 `
 
-const SocialButton = (props) => {
+const AuthSocialButton = (props) => {
 
 	let iconClass;
 	switch (props.icon) {
@@ -75,4 +76,9 @@ const SocialButton = (props) => {
 	)
 }
 
-export default SocialButton;
+AuthSocialButton.propTypes = {
+	onClick: PropTypes.func,
+	icon: PropTypes.string.isRequired,
+};
+
+export default AuthSocialButton;

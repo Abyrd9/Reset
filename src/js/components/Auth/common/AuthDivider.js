@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import React from 'react';
-import { Font, Color } from '../../Mixins';
+import { Font, Color } from '../../common/Mixins';
 
 const Span = styled.span`
     content: "";
@@ -11,22 +11,20 @@ const Span = styled.span`
 `
 
 const Text = styled.p`
+		margin: 0;
     ${Font(700, '18px')}
 		color: ${Color.BlackLight};
 `
 
 const Container = styled.div`
-    margin: 10px 0px;
+    margin: 5px 0px;
     width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
-    @media (max-width: 320px) {
-		display: none;
-	}
 `
 
-const Divider = (props) => {
+const AuthDivider = (props) => {
 	return (
 		<Container>
 			<Span /><Text>{props.children}</Text><Span />
@@ -34,4 +32,4 @@ const Divider = (props) => {
 	);
 }
 
-export default Divider;
+export default AuthDivider;

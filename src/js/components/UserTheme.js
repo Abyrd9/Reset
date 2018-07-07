@@ -3,13 +3,10 @@ import PropTypes from 'prop-types';
 
 import produce from 'immer';
 import firebase from '../utils/Firebase';
-
 import { KeyGen } from '../utils/KeyGen';
+import isEqual from 'lodash.isequal';
 
 export const UserContext = React.createContext('user');
-const googleProvider = new firebase.auth.GoogleAuthProvider();
-const facebookProvider = new firebase.auth.FacebookAuthProvider();
-
 const database = firebase.database();
 
 export class UserTheme extends Component {
@@ -18,82 +15,45 @@ export class UserTheme extends Component {
     this.state = {
       page: '',
       quoteCreatorValue: '',
-      user: {
-				name: '',
-				email: '',
-        userId: '',
-        userQuotes: [],
-      },
+			userQuotes: [],
     }
-  }
-
-  componentDidMount() {
-    this.props.setIsRunningAuth();
-    firebase.auth().onAuthStateChanged(user => {
-      if (!!user) {
-				const userId = user.uid;
-				firebase.database().ref(`users/${userId}/quotes`).once(`value`).then(snapshot => {
-					let quotes = snapshot.val();
-					console.log(quotes);
-					quotes = quotes === null ? [] : quotes;
-					this.setState(
-						produce(draft => {
-							draft.user.name = user.displayName;
-							draft.user.email = user.email;
-							draft.user.userId = user.uid;
-							draft.user.userQuotes = Object.values(quotes);;
-							draft.page = 'home';
-						})
-					)
-					this.props.setIsUserActive();
-					this.props.setIsRunningAuth();
-				})
-
-      } else {
-        this.setState(
-          produce(draft => {
-            draft.page = 'signIn';
-          })
-        )
-        this.props.setIsRunningAuth();
-      }
-    })
 	}
 
-	componentDidUpdate() {
-		if (this.props.isUserActive && !this.props.isRunningAuth) this.updateFirebase();
-		firebase.auth().onAuthStateChanged(user => {
-      if (!!user && !!user !== this.props.isUserActive) {
-				this.props.setIsUserActive()
-				if (!!user) {
+	componentDidMount() {
+		if (this.props.user.userActive) {
+			const ref = database.ref(`users/${this.props.user.userId}`).once('value')
+				.then(snapshot => {
+					const quotes = snapshot.val().quotes || [];
+				})
+				.catch(err => {
+					console.log(err);
+				})
+		}
+	}
+	
+	componentDidUpdate(prevProps, prevState) {
+		const authChangeSignIn = !prevProps.user.userActive && this.props.user.userActive;
+		if (authChangeSignIn) {
+			const ref = database.ref(`users/${this.props.user.userId}`).once('value')
+				.then(snapshot => {
+					const quotes = snapshot.val().quotes || [];
 					this.setState(
-						produce(draft => {
-							draft.user.name = user.displayName;
-							draft.user.email = user.email;
-							draft.user.userId = user.uid;
-							draft.page = 'home';
-						})
+						produce(draft => { draft.userQuotes = quotes })
 					)
-				} else {
-					this.setState(
-						produce(draft => {
-							draft.page = 'signIn';
-						})
-					)
-				}
-			}
-    });
+				})
+				.catch(err => {
+					console.log(err);
+				})
+		}
+		if (!isEqual(prevState.userQuotes, this.state.userQuotes) && this.props.user.userActive && !authChangeSignIn) {
+			this.updateFirebase();
+		}
 	}
 
 	updateFirebase = () => {
-		if (this.props.isUserActive) {
-			const userId = firebase.auth().currentUser.uid;
-			const quotes = this.state.user.userQuotes;
-			firebase.database().ref(`users/${userId}`).update({
-				quotes,
-			}, error => {
-				console.log(error);
-			})
+		if (this.props.user.userActive) {
+			const quotes = this.state.userQuotes;
+			firebase.database().ref(`users/${this.props.user.userId}`).update({ quotes })
 		}
 	}
 
@@ -113,72 +73,20 @@ export class UserTheme extends Component {
 		)
   }
 
-  emailAuth = (email, password, name) => {
-    this.props.setIsRunningAuth();
-    if (this.state.page === 'signUp') {
-      firebase.auth().createUserWithEmailAndPassword(email, password)
-        .then(response => {
-					console.log(response);
-					const userId = response.user.uid;
-					console.log(userId);
-					firebase.database().ref(`users/${userId}`).update({
-						name,
-						email
-					}, error => console.log(error))
-          this.props.setIsRunningAuth();
-          this.props.setIsUserActive();
-        })
-        .catch(error => {
-          console.log(error.code, error.message);
-        })
-    } else if (this.state.page === 'signIn') {
-      firebase.auth().signInWithEmailAndPassword(email, password)
-        .then(response => {
-          this.props.setIsRunningAuth();
-          this.props.setIsUserActive();
-        })
-        .catch(error => {
-          console.log(error.code, error.message);
-        })
-    }
-	}
-	
-	googleAuth = () => {
-		firebase.auth().signInWithPopup(googleProvider).then(result => {
-			const token = result.credential.accessToken;
-			const user = result.user;
-			firebase.database().ref(`users/${user.uid}`).update({
-				name: user.displayName,
-				email: user.email
-			}, error => console.log(error))
-		}).catch(error => {
-			console.log(error.code, error.message, error.email, error.credential);
-		})
-	}
-
-	facebookAuth = () => {
-		firebase.auth().signInWithPopup(facebookProvider).then(result => {
-			console.log(result)
-			const token = result.credential.accessToken;
-			const user = result.user;
-			console.log(token, user)
-		}).catch(error => {
-			console.log(error.code, error.message, error.email, error.credential);
-		})
-	}
-
 	signOut = () => {
 		firebase.auth().signOut().then(() => {
 			console.log("User successfuly signed out")
-			this.props.setIsUserActive(false);
 		}).catch(error => console.log(error))
 	}
 
   createQuote = (value) => {
-		const isActive = this.state.user.userQuotes.some(quote => 
+		// Check if any current quotes are active in any way
+		const isActive = this.state.userQuotes.some(quote => 
 			quote.toolsVisible || quote.isDeletable || quote.isEditable
 		);
-		const quoteKey = KeyGen(this.state.user.userQuotes);
+		// Generate new quote Key
+		const quoteKey = KeyGen(this.state.userQuotes);
+		// Create Quote Object
 		const quote = {
 			quoteKey,
 			value,
@@ -186,11 +94,12 @@ export class UserTheme extends Component {
 			isDeletable: false,
 			isEditable: false,
 		}
+		// If the value isn't empty and no quotes are currently active, add to quote list
 		if (value !== '' && !isActive) {
 			this.setState(
 				produce(draft => {
 					draft.quoteCreatorValue = '';
-					draft.user.userQuotes.push(quote)
+					draft.userQuotes.push(quote)
 				})
 			)
 		}
@@ -201,7 +110,7 @@ export class UserTheme extends Component {
 			produce(draft => {
 
 				// Make sure clicking a non-active quote doesn't trigger anything
-				const filteredQuotes = draft.user.userQuotes.filter(quote => quote.quoteKey !== key);
+				const filteredQuotes = draft.userQuotes.filter(quote => quote.quoteKey !== key);
 				const notActive = filteredQuotes.every(quote => {
 					if (!quote.isDeletable && !quote.isEditable && !quote.toolsVisible) {
 						return true;
@@ -210,12 +119,15 @@ export class UserTheme extends Component {
 					}
 				})
 
-				draft.user.userQuotes.forEach((quote, index) => {
+				draft.userQuotes.forEach((quote, index) => {
+					// If the key is reset, this means reset all values to false
 					if (keyToChange === 'reset') {
 						quote.toolsVisible = false;
 						quote.isDeletable = false;
 						quote.isEditable = false;
 					}
+					// if the quote key is equal to the passed key, and it's not active
+					// run the switch
 					if (quote.quoteKey === key && notActive) {
 						switch(keyToChange) {
 							case 'value':
@@ -230,7 +142,6 @@ export class UserTheme extends Component {
 								}
 								break;
 							case 'isDeletable':
-								console.log("is this running?")
 								quote.isDeletable = value;
 								quote.toolsVisible = false;
 								quote.isEditable = false;
@@ -241,7 +152,7 @@ export class UserTheme extends Component {
 								quote.isDeletable = false;
 								break;
 							case 'deleteQuote':
-								draft.user.userQuotes.splice(index, 1);
+								draft.userQuotes.splice(index, 1);
 							default:
 								quote[keyToChange] = value;
 						}
@@ -254,17 +165,14 @@ export class UserTheme extends Component {
   render() {
     return (
       <UserContext.Provider value={{
-        page: this.state.page,
-				quotes: this.state.user.userQuotes,
 				quoteCreatorValue: this.state.quoteCreatorValue,
-        changePage: this.changePage,
-				emailAuth: this.emailAuth,
-				googleAuth: this.googleAuth,
-				facebookAuth: this.facebookAuth,
-				signOut: this.signOut,
-        changeQuote: this.changeQuote,
-        createQuote: this.createQuote,
 				changeCreatorValue: this.changeCreatorValue,
+				createQuote: this.createQuote,
+				changeQuote: this.changeQuote,
+				quotes: this.state.userQuotes,
+				changePage: this.changePage,
+        page: this.state.page,
+				signOut: this.signOut,
       }}>
         {this.props.children}
       </UserContext.Provider>

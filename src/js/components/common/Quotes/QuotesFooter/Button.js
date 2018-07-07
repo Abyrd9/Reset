@@ -6,7 +6,7 @@ const Button = styled.button`
 	align-items: center;
 	justify-content: center;
 	width: 80%;
-	${Font(400, '16px')}
+	${Font(400, '14px')}
 	color: ${Color.White};
 	${Shadow(2)}
 	background-color: ${Color.BlueLight};
@@ -14,7 +14,7 @@ const Button = styled.button`
 	outline: none;
 	border: none;
 	max-width: 400px;
-	padding: 12px 0px;
+	padding: 8px 0px;
 	margin: 15px 0px;
 	transform: scale(1);
 	${Animation('all', '.1s', 'ease-in-out', '0s')}

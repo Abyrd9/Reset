@@ -6,11 +6,6 @@ import ShowQuotes from './ShowQuotes';
 import { UserContext } from './UserTheme';
 
 class Home extends Component {
-
-	componentDidMount() {
-		this.props.scrollToBottom();
-	}
-
 	render() {
 		return (
 			<UserContext.Consumer>
