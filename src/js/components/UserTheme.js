@@ -16,6 +16,7 @@ export class UserTheme extends Component {
       page: '',
       quoteCreatorValue: '',
 			userQuotes: [],
+			quoteLoading: true,
     }
 	}
 
@@ -24,9 +25,15 @@ export class UserTheme extends Component {
 			const ref = database.ref(`users/${this.props.user.userId}`).once('value')
 				.then(snapshot => {
 					const quotes = snapshot.val().quotes || [];
+					this.setState(
+						produce(draft => { draft.userQuotes = quotes, draft.quoteLoading = false })
+					)
 				})
 				.catch(err => {
 					console.log(err);
+					this.setState(
+						produce(draft => { draft.quoteLoading = false })
+					)
 				})
 		}
 	}
@@ -38,11 +45,14 @@ export class UserTheme extends Component {
 				.then(snapshot => {
 					const quotes = snapshot.val().quotes || [];
 					this.setState(
-						produce(draft => { draft.userQuotes = quotes })
+						produce(draft => { draft.userQuotes = quotes, draft.quoteLoading = false })
 					)
 				})
 				.catch(err => {
 					console.log(err);
+					this.setState(
+						produce(draft => { draft.quoteLoading = false })
+					)
 				})
 		}
 		if (!isEqual(prevState.userQuotes, this.state.userQuotes) && this.props.user.userActive && !authChangeSignIn) {
@@ -173,6 +183,7 @@ export class UserTheme extends Component {
 				changePage: this.changePage,
         page: this.state.page,
 				signOut: this.signOut,
+				quoteLoading: this.state.quoteLoading,
       }}>
         {this.props.children}
       </UserContext.Provider>

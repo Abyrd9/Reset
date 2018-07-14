@@ -5,6 +5,7 @@ import Text from './Text';
 import Button from './Button';
 import QuoteContainer from './QuoteContainer';
 import ButtonCountdown from './ButtonCountdown';
+import Loader from './Loader';
 
 const QuotesBlock = styled.div`
 	width: 100%;
@@ -24,5 +25,6 @@ QuotesBlock.Text = Text;
 QuotesBlock.Button = Button;
 QuotesBlock.QuoteContainer = QuoteContainer;
 QuotesBlock.ButtonCountdown = ButtonCountdown;
+QuotesBlock.Loader = Loader;
 
 export default QuotesBlock;

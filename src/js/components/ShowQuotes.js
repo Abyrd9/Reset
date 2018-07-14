@@ -9,6 +9,7 @@ import { UserContext } from './UserTheme';
 import Backdrop from './common/Backdrop';
 
 import Logo from '../../assets/img/Logo.png';
+import LoaderImg from '../../assets/img/LoaderImg.svg';
 
 class ShowQuotes extends Component {
 	constructor(props) {
@@ -76,6 +77,7 @@ class ShowQuotes extends Component {
 
 
 								<QuotesBlock>
+									{context.quoteLoading ? ( <QuotesBlock.Loader> <img src={LoaderImg} /> </QuotesBlock.Loader> ) : null}
 									<QuotesBlock.QuoteContainer isTransition={this.state.quotes.quoteTransition} >
 										<QuotesBlock.Icon iconClassname="fas fa-quote-left" left />
 										<QuotesBlock.Icon iconClassname="fas fa-quote-right" right />

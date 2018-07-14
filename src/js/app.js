@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import styled from 'styled-components';
 
 import { UserTheme } from './components/UserTheme';
-import { Color } from './components/common/Mixins';
+import { Color, Depth } from './components/common/Mixins';
+import LoaderImg from '../assets/img/LoaderImg.svg';
 
 import Auth from './components/Auth';
 import Home from './components/Home';
@@ -19,10 +20,24 @@ const AppContainer = styled.div`
 	background-color: ${Color.White};
 	position: relative;
 	overflow-y: scroll;
+	overflow-x: hidden;
 	* {
 		box-sizing: border-box;
 	}
 `
+
+const Loader = styled.div`
+	position: absolute;
+	top: 0;
+	left: 0;
+	background-color: ${Color.White};
+	width: 100vw;
+	height: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	${Depth('top')}
+`;
 
 class App extends Component {
 	constructor() {
@@ -32,7 +47,7 @@ class App extends Component {
 				userActive: false,
 				userId: ''
 			},
-			authLoading: false,
+			authLoading: true,
 		}
 	}
 
@@ -79,11 +94,13 @@ class App extends Component {
 	}
 
 	render() {
+		console.log(this.state.authLoading);
 		return (
 			<AppContainer>
 				<UserTheme
 					user={this.state.user}
 				>
+					{this.state.authLoading ? ( <Loader> <img src={LoaderImg} /> </Loader> ) : null}
 					{
 						!this.state.user.userActive ? ( <Auth /> ) : ( <Home /> )
 					}
