@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import styled from 'styled-components';
 
 import { UserTheme } from './components/UserTheme';
-import { Color, Depth } from './components/common/Mixins';
+import { Color, Depth, Font } from './components/common/Mixins';
 import LoaderImg from '../assets/img/LoaderImg.svg';
 
 import Auth from './components/Auth';
@@ -13,7 +13,6 @@ import firebase from './utils/Firebase';
 const AppContainer = styled.div`
 	height: 100%;
 	width: 100vw;
-	display: flex;
 	flex-direction: column;
 	justify-content: space-between;
 	align-items: center;
@@ -23,6 +22,28 @@ const AppContainer = styled.div`
 	overflow-x: hidden;
 	* {
 		box-sizing: border-box;
+	}
+	display: none;
+	@media (max-width: 500px) {
+		display: flex;
+	}
+`
+
+const DesktopMessage = styled.div`
+	height: 100vh;
+	width: 100vw;
+	display: none;
+	justify-content: center;
+	align-items: center;
+	padding: 50px;
+	background-color: ${Color.White};
+	h1 {
+		${Font(600, 26)}
+		text-align: center;
+		color: ${Color.BlackLight};
+	}
+	@media (min-width: 500px) {
+		display: flex;
 	}
 `
 
@@ -57,7 +78,6 @@ class App extends Component {
 
 	authListener = () => {
 		firebase.auth().onAuthStateChanged(user => {
-			console.log("this Changed")
 			this.setAuthLoading(true);
 			if (user) {
 				this.setUser(user.uid);
@@ -94,18 +114,22 @@ class App extends Component {
 	}
 
 	render() {
-		console.log(this.state.authLoading);
 		return (
-			<AppContainer>
-				<UserTheme
-					user={this.state.user}
-				>
-					{this.state.authLoading ? ( <Loader> <img src={LoaderImg} /> </Loader> ) : null}
-					{
-						!this.state.user.userActive ? ( <Auth /> ) : ( <Home /> )
-					}
-				</UserTheme>
-			</AppContainer>
+			<React.Fragment>
+				<DesktopMessage>
+					<h1>Desktop Version <br /> Coming Soon.</h1>
+				</DesktopMessage>
+				<AppContainer>
+					<UserTheme
+						user={this.state.user}
+					>
+						{this.state.authLoading ? ( <Loader> <img src={LoaderImg} /> </Loader> ) : null}
+						{
+							!this.state.user.userActive ? ( <Auth /> ) : ( <Home /> )
+						}
+					</UserTheme>
+				</AppContainer>
+			</React.Fragment>
 		)
 	}
 }
