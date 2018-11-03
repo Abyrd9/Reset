@@ -1,9 +1,0 @@
-.auth-toggle-link {
-	@include font(400, 14px);
-	color: $color-gray;
-	&__link {
-		@include font(600, 16px);
-		color: $color-gray;
-		text-decoration: underline;
-	}
-}
