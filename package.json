@@ -1,54 +1,25 @@
 {
   "name": "reset",
-  "version": "1.0.0",
-  "description": "A web app for resetting your thoughts.",
-  "main": "index.js",
-  "scripts": {
-    "start:dev": "webpack-dev-server --mode development --config config/webpack.base.config.js --open --hot --history-api-fallback",
-    "start:build": "webpack --mode production --config config/webpack.prod.config.js --env.NODE_ENV=production --progress",
-    "start:prod": "node server",
-    "start:deploy": "webpack --mode production --config config/webpack.prod.config.js --env.NODE_ENV=production --progress firebase deploy"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/Abyrd9/Reset.git"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/Abyrd9/Reset/issues"
-  },
-  "homepage": "https://github.com/Abyrd9/Reset#readme",
-  "devDependencies": {
-    "@babel/core": "^7.0.0-beta.46",
-    "@babel/preset-env": "^7.0.0-beta.46",
-    "@babel/preset-react": "^7.0.0-beta.46",
-    "@babel/preset-stage-2": "^7.0.0-beta.46",
-    "babel-loader": "^8.0.0-beta.2",
-    "css-loader": "^0.28.11",
-    "extract-text-webpack-plugin": "^4.0.0-beta.0",
-    "file-loader": "^1.1.11",
-    "html-webpack-plugin": "^3.2.0",
-    "node-sass": "^4.9.0",
-    "optimize-css-assets-webpack-plugin": "^4.0.1",
-    "sass-loader": "^7.0.1",
-    "style-loader": "^0.21.0",
-    "sw-precache-webpack-plugin": "^0.11.5",
-    "uglifyjs-webpack-plugin": "^1.2.5",
-    "webpack": "^4.8.1",
-    "webpack-cli": "^2.1.3",
-    "webpack-dev-server": "^3.1.4",
-    "webpack-manifest-plugin": "^2.0.3",
-    "webpack-merge": "^4.1.2"
-  },
+  "version": "0.1.0",
+  "private": true,
   "dependencies": {
-    "express": "^4.16.3",
-    "firebase": "^5.0.4",
-    "immer": "^1.3.1",
-    "lodash.isequal": "^4.5.0",
-    "react": "^16.3.2",
-    "react-dom": "^16.3.2",
-    "styled-components": "^3.3.2"
-  }
+    "react": "^16.6.3",
+    "react-dom": "^16.6.3",
+    "react-scripts": "2.1.1"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ]
 }
