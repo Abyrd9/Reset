@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import firebase from 'firebase';
 import { AdminContext } from '../Contexts/AdminContext';
 import styled, { css } from 'styled-components';
 
@@ -35,6 +36,28 @@ const CancelButton = styled.p`
 class Category extends Component {
   static contextType = AdminContext;
   state = { createNewCategory: false, newCategoryName: '' };
+
+  componentDidMount() {
+    const userId = firebase.auth().currentUser.uid;
+    const { categoryId } = this.props.currentCategory;
+    firebase
+      .database()
+      .ref(`/users/${userId}/categories/${categoryId}`)
+      .on('value', snapshot => {
+        let category = snapshot.val();
+        if (!!category) this.handleSetCurrentCategory(category.key);
+      });
+  }
+
+  componentWillUnmount() {
+    const user = firebase.auth().currentUser;
+    if (!!user) {
+      firebase
+        .database()
+        .ref(`/users/${user.uid}/timer`)
+        .off();
+    }
+  }
 
   handleSetCurrentCategory = async categoryId => {
     try {

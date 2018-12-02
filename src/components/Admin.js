@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import firebase from 'firebase';
 import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
 import AdminContextComponent, {
@@ -9,6 +10,7 @@ import Container from './common/Container';
 import Category from './common/Admin/Category';
 import CreateStatement from './common/Admin/CreateStatement';
 import StatementList from './common/Admin/StatementList';
+import CategoryEdit from './common/Admin/CategoryEdit';
 
 class Admin extends Component {
   state = {
@@ -41,6 +43,10 @@ class Admin extends Component {
             handleSetCurrentCategory={category =>
               this.handleSetCurrentCategory(category)
             }
+          />
+          <CategoryEdit
+            categoryId={this.state.currentCategory.categoryId}
+            categoryName={this.state.currentCategory.name}
           />
           <StatementList categoryId={this.state.currentCategory.categoryId} />
           <CreateStatement category={this.state.currentCategory} />

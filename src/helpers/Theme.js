@@ -43,5 +43,6 @@ export default {
     return `${property} ${time}s cubic-bezier(0.4, 0, 0.2, 1) ${delay}s`;
   },
   ease: 'cubic-bezier(0.4, 0, 0.2, 1)',
-  shadow: '0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);'
+  shadow: '0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);',
+  shadowPressed: '0 1px 3px rgba(0, 0, 0, 0.16), 0 1px 3px rgba(0, 0, 0, 0.23);'
 };

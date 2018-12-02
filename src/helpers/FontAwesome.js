@@ -18,7 +18,9 @@ import {
   faCaretDown,
   faFileSignature,
   faQuoteRight,
-  faQuoteLeft
+  faQuoteLeft,
+  faMinusCircle,
+  faSave
 } from '@fortawesome/free-solid-svg-icons';
 
 export const addIcons = () => {
@@ -41,6 +43,8 @@ export const addIcons = () => {
     faCaretDown,
     faFileSignature,
     faQuoteRight,
-    faQuoteLeft
+    faQuoteLeft,
+    faMinusCircle,
+    faSave
   );
 };

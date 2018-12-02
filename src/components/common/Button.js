@@ -17,6 +17,9 @@ const Button = styled.button`
       a {
         color: ${theme.colors.white};
       }
+      &:active {
+        box-shadow: ${theme.shadowPressed};
+      }
       &:disabled {
         background-color: ${theme.colors.gray};
         color: ${theme.colors.blackSecondary};
