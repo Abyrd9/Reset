@@ -12,7 +12,7 @@ const Loading = styled.div`
       align-items: center;
       h1 {
         text-align: center;
-        ${theme.font(24, 600)};
+        ${theme.font(26, 600)};
         color: ${theme.colors.blackSecondary};
       }
     `;

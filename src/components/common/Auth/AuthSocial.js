@@ -22,7 +22,7 @@ const Container = styled.div`
         p {
           color: ${theme.colors.blackSecondary};
           margin: 0px 10px;
-          ${theme.font(14, 600)};
+          ${theme.font(16, 600)};
         }
       }
     `;
@@ -39,10 +39,10 @@ const FacebookButton = styled(Button)`
       justify-content: center;
       width: 80%;
       margin: 10px auto;
-      ${theme.font(10, 400)};
+      ${theme.font(14, 400)};
       h4 {
-        margin-left: 2px;
-        ${theme.font(10, 600)};
+        margin-left: 3px;
+        ${theme.font(14, 600)};
       }
     `;
   }};
@@ -58,10 +58,10 @@ const GoogleButton = styled(Button)`
       justify-content: center;
       width: 80%;
       margin: 10px auto;
-      ${theme.font(10, 400)};
+      ${theme.font(14, 400)};
       h4 {
-        margin-left: 2px;
-        ${theme.font(10, 600)};
+        margin-left: 3px;
+        ${theme.font(14, 600)};
       }
     `;
   }};

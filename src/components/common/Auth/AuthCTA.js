@@ -12,8 +12,8 @@ const Container = styled.div`
       flex-direction: column;
       justify-content: center;
       a {
-        margin-top: 10px;
-        ${theme.font(12, 600)};
+        margin-top: 14px;
+        ${theme.font(16, 600)};
         color: ${theme.colors.primary};
         text-align: center;
       }

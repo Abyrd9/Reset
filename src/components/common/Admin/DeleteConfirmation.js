@@ -8,7 +8,7 @@ const Icon = styled(FontAwesomeIcon)`
     const { theme } = props;
     return css`
       color: ${theme.colors.white};
-      font-size: 22px;
+      font-size: 28px;
       margin: 0px 8px;
       margin-top: 12px;
     `;
@@ -27,8 +27,8 @@ const DeleteConfirmationContainer = styled.div`
       align-items: center;
       background-color: ${theme.colors.primary};
       color: ${theme.colors.white};
-      ${theme.font(12, 600)};
-      min-height: 52px;
+      ${theme.font(18, 600)};
+      min-height: 90px;
       padding: 10px;
     `;
   }};

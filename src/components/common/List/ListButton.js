@@ -35,11 +35,11 @@ const ButtonContainer = styled.div`
         width: 100%;
       }
       button {
-        ${theme.font(12, 400)};
+        ${theme.font(18, 400)};
         padding: 12px 0px;
       }
       p {
-        ${theme.font(10, 600)};
+        ${theme.font(16, 600)};
         color: ${theme.colors.blackSecondary};
         margin-top: 10px;
         transition: ${theme.transition('all', 0.2)};

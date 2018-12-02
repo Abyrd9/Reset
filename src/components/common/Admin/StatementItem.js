@@ -31,12 +31,12 @@ const StatementItemDefault = styled.div`
   ${props => {
     const { theme } = props;
     return css`
-      ${theme.font(14, 600)};
+      ${theme.font(20, 600)};
       display: flex;
       justify-content: flex-start;
       align-items: center;
       margin: 0px 8px;
-      min-height: 52px;
+      min-height: 90px;
     `;
   }};
 `;
@@ -99,7 +99,7 @@ class StatementItem extends Component {
         {this.state.isEditable && (
           <React.Fragment>
             <AutoResizingTextArea
-              defaultHeight={49}
+              defaultHeight={67}
               value={this.state.editValue}
               onChange={e => this.setState({ editValue: e.target.value })}
             />

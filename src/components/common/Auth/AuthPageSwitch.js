@@ -12,12 +12,12 @@ const Container = styled.div`
       align-items: center;
       margin-top: 20px;
       p {
-        ${theme.font(12, 600)};
+        ${theme.font(16, 600)};
         color: ${theme.colors.primary};
       }
       a {
         margin-left: 3px;
-        ${theme.font(12, 800)};
+        ${theme.font(16, 800)};
         color: ${theme.colors.primary};
         text-decoration: underline;
       }

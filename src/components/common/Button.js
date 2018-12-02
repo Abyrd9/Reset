@@ -5,9 +5,9 @@ const Button = styled.button`
   ${props => {
     const { theme } = props;
     return css`
-      ${theme.font(14, 400)};
+      ${theme.font(18, 400)};
       width: 100%;
-      padding: 8px 5px;
+      padding: 10px 5px;
       color: ${theme.colors.white};
       border-radius: ${props.isFlush ? '0px' : '3px'};
       background-color: ${props.isSecondary

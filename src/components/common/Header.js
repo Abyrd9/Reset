@@ -10,8 +10,8 @@ const HeaderContainer = styled.div`
   ${props => {
     const { theme } = props;
     return css`
-      max-height: 60px;
-      padding: 15px;
+      max-height: 75px;
+      padding: 15px 20px;
       position: absolute;
       top: 0;
       left: 0;
@@ -20,7 +20,7 @@ const HeaderContainer = styled.div`
       justify-content: space-between;
       align-items: center;
       img {
-        height: 30px;
+        height: 50px;
       }
       background-color: ${props.isAdmin
         ? theme.colors.secondary
@@ -37,7 +37,7 @@ const NavIcon = styled(FontAwesomeIcon)`
     return css`
       opacity: 1;
       visibility: visible;
-      font-size: ${props.icon === 'times' ? '30px' : '24px'};
+      font-size: ${props.icon === 'times' ? '38px' : '32px'};
       color: ${props.isAdmin ? theme.colors.white : theme.colors.primary};
       transition: ${theme.transition('all', 0.2)};
     `;

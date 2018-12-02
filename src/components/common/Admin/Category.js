@@ -26,7 +26,7 @@ const CancelButton = styled.p`
     return css`
       margin-top: 10px;
       text-align: center;
-      ${theme.font(12, 600)};
+      ${theme.font(16, 600)};
       color: ${theme.colors.blackSecondary};
     `;
   }};

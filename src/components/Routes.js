@@ -54,6 +54,17 @@ class Routes extends Component {
               ) : (
                 <Router>
                   <React.Fragment>
+                    <Route
+                      exact
+                      path="/"
+                      render={() =>
+                        auth.isAuthenticated ? (
+                          <Redirect to="/list" />
+                        ) : (
+                          <Redirect to="/auth" />
+                        )
+                      }
+                    />
                     <NonAuthenticatedRoute
                       isAuthenticated={auth.isAuthenticated}
                       component={Auth}

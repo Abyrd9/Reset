@@ -9,15 +9,14 @@ const QuoteIconLeft = styled(FontAwesomeIcon)`
     return css`
       position: absolute;
       color: ${theme.colors.graySecondary};
-      font-size: 80px;
+      font-size: 100px;
       left: 10px;
-      transform: translateY(-30px);
       z-index: ${theme.zIndex.bottom};
       /* transition */
       opacity: ${props.isTransitioned ? '1' : '0'};
       transform: ${props.isTransitioned
-        ? 'translateY(-30px)'
-        : 'translateY(-40px)'};
+        ? 'translateY(-40px)'
+        : 'translateY(-50px)'};
       ${props.isTransitioned &&
         `transition: ${theme.transition('all', 0.3, 0.1)};`};
     `;
@@ -30,15 +29,14 @@ const QuoteIconRight = styled(FontAwesomeIcon)`
     return css`
       position: absolute;
       color: ${theme.colors.graySecondary};
-      font-size: 80px;
+      font-size: 100px;
       right: 10px;
-      transform: translateY(30px);
       z-index: ${theme.zIndex.bottom};
       /* transition */
       opacity: ${props.isTransitioned ? '1' : '0'};
       transform: ${props.isTransitioned
-        ? 'translateY(30px)'
-        : 'translateY(20px)'};
+        ? 'translateY(40px)'
+        : 'translateY(30px)'};
       ${props.isTransitioned && `transition: ${theme.transition('all', 0.3)};`};
     `;
   }};
@@ -57,7 +55,7 @@ const Container = styled.div`
       p {
         z-index: ${theme.zIndex.middle};
         text-align: center;
-        ${theme.font(16, 600)};
+        ${theme.font(26, 600)};
         color: ${theme.colors.black};
         /* transition */
         opacity: ${props.isTransitioned ? '1' : '0'};

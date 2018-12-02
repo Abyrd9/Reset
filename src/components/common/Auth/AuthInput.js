@@ -17,8 +17,8 @@ const InputIcon = styled(FontAwesomeIcon)`
     const { theme } = props;
     return css`
       color: ${theme.colors.gray};
-      margin-right: 6px;
-      height: 12px;
+      margin-right: 10px;
+      height: 16px;
     `;
   }};
 `;
@@ -36,7 +36,7 @@ const AuthInputStyled = styled.label`
       padding: 5px 2px;
       &:focus-within {
         p {
-          transform: scale(0.8) translateY(-20px);
+          transform: scale(0.8) translateY(-30px);
         }
       }
       input {
@@ -44,16 +44,16 @@ const AuthInputStyled = styled.label`
         background-color: transparent;
         border: none;
         color: ${theme.colors.black};
-        ${theme.font(12, 500)};
+        ${theme.font(18, 500)};
         &:focus {
           outline: none;
         }
       }
       p {
-        left: 22px;
+        left: 28px;
         position: absolute;
         color: ${theme.colors.blackSecondary};
-        ${theme.font(12, 500)};
+        ${theme.font(18, 500)};
         transition: ${theme.transition('all', 0.1)};
         transform-origin: left;
         transform: scale(1) translateY(0);

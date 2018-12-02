@@ -13,10 +13,10 @@ const Container = styled.div`
       justify-content: center;
       align-items: center;
       img {
-        height: 25px;
+        height: 40px;
       }
       h1 {
-        ${theme.font(55, 900)};
+        ${theme.font(70, 900)};
         color: ${theme.colors.black};
         span {
           color: ${theme.colors.primary};

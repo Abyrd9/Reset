@@ -29,7 +29,7 @@ class Auth extends Component {
     return (
       <AuthContext>
         {auth => (
-          <Container isFlex>
+          <Container isAuth isFlex>
             {this.state.currentPage === 'signin' && (
               <React.Fragment>
                 <BlockAnimation>

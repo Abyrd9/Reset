@@ -12,7 +12,7 @@ const MenuList = styled.ul`
     const { theme } = props;
     return css`
       position: absolute;
-      right: 14px;
+      right: 16px;
       top: calc(100% - 15px);
     `;
   }};
@@ -25,12 +25,13 @@ const MenuItemStyled = styled.li`
       margin: 10px 0px;
       position: relative;
       button {
+        ${theme.font(18, 400)}
         position: absolute;
-        min-width: 100px;
+        min-width: 120px;
         padding: 8px 10px;
         background-color: ${theme.colors.white};
         box-shadow: ${theme.shadow};
-        right: calc(100% + 5px);
+        right: calc(100% + 8px);
         top: -2px;
         /* Transition */
         opacity: ${props.isOpen ? '1' : '0'};
@@ -49,7 +50,7 @@ const MenuItemStyled = styled.li`
         min-width: 100px;
         background-color: ${theme.colors.white};
         box-shadow: ${theme.shadow};
-        right: calc(100% + 5px);
+        right: calc(100% + 8px);
         top: -2px;
         margin: 0;
         top: 0;
@@ -77,6 +78,7 @@ const MenuItemStyled = styled.li`
           position: relative;
           box-shadow: none;
           right: 0;
+          ${theme.font(18, 400)}
         }
       }
     `;
@@ -88,7 +90,7 @@ const Icon = styled(FontAwesomeIcon)`
     const { theme } = props;
     return css`
       color: ${theme.colors.blackSecondary};
-      font-size: 24px;
+      font-size: 32px;
     `;
   }};
 `;

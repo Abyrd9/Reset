@@ -8,9 +8,8 @@ const Icon = styled(FontAwesomeIcon)`
     const { theme } = props;
     return css`
       color: ${theme.colors.primary};
-      height: 20px;
-      max-width: 15px;
-      margin: 3px 0px;
+      font-size: 24px;
+      margin: 8px 0px;
     `;
   }};
 `;
@@ -23,7 +22,7 @@ const ToolListContainer = styled.div`
       align-items: center;
       justify-content: flex-start;
       width: 100%;
-      max-width: 35px;
+      max-width: 50px;
       div {
         display: flex;
         flex-direction: column;
@@ -32,8 +31,8 @@ const ToolListContainer = styled.div`
       }
       span {
         display: inline-block;
-        height: 20px;
-        width: 1px;
+        height: 40px;
+        width: 2px;
         background-color: ${theme.colors.gray};
         margin-left: 10px;
       }
@@ -49,7 +48,6 @@ class ToolList extends Component {
           <Icon icon="trash" onClick={this.props.onDeleteClick} />
           <Icon icon="edit" onClick={this.props.onEditClick} />
         </div>
-
         <span />
       </ToolListContainer>
     );

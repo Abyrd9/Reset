@@ -8,8 +8,7 @@ const Icon = styled(FontAwesomeIcon)`
     const { theme } = props;
     return css`
       color: ${theme.colors.white};
-      height: 20px;
-      max-width: 15px;
+      font-size: 24px;
     `;
   }};
 `;
@@ -23,7 +22,7 @@ const ButtonListContainer = styled.div`
       align-items: center;
       flex-wrap: nowrap;
       button {
-        padding: 2px 0px;
+        padding: 5px 0px;
         flex: 1;
         background-color: ${theme.colors.primary};
         &:first-of-type {

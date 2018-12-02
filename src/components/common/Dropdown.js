@@ -8,7 +8,7 @@ const Icon = styled(FontAwesomeIcon)`
     const { theme } = props;
     return css`
       color: ${theme.colors.blackSecondary};
-      height: 16px;
+      height: 20px;
       max-width: 15px;
       transform: ${props.isOpen ? 'rotate(180deg)' : 'rotate(0deg)'};
     `;
@@ -23,14 +23,17 @@ const DropdownButton = styled.button`
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 10px 5px;
+      padding: 15px 10px;
       background-color: ${theme.colors.white};
       color: ${theme.colors.blackSecondary};
-      ${theme.font(12, 600)};
+      ${theme.font(20, 600)};
       position: relative;
       border: 1px solid ${theme.colors.blackSecondary};
       border-radius: 3px;
-      margin-bottom: 15px;
+      && {
+        margin-top: 10px;
+        margin-bottom: 15px;
+      }
     `;
   }};
 `;
@@ -63,7 +66,7 @@ const DropdownList = styled.div`
         padding: 10px;
         border-bottom: 1px solid ${theme.colors.blackSecondary};
         color: ${theme.colors.black};
-        ${theme.font(12, 600)};
+        ${theme.font(20, 600)};
         &:last-child {
           border: none;
         }
