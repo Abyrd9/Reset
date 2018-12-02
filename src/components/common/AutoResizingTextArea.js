@@ -8,13 +8,13 @@ const TextArea = styled.textarea`
   resize: none;
   border: none;
   outline: none;
-  font-size: 22px;
+  font-size: 18px;
   font-family: 'Roboto', sans-serif;
-  padding: 20px 15px;
+  padding: 18px 12px;
 `;
 
 const Ghost = styled.div`
-  padding: 20px 15px;
+  padding: 18px 12px;
   border: none;
   box-sizing: border-box;
   left: 0;
@@ -26,7 +26,7 @@ const Ghost = styled.div`
   white-space: pre-wrap;
   width: 100%;
   word-wrap: break-word;
-  font-size: 22px;
+  font-size: 18px;
   font-family: 'Roboto', sans-serif;
 `;
 

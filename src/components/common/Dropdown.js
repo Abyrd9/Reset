@@ -23,10 +23,10 @@ const DropdownButton = styled.button`
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 15px 10px;
+      padding: 10px 8px;
       background-color: ${theme.colors.white};
       color: ${theme.colors.blackSecondary};
-      ${theme.font(20, 600)};
+      ${theme.font(18, 600)};
       position: relative;
       border: 1px solid ${theme.colors.blackSecondary};
       border-radius: 3px;
@@ -66,7 +66,7 @@ const DropdownList = styled.div`
         padding: 10px;
         border-bottom: 1px solid ${theme.colors.blackSecondary};
         color: ${theme.colors.black};
-        ${theme.font(20, 600)};
+        ${theme.font(18, 600)};
         &:last-child {
           border: none;
         }

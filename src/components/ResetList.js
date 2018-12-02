@@ -17,7 +17,9 @@ const ListDropdown = styled(Dropdown)`
     return css`
       border: none;
       border-bottom: 1px solid ${theme.colors.gray};
-      margin: 0 auto;
+      && {
+        margin: 0 auto;
+      }
     `;
   }};
 `;
@@ -27,7 +29,8 @@ class ResetList extends Component {
     categories: [],
     currentCategory: { name: '', key: '', statements: [] },
     currentIndex: 0,
-    dataLoading: false
+    dataLoading: false,
+    timer: 0
   };
 
   componentDidMount() {
@@ -49,6 +52,24 @@ class ResetList extends Component {
           dataLoading: false
         });
       });
+    firebase
+      .database()
+      .ref(`/users/${userId}/timer`)
+      .on('value', snapshot => {
+        let timer = snapshot.val();
+        timer ? (timer = timer) : (timer = 0);
+        this.setState({ timer });
+      });
+  }
+
+  componentWillUnmount() {
+    const user = firebase.auth().currentUser;
+    if (!!user) {
+      firebase
+        .database()
+        .ref(`/users/${user.uid}/timer`)
+        .off();
+    }
   }
 
   handleChangeIndex = () => {
@@ -57,7 +78,6 @@ class ResetList extends Component {
     } = this.state;
     const statementsArray = !!statements && Object.values(statements);
     let statementLength = statementsArray.length - 1;
-    console.log(this.state.currentIndex, statementLength);
     if (this.state.currentIndex === statementLength) {
       this.setState({ currentIndex: 0 });
     } else {
@@ -69,15 +89,17 @@ class ResetList extends Component {
     const {
       currentCategory: { statements },
       currentIndex,
-      dataLoading
+      dataLoading,
+      timer
     } = this.state;
+    console.log(timer);
     const hasStatements = !!statements && Object.values(statements).length > 0;
     const statementsArray = !!statements ? Object.values(statements) : [];
     return (
-      <Container>
+      <Container isFlex>
         <AdminContextComponent>
           <Header>
-            <Menu />
+            <Menu timer={timer} />
           </Header>
           {dataLoading ? (
             <Loading>Loading...</Loading>
@@ -104,6 +126,7 @@ class ResetList extends Component {
               <ListButton
                 hasStatements={hasStatements}
                 handleChangeIndex={() => this.handleChangeIndex()}
+                timer={timer}
               />
             </React.Fragment>
           )}

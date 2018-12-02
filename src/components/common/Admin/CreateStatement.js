@@ -11,7 +11,7 @@ const Icon = styled(FontAwesomeIcon)`
     const { theme } = props;
     return css`
       color: ${theme.colors.white};
-      font-size: 28px;
+      font-size: 24px;
     `;
   }};
 `;
@@ -39,7 +39,7 @@ class CreateStatement extends Component {
     return (
       <Container>
         <AutoResizingTextArea
-          defaultHeight={65}
+          defaultHeight={58}
           placeholder="Add New Statement..."
           value={this.state.value}
           onChange={e => this.setState({ value: e.target.value })}

@@ -21,7 +21,6 @@ class AuthContext extends Component {
   authListener = () => {
     firebase.auth().onAuthStateChanged(user => {
       if (user) {
-        console.log('user signed in', user);
         this.setState({
           isAuthenticated: true,
           user,
@@ -29,7 +28,6 @@ class AuthContext extends Component {
           isLoading: false
         });
       } else {
-        console.log('user signed out');
         this.setState({
           isAuthenticated: false,
           user: {},

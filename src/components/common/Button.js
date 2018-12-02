@@ -5,7 +5,7 @@ const Button = styled.button`
   ${props => {
     const { theme } = props;
     return css`
-      ${theme.font(18, 400)};
+      ${theme.font(16, 400)};
       width: 100%;
       padding: 10px 5px;
       color: ${theme.colors.white};

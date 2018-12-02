@@ -18,7 +18,7 @@ const QuoteIconLeft = styled(FontAwesomeIcon)`
         ? 'translateY(-40px)'
         : 'translateY(-50px)'};
       ${props.isTransitioned &&
-        `transition: ${theme.transition('all', 0.3, 0.1)};`};
+        `transition: ${theme.transition('all', 0.5, 0.1)};`};
     `;
   }};
 `;
@@ -37,7 +37,7 @@ const QuoteIconRight = styled(FontAwesomeIcon)`
       transform: ${props.isTransitioned
         ? 'translateY(40px)'
         : 'translateY(30px)'};
-      ${props.isTransitioned && `transition: ${theme.transition('all', 0.3)};`};
+      ${props.isTransitioned && `transition: ${theme.transition('all', 0.5)};`};
     `;
   }};
 `;
@@ -52,6 +52,7 @@ const Container = styled.div`
       display: flex;
       justify-content: center;
       align-items: center;
+      flex: 1;
       p {
         z-index: ${theme.zIndex.middle};
         text-align: center;
@@ -63,7 +64,7 @@ const Container = styled.div`
           ? 'translateY(0)'
           : 'translateY(-10px)'};
         ${props.isTransitioned &&
-          `transition: ${theme.transition('all', 0.3, 0.2)};`};
+          `transition: ${theme.transition('all', 0.5, 0.2)};`};
       }
     `;
   }};
@@ -81,7 +82,6 @@ class Statement extends Component {
   }
 
   componentDidUpdate(prevProps) {
-    console.log(prevProps, this.props);
     if (prevProps.value !== false && prevProps.value !== this.props.value) {
       this.setState({ isTransitioned: false });
       setTimeout(() => {
@@ -91,7 +91,6 @@ class Statement extends Component {
   }
 
   render() {
-    console.log(this.state);
     const { value } = this.props;
     return (
       <Container isTransitioned={this.state.isTransitioned}>

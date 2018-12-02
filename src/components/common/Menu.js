@@ -7,82 +7,41 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import BlockAnimation from './BlockAnimation';
 import { AdminContext } from './Contexts/AdminContext';
 
-const MenuList = styled.ul`
+const times = [0, 5, 8, 10, 15, 20, 30, 60];
+
+const MenuContainer = styled.div`
+  ${props => {
+    const { theme } = props;
+    return css`
+      height: 100vh;
+      width: 100%;
+      overflow: scroll;
+      position: absolute;
+      top: 0;
+      left: 0;
+      background-color: ${theme.colors.white};
+      padding-top: 60px;
+      /* transition */
+      visibility: ${props.menuOpen ? 'visible' : 'hidden'};
+      opacity: ${props.menuOpen ? '1' : '0'};
+      transition: ${props.menuOpen
+        ? `visibility 0s linear, opacity 0.2s ${theme.ease}`
+        : `opacity 0.2s ${theme.ease}, visibility 0s linear 0.2s`};
+    `;
+  }}
+`;
+
+const CloseIcon = styled(FontAwesomeIcon)`
   ${props => {
     const { theme } = props;
     return css`
       position: absolute;
-      right: 16px;
-      top: calc(100% - 15px);
+      right: 20px;
+      top: 18px;
+      font-size: 34px;
+      color: ${theme.colors.primary};
     `;
-  }};
-`;
-
-const MenuItemStyled = styled.li`
-  ${props => {
-    const { theme } = props;
-    return css`
-      margin: 10px 0px;
-      position: relative;
-      button {
-        ${theme.font(18, 400)}
-        position: absolute;
-        min-width: 120px;
-        padding: 8px 10px;
-        background-color: ${theme.colors.white};
-        box-shadow: ${theme.shadow};
-        right: calc(100% + 8px);
-        top: -2px;
-        /* Transition */
-        opacity: ${props.isOpen ? '1' : '0'};
-        visibility: ${props.isOpen ? 'visible' : 'hidden'};
-        transform: ${props.isOpen ? 'translateX(0)' : 'translateX(10px)'};
-        transition: ${props.isOpen
-          ? `visibility 0s linear, opacity .2s ${theme.ease}, transform .2s ${
-              theme.ease
-            }`
-          : `opacity .2s ${theme.ease}, transform .2s ${
-              theme.ease
-            }, visibility 0s linear .2s`};
-      }
-      ul {
-        position: absolute;
-        min-width: 100px;
-        background-color: ${theme.colors.white};
-        box-shadow: ${theme.shadow};
-        right: calc(100% + 8px);
-        top: -2px;
-        margin: 0;
-        top: 0;
-        /* Transition */
-        opacity: ${props.isOpen ? '1' : '0'};
-        visibility: ${props.isOpen ? 'visible' : 'hidden'};
-        transform: ${props.isOpen ? 'translateX(0)' : 'translateX(10px)'};
-        transition: ${props.isOpen
-          ? `visibility 0s linear, opacity .2s ${theme.ease}, transform .2s ${
-              theme.ease
-            }`
-          : `opacity .2s ${theme.ease}, transform .2s ${
-              theme.ease
-            }, visibility 0s linear .2s`};
-        li {
-          &:nth-child(even) {
-            background-color: ${theme.colors.graySecondary};
-          }
-        }
-        button {
-          visibility: visible;
-          opacity: 1;
-          transform: translateX(0);
-          background-color: transparent;
-          position: relative;
-          box-shadow: none;
-          right: 0;
-          ${theme.font(18, 400)}
-        }
-      }
-    `;
-  }};
+  }}
 `;
 
 const Icon = styled(FontAwesomeIcon)`
@@ -90,134 +49,154 @@ const Icon = styled(FontAwesomeIcon)`
     const { theme } = props;
     return css`
       color: ${theme.colors.blackSecondary};
-      font-size: 32px;
+      height: 20px;
+      margin-left: 10px;
     `;
   }};
 `;
 
-class MenuTimeItem extends Component {
-  render() {
-    return (
-      <MenuItemStyled isOpen={this.props.isOpen}>
-        <Icon onClick={this.props.onIconClick} icon={this.props.icon} />
-        <ul>
-          <li>
-            <button onClick={() => this.props.returnTime(0)}>0 seconds</button>
-          </li>
-          <li>
-            <button onClick={() => this.props.returnTime(5)}>5 seconds</button>
-          </li>
-          <li>
-            <button onClick={() => this.props.returnTime(8)}>8 seconds</button>
-          </li>
-          <li>
-            <button onClick={() => this.props.returnTime(10)}>
-              10 seconds
-            </button>
-          </li>
-          <li>
-            <button onClick={() => this.props.returnTime(15)}>
-              15 seconds
-            </button>
-          </li>
-          <li>
-            <button onClick={() => this.props.returnTime(20)}>
-              20 seconds
-            </button>
-          </li>
-          <li>
-            <button onClick={() => this.props.returnTime(30)}>
-              30 seconds
-            </button>
-          </li>
-          <li>
-            <button onClick={() => this.props.returnTime(60)}>
-              60 seconds
-            </button>
-          </li>
-        </ul>
-      </MenuItemStyled>
-    );
-  }
-}
+const CheckIcon = styled(FontAwesomeIcon)`
+  ${props => {
+    const { theme } = props;
+    return css`
+      color: ${theme.colors.white};
+      position: absolute;
+      right: 20px;
+    `;
+  }};
+`;
 
-class MenuItem extends Component {
-  render() {
-    return (
-      <MenuItemStyled isOpen={this.props.isOpen}>
-        <Icon onClick={this.props.onIconClick} icon={this.props.icon} />
-        {this.props.children}
-      </MenuItemStyled>
-    );
-  }
-}
+const MenuItemList = styled.ul`
+  ${props => {
+    const { theme } = props;
+    return css`
+      width: 100%;
+			div {
+				&:first-of-type {
+					li {
+						border-top: 1px solid ${theme.colors.gray};
+					}
+				}
+			}
+			a {
+				color: ${theme.colors.black};
+			}
+      li {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        text-align: center;
+        padding: 15px 0px;
+        border-bottom: 1px solid ${theme.colors.gray};
+        ${theme.font(18, 600)}
+				color: ${theme.colors.black};
+      }
+    `;
+  }}
+`;
+
+const TimeItemList = styled.ul`
+  ${props => {
+    const { theme } = props;
+    return css`
+      max-height: 0px;
+      ${props.timerMenuOpen && 'max-height: 405px;'}
+      overflow: hidden;
+      transition: ${theme.transition('max-height', 0.5)};
+    `;
+  }}
+`;
+
+const TimeItemListItem = styled.li`
+  ${props => {
+    const { theme } = props;
+    return css`
+      && {
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        text-align: center;
+        padding: 15px 0px;
+        border-bottom: 1px solid ${theme.colors.gray};
+        ${theme.font(16, 600)};
+        color: ${props.isSelected ? theme.colors.white : theme.colors.black};
+        background-color: ${props.isSelected
+          ? theme.colors.primary
+          : 'transparent'};
+      }
+    `;
+  }}
+`;
 
 class Menu extends Component {
   static contextType = AdminContext;
   state = {
-    stopwatchOpen: false,
-    settingsOpen: false,
-    userOpen: false
+    timerMenuOpen: false
   };
+
+  setTimerMenuOpen = val => this.setState({ timerMenuOpen: val });
+
   render() {
-    const { stopwatchOpen, settingsOpen, userOpen } = this.state;
-    const { menuOpen } = this.props;
+    const { menuOpen, setMenuOpen } = this.props;
     return (
-      <MenuList menuOpen={menuOpen}>
+      <MenuContainer menuOpen={menuOpen}>
+        <CloseIcon
+          icon="times"
+          onClick={() => {
+            this.setState({ timerMenuOpen: false });
+            setMenuOpen(false);
+          }}
+        />
         {menuOpen && (
-          <React.Fragment>
-            <BlockAnimation>
-              <MenuTimeItem
-                onIconClick={() =>
-                  this.setState({
-                    stopwatchOpen: !stopwatchOpen,
-                    settingsOpen: false,
-                    userOpen: false
-                  })
-                }
-                isOpen={stopwatchOpen}
-                icon="stopwatch"
-                returnTime={val => {
-                  this.setState({ stopwatchOpen: false });
-                  this.context.handleSetTimer({ timer: val });
-                }}
-              />
-            </BlockAnimation>
+          <MenuItemList>
             <BlockAnimation delay={100}>
-              <MenuItem
-                onIconClick={() =>
-                  this.setState({
-                    stopwatchOpen: false,
-                    settingsOpen: !settingsOpen,
-                    userOpen: false
-                  })
-                }
-                isOpen={settingsOpen}
-                icon="cog">
-                <button>
-                  <Link to="/admin">Settings</Link>
-                </button>
-              </MenuItem>
+              <li
+                onClick={() =>
+                  this.setState({ timerMenuOpen: !this.state.timerMenuOpen })
+                }>
+                Timer <Icon icon="stopwatch" />
+              </li>
             </BlockAnimation>
+            <TimeItemList timerMenuOpen={this.state.timerMenuOpen}>
+              {this.state.timerMenuOpen && (
+                <React.Fragment>
+                  {times.map((time, i) => (
+                    <BlockAnimation delay={i * 100 + 500}>
+                      <TimeItemListItem
+                        isSelected={time === this.props.timer}
+                        onClick={() => {
+                          this.context.handleSetTimer(time);
+                        }}>
+                        {time === this.props.timer && (
+                          <CheckIcon icon="check" />
+                        )}{' '}
+                        {time} seconds
+                      </TimeItemListItem>
+                    </BlockAnimation>
+                  ))}
+                </React.Fragment>
+              )}
+            </TimeItemList>
             <BlockAnimation delay={200}>
-              <MenuItem
-                onIconClick={() =>
-                  this.setState({
-                    stopwatchOpen: false,
-                    settingsOpen: false,
-                    userOpen: !userOpen
-                  })
-                }
-                isOpen={userOpen}
-                icon="user">
-                <button onClick={() => firebase.auth().signOut()}>
-                  Sign Out
-                </button>
-              </MenuItem>
+              <Link to="/admin">
+                <li>
+                  Settings
+                  <Icon icon="cog" />
+                </li>
+              </Link>
             </BlockAnimation>
-          </React.Fragment>
+            <BlockAnimation delay={300}>
+              <li onClick={() => firebase.auth().signOut()}>
+                Sign Out
+                <Icon icon="user" />
+              </li>
+            </BlockAnimation>
+          </MenuItemList>
         )}
-      </MenuList>
+      </MenuContainer>
     );
   }
 }

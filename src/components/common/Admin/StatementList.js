@@ -48,7 +48,6 @@ class StatementList extends Component {
           !!statements
             ? (statements = Object.values(statements))
             : (statements = []);
-          console.log(statements);
           this.setState({ statements });
         });
     }

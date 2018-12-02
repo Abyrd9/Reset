@@ -35,7 +35,7 @@ const ButtonContainer = styled.div`
         width: 100%;
       }
       button {
-        ${theme.font(18, 400)};
+        ${theme.font(16, 400)};
         padding: 12px 0px;
       }
       p {
@@ -57,44 +57,33 @@ class ListButton extends Component {
     buttonDisabled: false
   };
 
-  componentDidMount() {
-    const userId = firebase.auth().currentUser.uid;
-    firebase
-      .database()
-      .ref(`/users/${userId}/timer`)
-      .on('value', snapshot => {
-        let timer = snapshot.val();
-        timer ? (timer = timer) : (timer = 0);
-        this.setState({ savedTime: timer });
-      });
-  }
-
-  componentWillUnmount() {
-    const user = firebase.auth().currentUser;
-    if (!!user) {
-      firebase
-        .database()
-        .ref(`/users/${user.uid}/timer`)
-        .off();
+  componentDidUpdate(prevProps) {
+    if (prevProps.timer !== this.props.timer) {
+      this.setState({ savedTime: this.props.timer });
     }
   }
 
   buttonDisableCountdown = () => {
     if (this.state.savedTime > 0) {
       this.setState({ buttonDisabled: true, timer: this.state.savedTime });
+      const interval = this.state.savedTime * 1000;
+      const currentTime = Date.now();
+      const expectedEndTime = currentTime + interval;
+      let intervalTime = currentTime + 1000;
       const Interval = setInterval(() => {
-        const intervalNumber = this.state.timer - 1;
-        this.setState({ timer: intervalNumber });
-        if (intervalNumber <= 0) {
-          clearInterval(Interval);
-          this.setState({ buttonDisabled: false });
+        if (Date.now() >= intervalTime) {
+          intervalTime = intervalTime + 1000;
+          this.setState({ timer: this.state.timer - 1 });
         }
-      }, this.state.savedTime * 100);
+        if (Date.now() >= expectedEndTime) {
+          this.setState({ buttonDisabled: false });
+          clearInterval(Interval);
+        }
+      }, 250);
     }
   };
 
   render() {
-    console.log(this.state.timer, this.state.savedTime, 'Times');
     const { hasStatements, handleChangeIndex } = this.props;
     return (
       <ButtonContainer buttonDisabled={this.state.buttonDisabled}>

@@ -20,7 +20,7 @@ const HeaderContainer = styled.div`
       justify-content: space-between;
       align-items: center;
       img {
-        height: 50px;
+        height: 40px;
       }
       background-color: ${props.isAdmin
         ? theme.colors.secondary
@@ -37,7 +37,7 @@ const NavIcon = styled(FontAwesomeIcon)`
     return css`
       opacity: 1;
       visibility: visible;
-      font-size: ${props.icon === 'times' ? '38px' : '32px'};
+      font-size: ${props.icon === 'times' ? '34px' : '28px'};
       color: ${props.isAdmin ? theme.colors.white : theme.colors.primary};
       transition: ${theme.transition('all', 0.2)};
     `;
@@ -54,7 +54,10 @@ class Header extends Component {
     const ChildrenWithMenuOpenProp = React.Children.map(
       this.props.children,
       child => {
-        return React.cloneElement(child, { menuOpen: this.state.menuOpen });
+        return React.cloneElement(child, {
+          menuOpen: this.state.menuOpen,
+          setMenuOpen: val => this.setState({ menuOpen: val })
+        });
       }
     );
 

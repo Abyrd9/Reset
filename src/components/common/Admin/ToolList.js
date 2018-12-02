@@ -8,8 +8,8 @@ const Icon = styled(FontAwesomeIcon)`
     const { theme } = props;
     return css`
       color: ${theme.colors.primary};
-      font-size: 24px;
-      margin: 8px 0px;
+      font-size: 20px;
+      margin: 6px 0px;
     `;
   }};
 `;
@@ -22,7 +22,7 @@ const ToolListContainer = styled.div`
       align-items: center;
       justify-content: flex-start;
       width: 100%;
-      max-width: 50px;
+      max-width: 55px;
       div {
         display: flex;
         flex-direction: column;
@@ -34,7 +34,7 @@ const ToolListContainer = styled.div`
         height: 40px;
         width: 2px;
         background-color: ${theme.colors.gray};
-        margin-left: 10px;
+        margin-left: 15px;
       }
     `;
   }};

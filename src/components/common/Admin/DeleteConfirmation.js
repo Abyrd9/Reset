@@ -8,7 +8,7 @@ const Icon = styled(FontAwesomeIcon)`
     const { theme } = props;
     return css`
       color: ${theme.colors.white};
-      font-size: 28px;
+      font-size: 24px;
       margin: 0px 8px;
       margin-top: 12px;
     `;

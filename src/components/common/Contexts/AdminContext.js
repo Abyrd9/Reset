@@ -192,7 +192,7 @@ class AdminContextComponent extends Component {
     firebase
       .database()
       .ref(`/users/${userId}/`)
-      .update(val)
+      .update({ timer: val })
       .catch(err => console.log(err.code, err.message));
   };
 
