@@ -28,7 +28,7 @@ const ButtonContainer = styled.div`
       align-items: center;
       width: 100%;
       position: absolute;
-      bottom: 50px;
+      bottom: 35px;
       left: 0;
       padding: 0px 20px;
       a {
@@ -42,6 +42,8 @@ const ButtonContainer = styled.div`
         ${theme.font(10, 600)};
         color: ${theme.colors.blackSecondary};
         margin-top: 10px;
+        transition: ${theme.transition('all', 0.2)};
+        opacity: ${props.buttonDisabled ? '1' : '0'};
       }
     `;
   }};
@@ -50,7 +52,8 @@ const ButtonContainer = styled.div`
 class ListButton extends Component {
   static contextType = AdminContext;
   state = {
-    time: 5,
+    savedTime: 0,
+    timer: 0,
     buttonDisabled: false
   };
 
@@ -62,46 +65,50 @@ class ListButton extends Component {
       .on('value', snapshot => {
         let timer = snapshot.val();
         timer ? (timer = timer) : (timer = 0);
-        this.setState({ time: timer });
+        this.setState({ savedTime: timer });
       });
   }
 
   componentWillUnmount() {
-    const userId = firebase.auth().currentUser.uid;
-    firebase
-      .database()
-      .ref(`/users/${userId}/timer`)
-      .off();
+    const user = firebase.auth().currentUser;
+    if (!!user) {
+      firebase
+        .database()
+        .ref(`/users/${user.uid}/timer`)
+        .off();
+    }
   }
 
   buttonDisableCountdown = () => {
-    if (this.state.time > 0) {
-      this.setState({ buttonDisabled: true });
+    if (this.state.savedTime > 0) {
+      this.setState({ buttonDisabled: true, timer: this.state.savedTime });
       const Interval = setInterval(() => {
-        const intervalNumber = this.state.time - 1;
-        this.setState({ time: intervalNumber });
+        const intervalNumber = this.state.timer - 1;
+        this.setState({ timer: intervalNumber });
         if (intervalNumber <= 0) {
           clearInterval(Interval);
           this.setState({ buttonDisabled: false });
         }
-      }, this.state.time * 100);
+      }, this.state.savedTime * 100);
     }
   };
 
   render() {
-    const { hasStatements } = this.props;
+    console.log(this.state.timer, this.state.savedTime, 'Times');
+    const { hasStatements, handleChangeIndex } = this.props;
     return (
-      <ButtonContainer>
+      <ButtonContainer buttonDisabled={this.state.buttonDisabled}>
         {hasStatements ? (
           <React.Fragment>
             <Button
               disabled={this.state.buttonDisabled}
-              onClick={() => this.buttonDisableCountdown()}>
+              onClick={() => {
+                handleChangeIndex();
+                this.buttonDisableCountdown();
+              }}>
               I agree with this statement.
             </Button>
-            {this.state.buttonDisabled && (
-              <p>This button will be enabled in {this.state.time}s</p>
-            )}
+            <p>This button will be enabled in {this.state.timer}s</p>
           </React.Fragment>
         ) : (
           <Link to="/admin">

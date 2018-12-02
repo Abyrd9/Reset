@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import AdminContextComponent from './common/Contexts/AdminContext';
+import Loading from './common/Loading';
 import Auth from './Auth';
 import ResetList from './ResetList';
 import Admin from './Admin';
@@ -46,28 +47,33 @@ class Routes extends Component {
     return (
       <AuthContext>
         {auth => {
-          console.log(auth);
           return (
-            <Router>
-              <React.Fragment>
-                <NonAuthenticatedRoute
-                  isAuthenticated={auth.isAuthenticated}
-                  component={Auth}
-                  path="/auth"
-                />
-                <AuthenticatedRoute
-                  isAuthenticated={auth.isAuthenticated}
-                  component={ResetList}
-                  path="/list"
-                />
-                <AuthenticatedRoute
-                  isAuthenticated={auth.isAuthenticated}
-                  component={Admin}
-                  path="/admin"
-                />
-                <span id="modal" />
-              </React.Fragment>
-            </Router>
+            <React.Fragment>
+              {auth.isLoading ? (
+                <Loading />
+              ) : (
+                <Router>
+                  <React.Fragment>
+                    <NonAuthenticatedRoute
+                      isAuthenticated={auth.isAuthenticated}
+                      component={Auth}
+                      path="/auth"
+                    />
+                    <AuthenticatedRoute
+                      isAuthenticated={auth.isAuthenticated}
+                      component={ResetList}
+                      path="/list"
+                    />
+                    <AuthenticatedRoute
+                      isAuthenticated={auth.isAuthenticated}
+                      component={Admin}
+                      path="/admin"
+                    />
+                    <span id="modal" />
+                  </React.Fragment>
+                </Router>
+              )}
+            </React.Fragment>
           );
         }}
       </AuthContext>

@@ -12,7 +12,7 @@ const MenuList = styled.ul`
     const { theme } = props;
     return css`
       position: absolute;
-      right: 11px;
+      right: 14px;
       top: calc(100% - 15px);
     `;
   }};
@@ -87,8 +87,8 @@ const Icon = styled(FontAwesomeIcon)`
   ${props => {
     const { theme } = props;
     return css`
-      color: ${theme.colors.primary};
-      font-size: 26px;
+      color: ${theme.colors.blackSecondary};
+      font-size: 24px;
     `;
   }};
 `;
@@ -175,7 +175,10 @@ class Menu extends Component {
                 }
                 isOpen={stopwatchOpen}
                 icon="stopwatch"
-                returnTime={val => this.context.handleSetTimer({ timer: val })}
+                returnTime={val => {
+                  this.setState({ stopwatchOpen: false });
+                  this.context.handleSetTimer({ timer: val });
+                }}
               />
             </BlockAnimation>
             <BlockAnimation delay={100}>

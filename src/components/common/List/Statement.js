@@ -1,0 +1,120 @@
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import styled, { css } from 'styled-components';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+
+const QuoteIconLeft = styled(FontAwesomeIcon)`
+  ${props => {
+    const { theme } = props;
+    return css`
+      position: absolute;
+      color: ${theme.colors.graySecondary};
+      font-size: 80px;
+      left: 10px;
+      transform: translateY(-30px);
+      z-index: ${theme.zIndex.bottom};
+      /* transition */
+      opacity: ${props.isTransitioned ? '1' : '0'};
+      transform: ${props.isTransitioned
+        ? 'translateY(-30px)'
+        : 'translateY(-40px)'};
+      ${props.isTransitioned &&
+        `transition: ${theme.transition('all', 0.3, 0.1)};`};
+    `;
+  }};
+`;
+
+const QuoteIconRight = styled(FontAwesomeIcon)`
+  ${props => {
+    const { theme } = props;
+    return css`
+      position: absolute;
+      color: ${theme.colors.graySecondary};
+      font-size: 80px;
+      right: 10px;
+      transform: translateY(30px);
+      z-index: ${theme.zIndex.bottom};
+      /* transition */
+      opacity: ${props.isTransitioned ? '1' : '0'};
+      transform: ${props.isTransitioned
+        ? 'translateY(30px)'
+        : 'translateY(20px)'};
+      ${props.isTransitioned && `transition: ${theme.transition('all', 0.3)};`};
+    `;
+  }};
+`;
+
+const Container = styled.div`
+  ${props => {
+    const { theme } = props;
+    return css`
+      position: relative;
+      height: 100%;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      p {
+        z-index: ${theme.zIndex.middle};
+        text-align: center;
+        ${theme.font(16, 600)};
+        color: ${theme.colors.black};
+        /* transition */
+        opacity: ${props.isTransitioned ? '1' : '0'};
+        transform: ${props.isTransitioned
+          ? 'translateY(0)'
+          : 'translateY(-10px)'};
+        ${props.isTransitioned &&
+          `transition: ${theme.transition('all', 0.3, 0.2)};`};
+      }
+    `;
+  }};
+`;
+
+class Statement extends Component {
+  state = {
+    isTransitioned: false
+  };
+
+  componentDidMount() {
+    setTimeout(() => {
+      this.setState({ isTransitioned: true });
+    }, 0);
+  }
+
+  componentDidUpdate(prevProps) {
+    console.log(prevProps, this.props);
+    if (prevProps.value !== false && prevProps.value !== this.props.value) {
+      this.setState({ isTransitioned: false });
+      setTimeout(() => {
+        this.setState({ isTransitioned: true });
+      }, 0);
+    }
+  }
+
+  render() {
+    console.log(this.state);
+    const { value } = this.props;
+    return (
+      <Container isTransitioned={this.state.isTransitioned}>
+        <QuoteIconLeft
+          icon="quote-left"
+          isTransitioned={this.state.isTransitioned}
+        />
+        <p>
+          {!!value
+            ? value
+            : "There doesn't seem to be anything here. Click the button below to add new Categories and Statements."}
+        </p>
+        <QuoteIconRight
+          icon="quote-right"
+          isTransitioned={this.state.isTransitioned}
+        />
+      </Container>
+    );
+  }
+}
+
+Statement.propTypes = {};
+
+export default Statement;
