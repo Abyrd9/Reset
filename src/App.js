@@ -1,26 +1,26 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { ThemeProvider } from 'styled-components';
+import { InitializeFirebase } from './helpers/Firebase';
+import { addIcons } from './helpers/FontAwesome';
+import { GlobalStyle } from './helpers/GlobalStyle';
+import Theme from './helpers/Theme';
+
+// Components
+import Routes from './components/Routes';
+
+// Run Helper Functions
+InitializeFirebase();
+addIcons();
 
 class App extends Component {
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
+      <ThemeProvider theme={Theme}>
+        <React.Fragment>
+          <Routes />
+          <GlobalStyle />
+        </React.Fragment>
+      </ThemeProvider>
     );
   }
 }
