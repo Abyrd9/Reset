@@ -8,13 +8,11 @@ export default {
 		`;
   },
   colors: {
-    primary: '#ef233c',
-    secondary: '#2b2d42',
-    white: '#edf2f4',
-    black: '#1b1b1e ',
-    blackSecondary: '#6d6d6d',
-    gray: '#d7dadb',
-    graySecondary: '#e3e7e9'
+    primary: '#EF233C',
+    white: '#FFFFFF',
+    black: '#1B1B1E ',
+    gray: '#C0C0C1',
+    graySecondary: '#F2F0F0'
   },
   media: {
     laptop: (...args) => css`

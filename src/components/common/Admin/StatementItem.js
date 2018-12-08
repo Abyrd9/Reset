@@ -5,7 +5,7 @@ import ToolList from './ToolList';
 import ButtonList from './ButtonList';
 import DeleteConfirmation from './DeleteConfirmation';
 import AutoResizingTextArea from '../AutoResizingTextArea';
-import { AdminContext } from '../Contexts/AdminContext';
+import { AdminContext } from '../../contexts/AdminContext';
 
 const StatementItemContainer = styled.div`
   ${props => {
@@ -66,9 +66,7 @@ class StatementItem extends Component {
           <StatementItemStyled>
             <StatementItemDefault
               onClick={() => {
-                toolsVisible
-                  ? setToolsVisible('')
-                  : setToolsVisible(statementId);
+                toolsVisible ? setToolsVisible('') : setToolsVisible(statementId);
               }}>
               {toolsVisible && (
                 <ToolList

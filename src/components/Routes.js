@@ -1,18 +1,14 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import AdminContextComponent from './common/Contexts/AdminContext';
+import AdminContextComponent from './contexts/AdminContext';
 import Loading from './common/Loading';
 import Auth from './Auth';
-import ResetList from './ResetList';
+import List from './List';
 import Admin from './Admin';
-import AuthContext from './common/Contexts/AuthContext';
+import AuthListener from './contexts/AuthListener';
 
-const AuthenticatedRoute = ({
-  isAuthenticated,
-  component: Component,
-  ...rest
-}) => (
+const AuthenticatedRoute = ({ isAuthenticated, component: Component, ...rest }) => (
   <Route
     {...rest}
     render={props =>
@@ -25,11 +21,7 @@ const AuthenticatedRoute = ({
   />
 );
 
-const NonAuthenticatedRoute = ({
-  isAuthenticated,
-  component: Component,
-  ...rest
-}) => (
+const NonAuthenticatedRoute = ({ isAuthenticated, component: Component, ...rest }) => (
   <Route
     {...rest}
     render={props =>
@@ -45,7 +37,7 @@ const NonAuthenticatedRoute = ({
 class Routes extends Component {
   render() {
     return (
-      <AuthContext>
+      <AuthListener>
         {auth => {
           return (
             <React.Fragment>
@@ -58,11 +50,7 @@ class Routes extends Component {
                       exact
                       path="/"
                       render={() =>
-                        auth.isAuthenticated ? (
-                          <Redirect to="/list" />
-                        ) : (
-                          <Redirect to="/auth" />
-                        )
+                        auth.isAuthenticated ? <Redirect to="/list" /> : <Redirect to="/auth" />
                       }
                     />
                     <NonAuthenticatedRoute
@@ -72,7 +60,7 @@ class Routes extends Component {
                     />
                     <AuthenticatedRoute
                       isAuthenticated={auth.isAuthenticated}
-                      component={ResetList}
+                      component={List}
                       path="/list"
                     />
                     <AuthenticatedRoute
@@ -87,7 +75,7 @@ class Routes extends Component {
             </React.Fragment>
           );
         }}
-      </AuthContext>
+      </AuthListener>
     );
   }
 }

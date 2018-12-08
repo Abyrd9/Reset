@@ -4,6 +4,7 @@ export const GlobalStyle = createGlobalStyle`
 	@import url('https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900');
 	* {
 		box-sizing: border-box;
+		font-family: 'Roboto', sans-serif;
 	}
 	body {
 		padding: 0;
@@ -31,5 +32,6 @@ export const GlobalStyle = createGlobalStyle`
 	}
 	a {
 		text-decoration: none;
+		color: #ffffff;
 	}
 `;

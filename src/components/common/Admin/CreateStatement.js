@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { AdminContext } from '../Contexts/AdminContext';
+import { AdminContext } from '../../contexts/AdminContext';
 import styled, { css } from 'styled-components';
 import AutoResizingTextArea from '../AutoResizingTextArea';
-import Button from '../Button';
+import Button from '../Button/Button';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const Icon = styled(FontAwesomeIcon)`
@@ -20,7 +20,7 @@ const Container = styled.div`
   ${props => {
     const { theme } = props;
     return css`
-      position: absolute;
+      position: fixed;
       bottom: 0;
       left: 0;
       width: 100%;
@@ -49,11 +49,7 @@ class CreateStatement extends Component {
           disabled={!hasCategoryId}
           onClick={() => {
             if (this.state.value.length > 0) this.setState({ value: '' });
-            this.context.handleCreateStatement(
-              categoryId,
-              this.state.value,
-              statements
-            );
+            this.context.handleCreateStatement(categoryId, this.state.value, statements);
           }}
           isFlush>
           <Icon icon="plus-circle" />

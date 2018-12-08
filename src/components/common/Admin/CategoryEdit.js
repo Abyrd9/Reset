@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { AdminContext } from '../Contexts/AdminContext';
+import { AdminContext } from '../../contexts/AdminContext';
 
 const Icon = styled(FontAwesomeIcon)`
   ${props => {
@@ -77,9 +77,7 @@ class CategoryEdit extends Component {
               <input
                 type="text"
                 value={this.state.editCategoryName}
-                onChange={e =>
-                  this.setState({ editCategoryName: e.target.value })
-                }
+                onChange={e => this.setState({ editCategoryName: e.target.value })}
               />
             ) : (
               <h1>{categoryName}</h1>
@@ -89,18 +87,12 @@ class CategoryEdit extends Component {
                 <Icon
                   icon="save"
                   onClick={() => {
-                    this.context.handleEditCategory(
-                      categoryId,
-                      this.state.editCategoryName
-                    );
+                    this.context.handleEditCategory(categoryId, this.state.editCategoryName);
                     this.setState({ isEditable: false });
                   }}
                 />
               ) : (
-                <Icon
-                  icon="edit"
-                  onClick={() => this.setState({ isEditable: true })}
-                />
+                <Icon icon="edit" onClick={() => this.setState({ isEditable: true })} />
               )}
 
               <Icon

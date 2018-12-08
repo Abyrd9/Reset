@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
 import firebase from 'firebase';
 import { Link } from 'react-router-dom';
-import { AdminContext } from '../Contexts/AdminContext';
-import Button from '../Button';
+import { AdminContext } from '../../contexts/AdminContext';
+import Button from '../Button/Button';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const Icon = styled(FontAwesomeIcon)`

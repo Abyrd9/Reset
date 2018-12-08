@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import firebase from 'firebase';
-import { AdminContext } from '../Contexts/AdminContext';
+import { AdminContext } from '../../contexts/AdminContext';
 import styled, { css } from 'styled-components';
 
 // components
-import Dropdown from '../Dropdown';
-import Button from '../Button';
-import AuthInput from '../Auth/AuthInput';
+import Dropdown from '../Dropdown/Dropdown';
+import Button from '../Button/Button';
+import Input from '../Input/Input';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const AddNewIcon = styled(FontAwesomeIcon)`
@@ -73,7 +73,7 @@ class Category extends Component {
       <React.Fragment>
         {this.state.createNewCategory ? (
           <React.Fragment>
-            <AuthInput
+            <Input
               type="text"
               value={this.state.newCategoryName}
               onChange={e => this.setState({ newCategoryName: e.target.value })}
@@ -90,18 +90,14 @@ class Category extends Component {
               }}>
               Add Category
             </Button>
-            <CancelButton
-              onClick={() => this.setState({ createNewCategory: false })}>
+            <CancelButton onClick={() => this.setState({ createNewCategory: false })}>
               Cancel
             </CancelButton>
           </React.Fragment>
         ) : (
-          <Dropdown
-            placeholder="Select Category..."
-            value={this.props.currentCategory}>
+          <Dropdown placeholder="Select Category..." value={this.props.currentCategory}>
             {this.context.categories.map(category => (
-              <button
-                onClick={() => this.handleSetCurrentCategory(category.key)}>
+              <button onClick={() => this.handleSetCurrentCategory(category.key)}>
                 {category.name}
               </button>
             ))}

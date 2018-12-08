@@ -24,7 +24,9 @@ const BackDrop = styled.span`
 const StatementsList = styled.div`
   ${props => {
     const { theme } = props;
-    return css``;
+    return css`
+      margin-bottom: 40px;
+    `;
   }};
 `;
 

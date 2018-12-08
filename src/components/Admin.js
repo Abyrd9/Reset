@@ -1,12 +1,12 @@
-import React, { Component } from 'react';
-import firebase from 'firebase';
-import PropTypes from 'prop-types';
-import styled, { css } from 'styled-components';
-import AdminContextComponent, {
-  AdminContext
-} from './common/Contexts/AdminContext';
-import Header from './common/Header';
+import React, { Component, Fragment } from 'react';
+import AdminContextComponent, { AdminContext } from './contexts/AdminContext';
+import NavBar from './common/NavBar/NavBar';
 import Container from './common/Container';
+import CategoriesListener from './contexts/CategoriesListener';
+import Dropdown from './common/Dropdown/Dropdown';
+import DropdownListItem from './common/DropdownListItem/DropdownListItem';
+import DropdownItemCreate from './common/DropdownItemCreate/DropdownItemCreate';
+import AdminCategoryCreate from './common/AdminCategoryEdit/AdminCategoryCreate';
 import Category from './common/Admin/Category';
 import CreateStatement from './common/Admin/CreateStatement';
 import StatementList from './common/Admin/StatementList';
@@ -18,7 +18,8 @@ class Admin extends Component {
       name: '',
       categoryId: '',
       statements: []
-    }
+    },
+    editCategory: false
   };
 
   handleSetCurrentCategory = category => {
@@ -26,24 +27,40 @@ class Admin extends Component {
       currentCategory: {
         name: category.name,
         categoryId: category.key,
-        statements: !!category.statements
-          ? Object.values(category.statements)
-          : []
+        statements: !!category.statements ? Object.values(category.statements) : []
       }
     });
   };
 
   render() {
+    const { editCategory } = this.state;
     return (
       <Container>
-        <Header isAdmin />
+        <NavBar link="/list" />
         <AdminContextComponent>
-          <Category
-            currentCategory={this.state.currentCategory.name}
-            handleSetCurrentCategory={category =>
-              this.handleSetCurrentCategory(category)
-            }
-          />
+          {editCategory ? (
+            <AdminCategoryCreate onCancel={() => this.setState({ editCategory: false })} />
+          ) : (
+            <Dropdown
+              title="Choose your category:"
+              placeholder={'Select Category...'}
+              value={this.state.currentCategory.name}>
+              <CategoriesListener>
+                {value => (
+                  <Fragment>
+                    {value.categories.map(category => (
+                      <DropdownListItem
+                        onClick={() => this.setState({ currentCategory: category })}>
+                        {category.name}
+                      </DropdownListItem>
+                    ))}
+                    <DropdownItemCreate onClick={() => this.setState({ editCategory: true })} />
+                  </Fragment>
+                )}
+              </CategoriesListener>
+            </Dropdown>
+          )}
+
           <CategoryEdit
             categoryId={this.state.currentCategory.categoryId}
             categoryName={this.state.currentCategory.name}
