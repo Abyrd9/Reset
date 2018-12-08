@@ -18,7 +18,6 @@ class Menu extends Component {
 
   render() {
     const { menuOpen, handleCloseMenu, timer } = this.props;
-    console.log(this.props);
     return (
       <NavMenuStyles menuOpen={menuOpen}>
         <NavCloseIcon

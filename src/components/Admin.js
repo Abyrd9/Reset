@@ -1,16 +1,19 @@
 import React, { Component, Fragment } from 'react';
-import AdminContextComponent, { AdminContext } from './contexts/AdminContext';
+import AdminContextComponent from './contexts/AdminContext';
 import NavBar from './common/NavBar/NavBar';
 import Container from './common/Container';
 import CategoriesListener from './contexts/CategoriesListener';
+import CategoryListener from './contexts/CategoryListener';
+import StatementsListener from './contexts/StatementsListener';
 import Dropdown from './common/Dropdown/Dropdown';
 import DropdownListItem from './common/DropdownListItem/DropdownListItem';
 import DropdownItemCreate from './common/DropdownItemCreate/DropdownItemCreate';
-import AdminCategoryCreate from './common/AdminCategoryEdit/AdminCategoryCreate';
-import Category from './common/Admin/Category';
-import CreateStatement from './common/Admin/CreateStatement';
-import StatementList from './common/Admin/StatementList';
-import CategoryEdit from './common/Admin/CategoryEdit';
+import AdminCategoryCreate from './common/AdminCategoryCreate/AdminCategoryCreate';
+import AdminCategoryEdit from './common/AdminCategoryEdit/AdminCategoryEdit';
+import AdminCreateStatement from './common/AdminCreateStatement/AdminCreateStatement';
+
+import AdminStatementList from './common/AdminStatementList/AdminStatementList';
+import AdminStatementItem from './common/AdminStatementItem/AdminStatementItem';
 
 class Admin extends Component {
   state = {
@@ -19,6 +22,7 @@ class Admin extends Component {
       categoryId: '',
       statements: []
     },
+    activeStatement: '',
     editCategory: false
   };
 
@@ -32,8 +36,15 @@ class Admin extends Component {
     });
   };
 
+  handleSetCurrentStatement = (statementId, clear = false) => {
+    console.log(statementId, clear);
+    const id = clear ? '' : statementId;
+    console.log(id);
+    this.setState({ activeStatement: id });
+  };
+
   render() {
-    const { editCategory } = this.state;
+    const { editCategory, currentCategory, activeStatement } = this.state;
     return (
       <Container>
         <NavBar link="/list" />
@@ -60,13 +71,29 @@ class Admin extends Component {
               </CategoriesListener>
             </Dropdown>
           )}
+          {!!currentCategory.categoryId && (
+            <Fragment>
+              <CategoryListener categoryId={currentCategory.categoryId}>
+                {val => !!val.category.name && <AdminCategoryEdit name={val.category.name} />}
+              </CategoryListener>
 
-          <CategoryEdit
-            categoryId={this.state.currentCategory.categoryId}
-            categoryName={this.state.currentCategory.name}
-          />
-          <StatementList categoryId={this.state.currentCategory.categoryId} />
-          <CreateStatement category={this.state.currentCategory} />
+              <StatementsListener categoryId={currentCategory.categoryId}>
+                {val =>
+                  val.statements.length > 0 &&
+                  val.statements.map(statement => (
+                    <AdminStatementItem
+                      toggleIsActive={clear =>
+                        this.handleSetCurrentStatement(statement.statementId, clear)
+                      }
+                      isActive={statement.statementId === activeStatement}>
+                      {statement.value}
+                    </AdminStatementItem>
+                  ))
+                }
+              </StatementsListener>
+            </Fragment>
+          )}
+          <AdminCreateStatement categoryId={currentCategory.categoryId} />
         </AdminContextComponent>
       </Container>
     );

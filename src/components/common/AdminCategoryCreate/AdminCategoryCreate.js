@@ -22,7 +22,6 @@ class AdminCategoryCreate extends Component {
   render() {
     const { onCancel } = this.props;
     const { name } = this.state;
-    console.log(this.context);
     return (
       <AdminCategoryCreateStyles>
         <Input

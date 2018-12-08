@@ -2,26 +2,27 @@ import React, { Component } from 'react';
 import firebase from 'firebase';
 import PropTypes from 'prop-types';
 
-class StatementsListener extends Component {
-  state = { statements: [] };
+class CategoryListener extends Component {
+  state = { category: {} };
 
   componentDidMount() {
     const userId = firebase.auth().currentUser.uid;
+    const { categoryId } = this.props;
     firebase
       .database()
-      .ref(`/users/${userId}/categories/${this.props.categoryId}/statements`)
+      .ref(`/users/${userId}/categories/${categoryId}/`)
       .on('value', snapshot => {
-        let statements = snapshot.val();
-        statements = !!statements && statements.length > 0 ? statements : [];
-        this.setState({ statements });
+        let category = snapshot.val();
+        this.setState({ category });
       });
   }
 
   componentWillUnmount() {
     const userId = firebase.auth().currentUser.uid;
+    const { categoryId } = this.props;
     firebase
       .database()
-      .ref(`/users/${userId}/categories/${this.props.categoryId}/statements`)
+      .ref(`/users/${userId}/categories/${categoryId}/`)
       .off();
   }
 
@@ -30,8 +31,8 @@ class StatementsListener extends Component {
   }
 }
 
-StatementsListener.propTypes = {
+CategoryListener.propTypes = {
   categoryId: PropTypes.string.isRequired
 };
 
-export default StatementsListener;
+export default CategoryListener;

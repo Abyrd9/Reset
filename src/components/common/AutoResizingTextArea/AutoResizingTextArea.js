@@ -1,42 +1,6 @@
 import React, { Component } from 'react';
-import styled from 'styled-components';
-
-const TextArea = styled.textarea`
-  box-sizing: border-box;
-  width: 100%;
-  overflow: hidden;
-  resize: none;
-  border: none;
-  outline: none;
-  font-size: 18px;
-  font-family: 'Roboto', sans-serif;
-  padding: 18px 12px;
-`;
-
-const Ghost = styled.div`
-  padding: 18px 12px;
-  border: none;
-  box-sizing: border-box;
-  left: 0;
-  outline: none;
-  overflow: hidden;
-  position: absolute;
-  top: 0;
-  visibility: hidden;
-  white-space: pre-wrap;
-  width: 100%;
-  word-wrap: break-word;
-  font-size: 18px;
-  font-family: 'Roboto', sans-serif;
-`;
-
-const Label = styled.label`
-  box-sizing: border-box;
-  position: relative;
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-`;
+import PropTypes from 'prop-types';
+import { TextArea, Ghost, Label } from './AutoResizingTextAreaStyles';
 
 class AutoSizeInput extends Component {
   constructor(props) {
@@ -69,10 +33,7 @@ class AutoSizeInput extends Component {
   getResizeTextField(props) {
     const { height } = this.state;
     const {
-      autoFocus,
-      className,
       disabled,
-      form,
       maxLength,
       name,
       onBlur,
@@ -84,9 +45,7 @@ class AutoSizeInput extends Component {
     } = props;
     return (
       <TextArea
-        autoFocus={autoFocus}
         disabled={disabled}
-        form={form}
         maxLength={maxLength}
         name={name}
         onBlur={onBlur}
@@ -103,7 +62,7 @@ class AutoSizeInput extends Component {
   }
 
   getGhostResizeField(props) {
-    const { className, value } = props;
+    const { value } = props;
     return (
       <Ghost ref={this.ghost} aria-hidden="true">
         {value}
@@ -120,5 +79,17 @@ class AutoSizeInput extends Component {
     );
   }
 }
+
+AutoSizeInput.propTypes = {
+  value: PropTypes.string.isRequired,
+  onChange: PropTypes.func.isRequired,
+  placeholder: PropTypes.string,
+  maxLength: PropTypes.number,
+  disabled: PropTypes.bool,
+  onFocus: PropTypes.func,
+  onBlur: PropTypes.func,
+  name: PropTypes.string,
+  required: PropTypes.bool
+};
 
 export default AutoSizeInput;

@@ -54,7 +54,7 @@ class AdminContextComponent extends Component {
       firebase
         .database()
         .ref(`/users/${userId}/categories/${categoryId}/`)
-        .set(statements)
+        .update({ statements })
         .catch(err => console.log(err.code, err.message));
     } catch (err) {
       console.log(err.code, err.message);
@@ -98,7 +98,7 @@ class AdminContextComponent extends Component {
         .ref(`/users/${userId}/categories/${categoryId}/statements`)
         .once('value', snapshot => {
           let statements = snapshot.val();
-          statements = !!statements.length ? statements : [];
+          statements = !!statements ? statements : [];
           resolve(statements);
         })
         .catch(err => console.log(err.code, err.message));
