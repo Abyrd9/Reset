@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
-import { AdminContext } from '../../contexts/AdminContext';
-import { AdminStatementItemStyled } from './AdminStatementItemStyled';
+import AdminContextComponent, { AdminContext } from '../../contexts/AdminContext';
+import { AdminStatementItemStyled } from './AdminStatementItem.styles';
 import AdminStatementToolList from '../AdminStatementToolList/AdminStatementToolList';
 import Modal from '../Modal/Modal';
 import AdminModalContent from '../AdminModalContent/AdminModalContent';
@@ -47,33 +47,37 @@ class AdminStatementItem extends Component {
         </AdminStatementItemStyled>
         {isDelete && (
           <Modal>
-            <AdminModalContent
-              title="Delete Modal"
-              onCancel={() => this.setState({ isDelete: false })}
-              onSave={() => {
-                this.context.handleDeleteStatement(categoryId, statementId);
-                this.setState({ isDelete: false });
-              }}
-              isCentered>
-              <p>Are you sure you want to delete this?</p>
-            </AdminModalContent>
+            <AdminContextComponent>
+              <AdminModalContent
+                title="Delete Modal"
+                onCancel={() => this.setState({ isDelete: false })}
+                onSave={() => {
+                  this.context.handleDeleteStatement(categoryId, statementId);
+                  this.setState({ isDelete: false });
+                }}
+                isCentered>
+                <p>Are you sure you want to delete this?</p>
+              </AdminModalContent>
+            </AdminContextComponent>
           </Modal>
         )}
         {isEdit && (
           <Modal>
-            <AdminModalContent
-              title="Edit Content:"
-              onCancel={() => this.setState({ isEdit: false })}
-              onSave={() => {
-                this.context.handleEditStatement(categoryId, statementId, value);
-                this.setState({ isEdit: false });
-              }}>
-              <AutoResizingTextArea
-                value={value}
-                onChange={e => this.setState({ value: e.target.value })}
-                defaultHeight={58}
-              />
-            </AdminModalContent>
+            <AdminContextComponent>
+              <AdminModalContent
+                title="Edit Content:"
+                onCancel={() => this.setState({ isEdit: false })}
+                onSave={() => {
+                  this.context.handleEditStatement(categoryId, statementId, value);
+                  this.setState({ isEdit: false });
+                }}>
+                <AutoResizingTextArea
+                  value={value}
+                  onChange={e => this.setState({ value: e.target.value })}
+                  defaultHeight={58}
+                />
+              </AdminModalContent>
+            </AdminContextComponent>
           </Modal>
         )}
       </Fragment>

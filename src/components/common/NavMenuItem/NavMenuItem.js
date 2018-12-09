@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
-import { NavMenuItemStyled, NavIcon } from './NavMenuItemStyled';
+import { NavMenuItemStyled, NavIcon } from './NavMenuItem.styles';
 import { Link } from 'react-router-dom';
 
 const NavMenuItem = ({ text, icon, link, onClick }) => {

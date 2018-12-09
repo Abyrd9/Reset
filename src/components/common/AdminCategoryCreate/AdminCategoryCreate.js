@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { AdminCategoryCreateStyled } from './AdminCategoryCreateStyled';
+import { AdminCategoryCreateStyled } from './AdminCategoryCreate.styles';
 import { AdminContext } from '../../contexts/AdminContext';
 import Input from '../Input/Input';
 import Button from '../Button/Button';

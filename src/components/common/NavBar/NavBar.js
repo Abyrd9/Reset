@@ -2,7 +2,7 @@ import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import ResetLogo from '../../../img/ResetLogo.png';
-import { NavBarStyled, NavBarIcon } from './NavBarStyled';
+import { NavBarStyled, NavBarIcon } from './NavBar.styles';
 
 class Header extends Component {
   render() {

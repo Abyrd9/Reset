@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { ButtonListStyled } from './ButtonListStyled';
+import { ButtonListStyled } from './ButtonList.styles';
 import Button from '../Button/Button';
 
 const ButtonList = ({ cancelText, saveText, onCancel, onSave }) => {

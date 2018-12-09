@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
-import { AdminContext } from '../../contexts/AdminContext';
-import { AdminCategoryEditStyled, DeleteIcon, Icon } from './AdminCategoryEditStyled';
+import AdminContextComponent, { AdminContext } from '../../contexts/AdminContext';
+import { AdminCategoryEditStyled, DeleteIcon, Icon } from './AdminCategoryEdit.styles';
 import Modal from '../Modal/Modal';
 import AdminModalContent from '../AdminModalContent/AdminModalContent';
 
@@ -38,17 +38,19 @@ class AdminCategoryEdit extends Component {
         </AdminCategoryEditStyled>
         {isDelete && (
           <Modal>
-            <AdminModalContent
-              title="Delete Modal"
-              onCancel={() => this.setState({ isDelete: false })}
-              onSave={() => {
-                clearCategoryId();
-                this.context.handleDeleteCategory(categoryId);
-                this.setState({ isDelete: false });
-              }}
-              isCentered>
-              <p>Are you sure you want to delete this?</p>
-            </AdminModalContent>
+            <AdminContextComponent>
+              <AdminModalContent
+                title="Delete Modal"
+                onCancel={() => this.setState({ isDelete: false })}
+                onSave={() => {
+                  clearCategoryId();
+                  this.context.handleDeleteCategory(categoryId);
+                  this.setState({ isDelete: false });
+                }}
+                isCentered>
+                <p>Are you sure you want to delete this?</p>
+              </AdminModalContent>
+            </AdminContextComponent>
           </Modal>
         )}
       </Fragment>

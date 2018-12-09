@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { DropdownItemCreateStyled, DropdownItemCreateIcon } from './DropdownItemCreateStyled';
+import { DropdownItemCreateStyled, DropdownItemCreateIcon } from './DropdownItemCreate.styles';
 
 const DropdownItemCreate = ({ children, onClick }) => {
   return (

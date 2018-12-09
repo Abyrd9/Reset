@@ -6,7 +6,7 @@ import { AdminContext } from '../../contexts/AdminContext';
 import NavMenuItem from '../NavMenuItem/NavMenuItem';
 import NavMenuTimeList from '../NavMenuTimeList/NavMenuTimeList';
 import NavMenuTimeListItem from '../NavMenuTimeListItem/NavMenuTimeListItem';
-import { NavMenuStyled, NavCloseIcon, NavMenuList } from './NavMenuStyled';
+import { NavMenuStyled, NavCloseIcon, NavMenuList } from './NavMenu.styles';
 
 const times = [0, 5, 8, 10, 15, 20, 30, 60];
 

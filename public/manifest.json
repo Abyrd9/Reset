@@ -101,6 +101,6 @@
   ],
   "start_url": "/?utm_source=homescreen",
   "display": "standalone",
-  "theme_color": "#ef233c",
-  "background_color": "#edf2f4"
+  "theme_color": "#F2F0F0",
+  "background_color": "#F2F0F0"
 }

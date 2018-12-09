@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { AuthSocialBlockStyled, FacebookButton, GoogleButton } from './AuthSocialBlockStyled';
+import { AuthSocialBlockStyled, FacebookButton, GoogleButton } from './AuthSocialBlock.styles';
 
 class AuthSocialBlock extends Component {
   render() {

@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { DropdownListItemStyled } from './DropdownListItemStyled';
+import { DropdownListItemStyled } from './DropdownListItem.styles';
 
 const DropdownListItem = ({ children, onClick }) => {
   return <DropdownListItemStyled onClick={onClick}>{children}</DropdownListItemStyled>;

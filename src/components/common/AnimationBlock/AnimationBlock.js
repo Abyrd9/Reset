@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { AnimationBlockStyled } from './AnimationBlockStyled';
+import { AnimationBlockStyled } from './AnimationBlock.styles';
 
 class AnimationBlock extends Component {
   state = {

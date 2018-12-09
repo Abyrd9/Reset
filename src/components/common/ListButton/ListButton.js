@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import produce from 'immer';
 import { Link } from 'react-router-dom';
-import { ListButtonStyled, ListButtonPlusIcon } from './ListButtonStyled';
+import { ListButtonStyled, ListButtonPlusIcon } from './ListButton.styles';
 import { AdminContext } from '../../contexts/AdminContext';
 import Button from '../Button/Button';
 

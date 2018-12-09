@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { AdminModalContentStyled, AdminModalContentIcon } from './AdminModalContentStyled';
+import { AdminModalContentStyled, AdminModalContentIcon } from './AdminModalContent.styles';
 import ButtonList from '../ButtonList/ButtonList';
 
 const AdminModalContent = ({ title, onCancel, onSave, isCentered, children }) => {

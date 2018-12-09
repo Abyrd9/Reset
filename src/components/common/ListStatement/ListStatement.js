@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { ListStatementStyled, QuoteIconLeft, QuoteIconRight } from './ListStatementStyled';
+import { ListStatementStyled, QuoteIconLeft, QuoteIconRight } from './ListStatement.styles';
 
 class Statement extends Component {
   state = {

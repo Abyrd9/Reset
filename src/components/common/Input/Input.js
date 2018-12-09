@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { InputIcon, AuthInputStyled } from './InputStyled';
+import { InputIcon, AuthInputStyled } from './Input.styles';
 
 const AuthInput = ({
   type,

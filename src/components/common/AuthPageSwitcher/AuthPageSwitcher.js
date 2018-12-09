@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { AuthPageSwitcherStyled } from './AuthPageSwitcherStyled';
+import { AuthPageSwitcherStyled } from './AuthPageSwitcher.styles';
 
 const AuthPageSwitcher = ({ text, buttonText, onClick }) => {
   return (

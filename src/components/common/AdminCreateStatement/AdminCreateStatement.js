@@ -5,7 +5,7 @@ import {
   AdminCreateStatementStyled,
   AdminCreateButton,
   AdminCreateAddIcon
-} from './AdminCreateStatementStyled';
+} from './AdminCreateStatement.styles';
 import AutoResizingTextArea from '../AutoResizingTextArea/AutoResizingTextArea';
 
 class CreateStatement extends Component {

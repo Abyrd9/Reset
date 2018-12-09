@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { AdminStatementListStyled } from './AdminStatementListStyled';
+import { AdminStatementListStyled } from './AdminStatementList.styles';
 
 class AdminStatementList extends Component {
   render() {

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import {
   AdminStatementToolListStyled,
   AdminStatementToolIcon
-} from './AdminStatementToolListStyled';
+} from './AdminStatementToolList.styles';
 
 class AdminStatementToolList extends Component {
   render() {
