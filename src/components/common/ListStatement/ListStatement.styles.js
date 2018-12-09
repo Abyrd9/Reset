@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-export const ListStatementStyles = styled.div`
+export const ListStatementStyled = styled.div`
   ${props => {
     const { theme } = props;
     return css`

@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components';
 
-export const AuthForgotPasswordStyles = styled.div`
+export const AuthForgotPasswordStyled = styled.div`
   ${props => {
     const { theme } = props;
     return css`

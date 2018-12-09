@@ -6,7 +6,7 @@ import { AdminContext } from '../../contexts/AdminContext';
 import NavMenuItem from '../NavMenuItem/NavMenuItem';
 import NavMenuTimeList from '../NavMenuTimeList/NavMenuTimeList';
 import NavMenuTimeListItem from '../NavMenuTimeListItem/NavMenuTimeListItem';
-import { NavMenuStyles, NavCloseIcon, NavMenuList } from './NavMenuStyles';
+import { NavMenuStyled, NavCloseIcon, NavMenuList } from './NavMenuStyled';
 
 const times = [0, 5, 8, 10, 15, 20, 30, 60];
 
@@ -19,7 +19,7 @@ class Menu extends Component {
   render() {
     const { menuOpen, handleCloseMenu, timer } = this.props;
     return (
-      <NavMenuStyles menuOpen={menuOpen}>
+      <NavMenuStyled menuOpen={menuOpen}>
         <NavCloseIcon
           icon="times"
           onClick={() => {
@@ -61,7 +61,7 @@ class Menu extends Component {
             </AnimationBlock>
           </NavMenuList>
         )}
-      </NavMenuStyles>
+      </NavMenuStyled>
     );
   }
 }

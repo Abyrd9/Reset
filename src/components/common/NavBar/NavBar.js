@@ -2,13 +2,13 @@ import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import ResetLogo from '../../../img/ResetLogo.png';
-import { NavBarStyles, NavBarIcon } from './NavBarStyles';
+import { NavBarStyled, NavBarIcon } from './NavBarStyled';
 
 class Header extends Component {
   render() {
     const { link, handleOpenMenu, isAdmin, children } = this.props;
     return (
-      <NavBarStyles isAdmin={isAdmin}>
+      <NavBarStyled isAdmin={isAdmin}>
         {link ? (
           <Fragment>
             <Link to={link}>
@@ -23,7 +23,7 @@ class Header extends Component {
           </Fragment>
         )}
         {children}
-      </NavBarStyles>
+      </NavBarStyled>
     );
   }
 }

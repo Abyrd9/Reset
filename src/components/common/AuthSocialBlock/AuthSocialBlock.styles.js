@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components';
 import Button from '../Button/Button';
 
-export const AuthSocialBlockStyles = styled.div`
+export const AuthSocialBlockStyled = styled.div`
   ${props => {
     const { theme } = props;
     return css`

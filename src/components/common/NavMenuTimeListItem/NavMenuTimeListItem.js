@@ -1,13 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { NavMenuTimeListItemStyles, NavCheckIcon } from './NavMenuTimeListItemStyles';
+import { NavMenuTimeListItemStyled, NavCheckIcon } from './NavMenuTimeListItemStyled';
 
 const NavMenuTimeListItem = ({ time, isSelected, onClick }) => {
   return (
-    <NavMenuTimeListItemStyles isSelected={isSelected} onClick={onClick}>
+    <NavMenuTimeListItemStyled isSelected={isSelected} onClick={onClick}>
       {time} seconds
       {isSelected && <NavCheckIcon icon="check" />}
-    </NavMenuTimeListItemStyles>
+    </NavMenuTimeListItemStyled>
   );
 };
 

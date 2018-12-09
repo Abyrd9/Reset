@@ -1,20 +1,20 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import {
-  AdminStatementToolListStyles,
+  AdminStatementToolListStyled,
   AdminStatementToolIcon
-} from './AdminStatementToolListStyles';
+} from './AdminStatementToolListStyled';
 
 class AdminStatementToolList extends Component {
   render() {
     return (
-      <AdminStatementToolListStyles>
+      <AdminStatementToolListStyled>
         <div>
           <AdminStatementToolIcon icon="trash" onClick={this.props.onDeleteClick} />
           <AdminStatementToolIcon icon="edit" onClick={this.props.onEditClick} />
         </div>
         <span />
-      </AdminStatementToolListStyles>
+      </AdminStatementToolListStyled>
     );
   }
 }

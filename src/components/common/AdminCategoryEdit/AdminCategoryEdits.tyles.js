@@ -22,7 +22,7 @@ export const Icon = styled(FontAwesomeIcon)`
   }};
 `;
 
-export const AdminCategoryEditStyles = styled.div`
+export const AdminCategoryEditStyled = styled.div`
   ${props => {
     const { theme } = props;
     return css`

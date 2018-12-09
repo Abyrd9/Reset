@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components';
 
-export const AdminStatementListStyles = styled.ul`
+export const AdminStatementListStyled = styled.ul`
   ${props => {
     const { theme } = props;
     return css`

@@ -1,12 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { DropdownItemCreateStyles, DropdownItemCreateIcon } from './DropdownItemCreateStyles';
+import { DropdownItemCreateStyled, DropdownItemCreateIcon } from './DropdownItemCreateStyled';
 
 const DropdownItemCreate = ({ children, onClick }) => {
   return (
-    <DropdownItemCreateStyles onClick={onClick}>
+    <DropdownItemCreateStyled onClick={onClick}>
       Create New Category... <DropdownItemCreateIcon icon="plus-circle" />
-    </DropdownItemCreateStyles>
+    </DropdownItemCreateStyled>
   );
 };
 

@@ -13,7 +13,7 @@ export const DropdownIcon = styled(FontAwesomeIcon)`
   }};
 `;
 
-export const DropdownButtonStyles = styled.button`
+export const DropdownButtonStyled = styled.button`
   ${props => {
     const { theme } = props;
     return css`
@@ -43,7 +43,7 @@ export const DropdownButtonStyles = styled.button`
   }};
 `;
 
-export const DropdownListStyles = styled.div`
+export const DropdownListStyled = styled.div`
   ${props => {
     const { theme } = props;
     return css`

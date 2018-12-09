@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { NavMenuTimeListStyles } from './NavMenuTimeListStyles';
+import { NavMenuTimeListStyled } from './NavMenuTimeListStyled';
 
 const NavMenuTimeList = ({ children, timerMenuOpen }) => {
-  return <NavMenuTimeListStyles timerMenuOpen={timerMenuOpen}>{children}</NavMenuTimeListStyles>;
+  return <NavMenuTimeListStyled timerMenuOpen={timerMenuOpen}>{children}</NavMenuTimeListStyled>;
 };
 
 NavMenuTimeList.propTypes = {

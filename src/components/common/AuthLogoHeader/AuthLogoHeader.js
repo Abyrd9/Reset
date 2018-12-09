@@ -1,17 +1,17 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import ResetIcon from '../../../img/ResetIcon.png';
-import { AuthLogoHeaderStyles } from './AuthLogoHeaderStyles';
+import { AuthLogoHeaderStyled } from './AuthLogoHeaderStyled';
 
 const AuthLogo = ({}) => {
   return (
-    <AuthLogoHeaderStyles>
+    <AuthLogoHeaderStyled>
       <img src={ResetIcon} />
       <h1>
         Reset
         <span>.</span>
       </h1>
-    </AuthLogoHeaderStyles>
+    </AuthLogoHeaderStyled>
   );
 };
 

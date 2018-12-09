@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { AdminCategoryCreateStyles } from './AdminCategoryCreateStyles';
+import { AdminCategoryCreateStyled } from './AdminCategoryCreateStyled';
 import { AdminContext } from '../../contexts/AdminContext';
 import Input from '../Input/Input';
 import Button from '../Button/Button';
@@ -23,7 +23,7 @@ class AdminCategoryCreate extends Component {
     const { onCancel } = this.props;
     const { name } = this.state;
     return (
-      <AdminCategoryCreateStyles>
+      <AdminCategoryCreateStyled>
         <Input
           icon="file-signature"
           type="text"
@@ -41,7 +41,7 @@ class AdminCategoryCreate extends Component {
             onCancel();
           }}
         />
-      </AdminCategoryCreateStyles>
+      </AdminCategoryCreateStyled>
     );
   }
 }

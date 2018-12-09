@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-export const NavMenuStyles = styled.div`
+export const NavMenuStyled = styled.div`
   ${props => {
     const { theme } = props;
     return css`

@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { AuthSocialBlockStyles, FacebookButton, GoogleButton } from './AuthSocialBlockStyles';
+import { AuthSocialBlockStyled, FacebookButton, GoogleButton } from './AuthSocialBlockStyled';
 
 class AuthSocialBlock extends Component {
   render() {
     const { onFacebookClick, onGoogleClick } = this.props;
     return (
-      <AuthSocialBlockStyles>
+      <AuthSocialBlockStyled>
         <div>
           <span />
           <p>or</p>
@@ -18,7 +18,7 @@ class AuthSocialBlock extends Component {
         <GoogleButton onGoogleClick={onGoogleClick}>
           Continue with <h4>Google</h4>
         </GoogleButton>
-      </AuthSocialBlockStyles>
+      </AuthSocialBlockStyled>
     );
   }
 }

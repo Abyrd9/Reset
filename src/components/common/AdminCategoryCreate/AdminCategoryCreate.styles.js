@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components';
 
-export const AdminCategoryCreateStyles = styled.div`
+export const AdminCategoryCreateStyled = styled.div`
   ${props => {
     const { theme } = props;
     return css`

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { AnimationBlockStyles } from './AnimationBlockStyles';
+import { AnimationBlockStyled } from './AnimationBlockStyled';
 
 class AnimationBlock extends Component {
   state = {
@@ -19,9 +19,9 @@ class AnimationBlock extends Component {
 
   render() {
     return (
-      <AnimationBlockStyles isMounted={this.state.isMounted}>
+      <AnimationBlockStyled isMounted={this.state.isMounted}>
         {this.props.children}
-      </AnimationBlockStyles>
+      </AnimationBlockStyled>
     );
   }
 }

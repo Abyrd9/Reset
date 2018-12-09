@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import ReactDOM from 'react-dom';
-import { ModalStylesBackdrop, ModalStylesContent } from './ModalStyles';
+import { ModalStyledBackdrop, ModalStyledContent } from './ModalStyled';
 import AdminContextComponent from '../../contexts/AdminContext';
 
 class Modal extends Component {
@@ -22,11 +22,11 @@ class Modal extends Component {
   render() {
     const { isAppended } = this.state;
     const ModalContent = (
-      <ModalStylesBackdrop>
-        <ModalStylesContent>
+      <ModalStyledBackdrop>
+        <ModalStyledContent>
           <AdminContextComponent>{this.props.children}</AdminContextComponent>
-        </ModalStylesContent>
-      </ModalStylesBackdrop>
+        </ModalStyledContent>
+      </ModalStyledBackdrop>
     );
     return (
       <Fragment>

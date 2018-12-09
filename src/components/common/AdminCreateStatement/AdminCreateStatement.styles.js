@@ -2,7 +2,7 @@ import styled, { css } from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Button from '../Button/Button';
 
-export const AdminCreateStatementStyles = styled.div`
+export const AdminCreateStatementStyled = styled.div`
   ${props => {
     const { theme } = props;
     return css`

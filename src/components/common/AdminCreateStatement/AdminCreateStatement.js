@@ -2,10 +2,10 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { AdminContext } from '../../contexts/AdminContext';
 import {
-  AdminCreateStatementStyles,
+  AdminCreateStatementStyled,
   AdminCreateButton,
   AdminCreateAddIcon
-} from './AdminCreateStatementStyles';
+} from './AdminCreateStatementStyled';
 import AutoResizingTextArea from '../AutoResizingTextArea/AutoResizingTextArea';
 
 class CreateStatement extends Component {
@@ -24,7 +24,7 @@ class CreateStatement extends Component {
     const { value } = this.state;
     const isDisabled = !!categoryId ? categoryId.length <= 0 : true;
     return (
-      <AdminCreateStatementStyles>
+      <AdminCreateStatementStyled>
         <AutoResizingTextArea
           defaultHeight={58}
           placeholder="Add New Statement..."
@@ -37,7 +37,7 @@ class CreateStatement extends Component {
           onClick={() => this.handleCreateStatement()}>
           <AdminCreateAddIcon icon="plus-circle" />
         </AdminCreateButton>
-      </AdminCreateStatementStyles>
+      </AdminCreateStatementStyled>
     );
   }
 }

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import produce from 'immer';
 import { Link } from 'react-router-dom';
-import { ListButtonStyles, ListButtonPlusIcon } from './ListButtonStyles';
+import { ListButtonStyled, ListButtonPlusIcon } from './ListButtonStyled';
 import { AdminContext } from '../../contexts/AdminContext';
 import Button from '../Button/Button';
 
@@ -96,7 +96,7 @@ class ListButton extends Component {
       timeSettings: { countdown }
     } = this.state;
     return (
-      <ListButtonStyles buttonDisabled={buttonDisabled}>
+      <ListButtonStyled buttonDisabled={buttonDisabled}>
         {hasStatements ? (
           <React.Fragment>
             <Button
@@ -117,7 +117,7 @@ class ListButton extends Component {
             </Button>
           </Link>
         )}
-      </ListButtonStyles>
+      </ListButtonStyled>
     );
   }
 }

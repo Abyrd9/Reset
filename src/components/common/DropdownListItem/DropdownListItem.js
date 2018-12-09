@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { DropdownListItemStyles } from './DropdownListItemStyles';
+import { DropdownListItemStyled } from './DropdownListItemStyled';
 
 const DropdownListItem = ({ children, onClick }) => {
-  return <DropdownListItemStyles onClick={onClick}>{children}</DropdownListItemStyles>;
+  return <DropdownListItemStyled onClick={onClick}>{children}</DropdownListItemStyled>;
 };
 
 DropdownListItem.propTypes = {

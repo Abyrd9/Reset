@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { ListStatementStyles, QuoteIconLeft, QuoteIconRight } from './ListStatementStyles';
+import { ListStatementStyled, QuoteIconLeft, QuoteIconRight } from './ListStatementStyled';
 
 class Statement extends Component {
   state = {
@@ -25,7 +25,7 @@ class Statement extends Component {
   render() {
     const { value } = this.props;
     return (
-      <ListStatementStyles isTransitioned={this.state.isTransitioned}>
+      <ListStatementStyled isTransitioned={this.state.isTransitioned}>
         <p>
           <QuoteIconLeft icon="quote-left" isTransitioned={this.state.isTransitioned} />
           {!!value
@@ -33,7 +33,7 @@ class Statement extends Component {
             : "There's nothing to see here. Click the button below to create new Categories and Statements."}
           <QuoteIconRight icon="quote-right" isTransitioned={this.state.isTransitioned} />
         </p>
-      </ListStatementStyles>
+      </ListStatementStyled>
     );
   }
 }

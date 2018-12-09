@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components';
 
-export const AuthPageSwitcherStyles = styled.div`
+export const AuthPageSwitcherStyled = styled.div`
   ${props => {
     const { theme } = props;
     return css`

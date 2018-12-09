@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { AdminStatementListStyles } from './AdminStatementListStyles';
+import { AdminStatementListStyled } from './AdminStatementListStyled';
 
 class AdminStatementList extends Component {
   render() {
-    return <AdminStatementListStyles>{this.props.children}</AdminStatementListStyles>;
+    return <AdminStatementListStyled>{this.props.children}</AdminStatementListStyled>;
   }
 }
 

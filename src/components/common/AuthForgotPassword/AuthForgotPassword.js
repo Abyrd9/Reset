@@ -1,15 +1,15 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { AuthForgotPasswordStyles } from './AuthForgotPasswordStyles';
+import { AuthForgotPasswordStyled } from './AuthForgotPasswordStyled';
 
 class AuthForgotPassword extends Component {
   render() {
     return (
-      <AuthForgotPasswordStyles>
+      <AuthForgotPasswordStyled>
         <a href="#" onClick={this.props.onClick}>
           I forgot my password.
         </a>
-      </AuthForgotPasswordStyles>
+      </AuthForgotPasswordStyled>
     );
   }
 }

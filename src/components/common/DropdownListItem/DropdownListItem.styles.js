@@ -1,18 +1,6 @@
 import styled, { css } from 'styled-components';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-export const DropdownItemCreateIcon = styled(FontAwesomeIcon)`
-  ${props => {
-    const { theme } = props;
-    return css`
-      color: ${theme.colors.primary};
-      height: 16px;
-      max-width: 15px;
-    `;
-  }};
-`;
-
-export const DropdownItemCreateStyles = styled.button`
+export const DropdownListItemStyled = styled.button`
   ${props => {
     const { theme } = props;
     return css`

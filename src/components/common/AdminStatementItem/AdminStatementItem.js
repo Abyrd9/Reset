@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { AdminContext } from '../../contexts/AdminContext';
-import { AdminStatementItemStyles } from './AdminStatementItemStyles';
+import { AdminStatementItemStyled } from './AdminStatementItemStyled';
 import AdminStatementToolList from '../AdminStatementToolList/AdminStatementToolList';
 import Modal from '../Modal/Modal';
 import AdminModalContent from '../AdminModalContent/AdminModalContent';
@@ -28,7 +28,7 @@ class AdminStatementItem extends Component {
     const toggleClear = isActive ? true : false;
     return (
       <Fragment>
-        <AdminStatementItemStyles onClick={() => toggleIsActive(toggleClear)}>
+        <AdminStatementItemStyled onClick={() => toggleIsActive(toggleClear)}>
           {isActive && (
             <AdminStatementToolList
               onDeleteClick={e => {
@@ -44,7 +44,7 @@ class AdminStatementItem extends Component {
             />
           )}
           {this.props.children}
-        </AdminStatementItemStyles>
+        </AdminStatementItemStyled>
         {isDelete && (
           <Modal>
             <AdminModalContent

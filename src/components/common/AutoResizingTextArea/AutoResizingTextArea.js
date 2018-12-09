@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { TextArea, Ghost, Label } from './AutoResizingTextAreaStyles';
+import { TextArea, Ghost, Label } from './AutoResizingTextAreaStyled';
 
 class AutoResizingTextArea extends Component {
   constructor(props) {

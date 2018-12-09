@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components';
 
-export const AnimationBlockStyles = styled.div`
+export const AnimationBlockStyled = styled.div`
   ${props => {
     const { theme } = props;
     return css`

@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components';
 
-export const NavMenuTimeListStyles = styled.ul`
+export const NavMenuTimeListStyled = styled.ul`
   ${props => {
     const { theme } = props;
     return css`

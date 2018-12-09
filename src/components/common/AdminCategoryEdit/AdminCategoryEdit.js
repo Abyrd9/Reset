@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { AdminContext } from '../../contexts/AdminContext';
-import { AdminCategoryEditStyles, DeleteIcon, Icon } from './AdminCategoryEditStyles';
+import { AdminCategoryEditStyled, DeleteIcon, Icon } from './AdminCategoryEditStyled';
 import Modal from '../Modal/Modal';
 import AdminModalContent from '../AdminModalContent/AdminModalContent';
 
@@ -14,7 +14,7 @@ class AdminCategoryEdit extends Component {
     const { isDelete, isEdit, name } = this.state;
     return (
       <Fragment>
-        <AdminCategoryEditStyles>
+        <AdminCategoryEditStyled>
           <DeleteIcon icon="minus-circle" onClick={() => this.setState({ isDelete: true })} />
           <label>
             <p>Category:</p>
@@ -35,7 +35,7 @@ class AdminCategoryEdit extends Component {
               <Icon icon={'edit'} onClick={() => this.setState({ isEdit: true })} />
             )}
           </label>
-        </AdminCategoryEditStyles>
+        </AdminCategoryEditStyled>
         {isDelete && (
           <Modal>
             <AdminModalContent

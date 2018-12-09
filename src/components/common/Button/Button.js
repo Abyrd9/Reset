@@ -1,11 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { ButtonStyles } from './ButtonStyles';
+import { ButtonStyled } from './ButtonStyled';
 
 const Button = ({ children, onClick, disabled, className }) => (
-  <ButtonStyles disabled={disabled} onClick={onClick} className={className}>
+  <ButtonStyled disabled={disabled} onClick={onClick} className={className}>
     {children}
-  </ButtonStyles>
+  </ButtonStyled>
 );
 
 Button.propTypes = {

@@ -1,11 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { AdminModalContentStyles, AdminModalContentIcon } from './AdminModalContentStyles';
+import { AdminModalContentStyled, AdminModalContentIcon } from './AdminModalContentStyled';
 import ButtonList from '../ButtonList/ButtonList';
 
 const AdminModalContent = ({ title, onCancel, onSave, isCentered, children }) => {
   return (
-    <AdminModalContentStyles isCentered={isCentered}>
+    <AdminModalContentStyled isCentered={isCentered}>
       <h3>{title}</h3>
       {children}
       <ButtonList
@@ -14,7 +14,7 @@ const AdminModalContent = ({ title, onCancel, onSave, isCentered, children }) =>
         onCancel={onCancel}
         onSave={onSave}
       />
-    </AdminModalContentStyles>
+    </AdminModalContentStyled>
   );
 };
 

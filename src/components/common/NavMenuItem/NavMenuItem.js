@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
-import { NavMenuItemStyles, NavIcon } from './NavMenuItemStyles';
+import { NavMenuItemStyled, NavIcon } from './NavMenuItemStyled';
 import { Link } from 'react-router-dom';
 
 const NavMenuItem = ({ text, icon, link, onClick }) => {
@@ -8,16 +8,16 @@ const NavMenuItem = ({ text, icon, link, onClick }) => {
     <Fragment>
       {link ? (
         <Link to={link}>
-          <NavMenuItemStyles onClick={onClick}>
+          <NavMenuItemStyled onClick={onClick}>
             {text}
             <NavIcon icon={icon} />
-          </NavMenuItemStyles>
+          </NavMenuItemStyled>
         </Link>
       ) : (
-        <NavMenuItemStyles onClick={onClick}>
+        <NavMenuItemStyled onClick={onClick}>
           {text}
           <NavIcon icon={icon} />
-        </NavMenuItemStyles>
+        </NavMenuItemStyled>
       )}
     </Fragment>
   );

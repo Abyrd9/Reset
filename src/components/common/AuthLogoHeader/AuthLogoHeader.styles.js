@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components';
 
-export const AuthLogoHeaderStyles = styled.div`
+export const AuthLogoHeaderStyled = styled.div`
   ${props => {
     const { theme } = props;
     return css`

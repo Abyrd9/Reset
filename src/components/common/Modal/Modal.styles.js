@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components';
 
-export const ModalStylesBackdrop = styled.div`
+export const ModalStyledBackdrop = styled.div`
   ${props => {
     const { theme } = props;
     return css`
@@ -21,7 +21,7 @@ export const ModalStylesBackdrop = styled.div`
   }}
 `;
 
-export const ModalStylesContent = styled.div`
+export const ModalStyledContent = styled.div`
   ${props => {
     const { theme } = props;
     return css`

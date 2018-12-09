@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-export const AdminModalContentStyles = styled.div`
+export const AdminModalContentStyled = styled.div`
   ${props => {
     const { theme } = props;
     return css`

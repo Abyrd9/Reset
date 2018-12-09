@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components';
 
-export const ButtonListStyles = styled.div`
+export const ButtonListStyled = styled.div`
   ${props => {
     const { theme } = props;
     return css`
