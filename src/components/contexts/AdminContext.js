@@ -47,8 +47,8 @@ class AdminContextComponent extends Component {
   handleCreateStatement = async (categoryId, value) => {
     const userId = this.getUserId();
     try {
-      const category = await this.handleReadStatements(categoryId);
-      const statements = !!category.statements ? category.statements : [];
+      let statements = await this.handleReadStatements(categoryId);
+      statements = !!statements ? statements : [];
       const statementId = Keygen(statements);
       statements.push({ statementId, value });
       firebase
@@ -131,8 +131,8 @@ class AdminContextComponent extends Component {
   handleEditStatement = async (categoryId, statementId, value) => {
     const userId = this.getUserId();
     try {
-      const category = await this.handleReadStatements(categoryId);
-      let statements = !!category.statements ? category.statements : [];
+      let statements = await this.handleReadStatements(categoryId);
+      statements = !!statements ? statements : [];
       statements = statements.map(statement => {
         if (statement.statementId === statementId) {
           statement.value = value;
@@ -142,7 +142,7 @@ class AdminContextComponent extends Component {
       firebase
         .database()
         .ref(`/users/${userId}/categories/${categoryId}/`)
-        .set(statements)
+        .update({ statements })
         .catch(err => console.log(err.code, err.message));
     } catch (err) {
       console.log(err.code, err.message);
@@ -161,13 +161,14 @@ class AdminContextComponent extends Component {
   handleDeleteStatement = async (categoryId, statementId) => {
     const userId = this.getUserId();
     try {
-      const category = await this.handleReadStatements(categoryId);
-      let statements = !!category.statements ? category.statements : [];
+      let statements = await this.handleReadStatements(categoryId);
+      statements = !!statements ? statements : [];
       statements = statements.filter(statement => statement.statementId !== statementId);
+      console.log(statements);
       firebase
         .database()
         .ref(`/users/${userId}/categories/${categoryId}/`)
-        .set(statements)
+        .update({ statements })
         .catch(err => console.log(err.code, err.message));
     } catch (err) {
       console.log(err.code, err.message);

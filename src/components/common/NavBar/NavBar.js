@@ -6,9 +6,9 @@ import { NavBarStyles, NavBarIcon } from './NavBarStyles';
 
 class Header extends Component {
   render() {
-    const { link, handleOpenMenu, children } = this.props;
+    const { link, handleOpenMenu, isAdmin, children } = this.props;
     return (
-      <NavBarStyles>
+      <NavBarStyles isAdmin={isAdmin}>
         {link ? (
           <Fragment>
             <Link to={link}>
@@ -31,6 +31,7 @@ class Header extends Component {
 Header.propTypes = {
   isAdmin: PropTypes.bool,
   handleOpenMenu: PropTypes.func,
+  isAdmin: PropTypes.bool,
   children: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.node), PropTypes.node])
 };
 

@@ -22,6 +22,7 @@ class CreateStatement extends Component {
   render() {
     const { categoryId } = this.props;
     const { value } = this.state;
+    const isDisabled = !!categoryId ? categoryId.length <= 0 : true;
     return (
       <AdminCreateStatementStyles>
         <AutoResizingTextArea
@@ -29,7 +30,7 @@ class CreateStatement extends Component {
           placeholder="Add New Statement..."
           value={value}
           onChange={e => this.setState({ value: e.target.value })}
-          disabled={categoryId.length <= 0}
+          disabled={isDisabled}
         />
         <AdminCreateButton
           disabled={value.length <= 0}

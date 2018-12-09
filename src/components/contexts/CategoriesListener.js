@@ -18,11 +18,14 @@ class CategoriesListener extends Component {
   }
 
   componentWillUnmount() {
-    const userId = firebase.auth().currentUser.uid;
-    firebase
-      .database()
-      .ref(`/users/${userId}/categories`)
-      .off();
+    const auth = firebase.auth();
+    if (!!auth.currentUser) {
+      const userId = auth.currentUser.uid;
+      firebase
+        .database()
+        .ref(`/users/${userId}/timer`)
+        .off();
+    }
   }
 
   render() {

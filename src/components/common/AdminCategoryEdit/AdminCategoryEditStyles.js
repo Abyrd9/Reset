@@ -17,6 +17,7 @@ export const Icon = styled(FontAwesomeIcon)`
     const { theme } = props;
     return css`
       color: ${theme.colors.primary};};
+			margin-left: 8px;
     `;
   }};
 `;

@@ -7,7 +7,7 @@ export const NavBarStyles = styled.div`
     return css`
       max-height: 75px;
       padding: 15px 20px;
-      position: absolute;
+      position: fixed;
       top: 0;
       left: 0;
       width: 100%;
@@ -19,6 +19,7 @@ export const NavBarStyles = styled.div`
       }
       background-color: ${theme.colors.white};
       z-index: ${theme.zIndex.top};
+      box-shadow: ${props.isAdmin ? '0px 1px 3px rgba(0, 0, 0, .3)' : 'none'};
     `;
   }};
 `;

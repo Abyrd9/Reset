@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { TextArea, Ghost, Label } from './AutoResizingTextAreaStyles';
 
-class AutoSizeInput extends Component {
+class AutoResizingTextArea extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -80,7 +80,8 @@ class AutoSizeInput extends Component {
   }
 }
 
-AutoSizeInput.propTypes = {
+AutoResizingTextArea.propTypes = {
+  defaultHeight: PropTypes.number.isRequired,
   value: PropTypes.string.isRequired,
   onChange: PropTypes.func.isRequired,
   placeholder: PropTypes.string,
@@ -92,4 +93,4 @@ AutoSizeInput.propTypes = {
   required: PropTypes.bool
 };
 
-export default AutoSizeInput;
+export default AutoResizingTextArea;

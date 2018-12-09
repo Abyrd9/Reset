@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import produce from 'immer';
-import Container from './common/Container';
+import GlobalContainer from './common/GlobalContainer/GlobalContainer';
 import Input from './common/Input/Input';
 import Button from './common/Button/Button';
 import AuthForgotPassword from './common/AuthForgotPassword/AuthForgotPassword';
@@ -49,7 +49,7 @@ class Auth extends Component {
     return (
       <AuthContext>
         {auth => (
-          <Container isAuth isFlex>
+          <GlobalContainer isFlex>
             {currentPage === 'signin' && (
               <Fragment>
                 <AnimationBlock>
@@ -183,7 +183,7 @@ class Auth extends Component {
                 </AnimationBlock>
               </Fragment>
             )}
-          </Container>
+          </GlobalContainer>
         )}
       </AuthContext>
     );

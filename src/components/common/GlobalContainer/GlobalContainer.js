@@ -1,14 +1,13 @@
 import styled, { css } from 'styled-components';
 
-const Container = styled.div`
+const GlobalContainer = styled.div`
   ${props => {
     const { theme } = props;
     return css`
-			height: 100%;
-			min-height: 100vh;
+			height: 100vh;
       width: 100%;
       overflow: scroll;
-			padding: ${props.isAuth ? '40px 15px' : '75px 15px 92px 15px'}
+			padding: ${props.isAdmin ? '70px 15px 105px 15px' : '60px 15px'};
 			display: block;
 			${props.isFlex &&
         css`
@@ -23,4 +22,4 @@ const Container = styled.div`
   }};
 `;
 
-export default Container;
+export default GlobalContainer;

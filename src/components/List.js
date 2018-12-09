@@ -1,32 +1,25 @@
 import React, { Component, Fragment } from 'react';
-import PropTypes from 'prop-types';
-import firebase from 'firebase';
 import AdminContextComponent from './contexts/AdminContext';
 import TimerListener from './contexts/TimerListener';
-import Container from './common/Container';
+import StatementsListener from './contexts/StatementsListener';
+import GlobalContainer from './common/GlobalContainer/GlobalContainer';
 import NavBar from './common/NavBar/NavBar';
 import NavMenu from './common/NavMenu/NavMenu';
-import ListButton from './common/List/ListButton';
 import Dropdown from './common/Dropdown/Dropdown';
 import DropdownListItem from './common/DropdownListItem/DropdownListItem';
-import Statement from './common/List/Statement';
-import Loading from './common/Loading';
+import ListStatement from './common/ListStatement/ListStatement';
+import ListButton from './common/ListButton/ListButton';
 import CategoriesListener from './contexts/CategoriesListener';
 
 class List extends Component {
   state = {
     menuOpen: false,
-    dataLoading: false,
-    currentCategory: { name: '', key: '', statements: [] },
-    currentIndex: 0
+    currentIndex: 0,
+    currentCategory: { name: '', key: '', statements: [] }
   };
 
-  handleChangeIndex = () => {
-    const {
-      currentCategory: { statements }
-    } = this.state;
-    const statementsArray = !!statements && Object.values(statements);
-    let statementLength = statementsArray.length - 1;
+  handleChangeIndex = length => {
+    let statementLength = length - 1;
     if (this.state.currentIndex === statementLength) {
       this.setState({ currentIndex: 0 });
     } else {
@@ -35,16 +28,10 @@ class List extends Component {
   };
 
   render() {
-    const {
-      menuOpen,
-      currentCategory: { statements },
-      currentIndex,
-      dataLoading
-    } = this.state;
-    const hasStatements = !!statements && Object.values(statements).length > 0;
-    const statementsArray = !!statements ? Object.values(statements) : [];
+    const { menuOpen, currentCategory, currentIndex } = this.state;
+    console.log(this.state);
     return (
-      <Container isFlex>
+      <GlobalContainer isFlex>
         <AdminContextComponent>
           {/* Nav Bar */}
           <NavBar handleOpenMenu={() => this.setState({ menuOpen: true })}>
@@ -81,21 +68,31 @@ class List extends Component {
             </CategoriesListener>
           </Dropdown>
 
-          <Statement
-            value={!!statementsArray[currentIndex] && statementsArray[currentIndex].value}
-          />
-
-          <TimerListener>
-            {value => (
-              <ListButton
-                hasStatements={hasStatements}
-                handleChangeIndex={() => this.handleChangeIndex()}
-                timer={value.timer}
-              />
+          <StatementsListener categoryId={currentCategory.categoryId}>
+            {statementVal => (
+              <Fragment>
+                <ListStatement
+                  value={
+                    !!statementVal.statements[currentIndex] &&
+                    statementVal.statements[currentIndex].value
+                  }
+                />
+                <TimerListener>
+                  {timerVal => (
+                    <ListButton
+                      hasStatements={statementVal.statements.length > 0}
+                      handleChangeIndex={() =>
+                        this.handleChangeIndex(statementVal.statements.length)
+                      }
+                      time={timerVal.timer}
+                    />
+                  )}
+                </TimerListener>
+              </Fragment>
             )}
-          </TimerListener>
+          </StatementsListener>
         </AdminContextComponent>
-      </Container>
+      </GlobalContainer>
     );
   }
 }

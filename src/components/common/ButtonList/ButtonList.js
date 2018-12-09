@@ -13,8 +13,8 @@ const ButtonList = ({ cancelText, saveText, onCancel, onSave }) => {
 };
 
 ButtonList.propTypes = {
-  cancelText: PropTypes.string,
-  saveText: PropTypes.string,
+  cancelText: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.node), PropTypes.node]),
+  saveText: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.node), PropTypes.node]),
   onCancel: PropTypes.func,
   onSave: PropTypes.func
 };

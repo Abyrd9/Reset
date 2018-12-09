@@ -15,8 +15,9 @@ export const ButtonStyles = styled.button`
         box-shadow: ${theme.shadowPressed};
       }
       &:disabled {
-        background-color: ${theme.colors.gray};
-        color: ${theme.colors.blackSecondary};
+        background-color: ${theme.colors.graySecondary};
+        color: ${theme.colors.gray};
+        box-shadow: none;
       }
     `;
   }};

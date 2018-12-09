@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import AdminContextComponent from './contexts/AdminContext';
 import NavBar from './common/NavBar/NavBar';
-import Container from './common/Container';
+import GlobalContainer from './common/GlobalContainer/GlobalContainer';
 import CategoriesListener from './contexts/CategoriesListener';
 import CategoryListener from './contexts/CategoryListener';
 import StatementsListener from './contexts/StatementsListener';
@@ -17,23 +17,9 @@ import AdminStatementItem from './common/AdminStatementItem/AdminStatementItem';
 
 class Admin extends Component {
   state = {
-    currentCategory: {
-      name: '',
-      categoryId: '',
-      statements: []
-    },
+    activeCategory: '',
     activeStatement: '',
     editCategory: false
-  };
-
-  handleSetCurrentCategory = category => {
-    this.setState({
-      currentCategory: {
-        name: category.name,
-        categoryId: category.key,
-        statements: !!category.statements ? Object.values(category.statements) : []
-      }
-    });
   };
 
   handleSetCurrentStatement = (statementId, clear = false) => {
@@ -44,58 +30,84 @@ class Admin extends Component {
   };
 
   render() {
-    const { editCategory, currentCategory, activeStatement } = this.state;
+    const { editCategory, activeCategory, activeStatement } = this.state;
     return (
-      <Container>
-        <NavBar link="/list" />
+      <GlobalContainer isAdmin>
+        <NavBar link="/list" isAdmin />
         <AdminContextComponent>
-          {editCategory ? (
-            <AdminCategoryCreate onCancel={() => this.setState({ editCategory: false })} />
-          ) : (
-            <Dropdown
-              title="Choose your category:"
-              placeholder={'Select Category...'}
-              value={this.state.currentCategory.name}>
-              <CategoriesListener>
-                {value => (
-                  <Fragment>
-                    {value.categories.map(category => (
-                      <DropdownListItem
-                        onClick={() => this.setState({ currentCategory: category })}>
-                        {category.name}
-                      </DropdownListItem>
-                    ))}
-                    <DropdownItemCreate onClick={() => this.setState({ editCategory: true })} />
-                  </Fragment>
-                )}
-              </CategoriesListener>
-            </Dropdown>
-          )}
-          {!!currentCategory.categoryId && (
-            <Fragment>
-              <CategoryListener categoryId={currentCategory.categoryId}>
-                {val => !!val.category.name && <AdminCategoryEdit name={val.category.name} />}
-              </CategoryListener>
+          <CategoryListener categoryId={activeCategory}>
+            {categoryVal => {
+              const { category } = categoryVal;
+              const categoryId = !!category ? category.categoryId : '';
+              const name = !!category ? category.name : '';
+              return (
+                <Fragment>
+                  {editCategory ? (
+                    <AdminCategoryCreate onCancel={() => this.setState({ editCategory: false })} />
+                  ) : (
+                    <Dropdown
+                      title="Choose your category:"
+                      placeholder={'Select Category...'}
+                      value={name}>
+                      <CategoriesListener>
+                        {value => (
+                          <Fragment>
+                            {value.categories.map(category => (
+                              <DropdownListItem
+                                onClick={() =>
+                                  this.setState({ activeCategory: category.categoryId })
+                                }>
+                                {category.name}
+                              </DropdownListItem>
+                            ))}
+                            <DropdownItemCreate
+                              onClick={() => this.setState({ editCategory: true })}
+                            />
+                          </Fragment>
+                        )}
+                      </CategoriesListener>
+                    </Dropdown>
+                  )}
+                  {!!categoryId && (
+                    <Fragment>
+                      <CategoryListener categoryId={categoryId}>
+                        {val =>
+                          !!val.category.name && (
+                            <AdminCategoryEdit
+                              name={val.category.name}
+                              categoryId={categoryId}
+                              clearCategoryId={() => this.setState({ activeCategory: '' })}
+                            />
+                          )
+                        }
+                      </CategoryListener>
 
-              <StatementsListener categoryId={currentCategory.categoryId}>
-                {val =>
-                  val.statements.length > 0 &&
-                  val.statements.map(statement => (
-                    <AdminStatementItem
-                      toggleIsActive={clear =>
-                        this.handleSetCurrentStatement(statement.statementId, clear)
-                      }
-                      isActive={statement.statementId === activeStatement}>
-                      {statement.value}
-                    </AdminStatementItem>
-                  ))
-                }
-              </StatementsListener>
-            </Fragment>
-          )}
-          <AdminCreateStatement categoryId={currentCategory.categoryId} />
+                      <StatementsListener categoryId={categoryId}>
+                        {val =>
+                          val.statements.length > 0 &&
+                          val.statements.map(statement => (
+                            <AdminStatementItem
+                              toggleIsActive={clear =>
+                                this.handleSetCurrentStatement(statement.statementId, clear)
+                              }
+                              isActive={statement.statementId === activeStatement}
+                              value={statement.value}
+                              categoryId={categoryId}
+                              statementId={statement.statementId}>
+                              {statement.value}
+                            </AdminStatementItem>
+                          ))
+                        }
+                      </StatementsListener>
+                    </Fragment>
+                  )}
+                  <AdminCreateStatement categoryId={categoryId} />
+                </Fragment>
+              );
+            }}
+          </CategoryListener>
         </AdminContextComponent>
-      </Container>
+      </GlobalContainer>
     );
   }
 }
