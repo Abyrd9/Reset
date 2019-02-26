@@ -8,11 +8,15 @@ export default {
 		`;
   },
   colors: {
-    primary: '#EF233C',
+    primary: '#08BDBD',
+    secondary: '#EF233C',
     white: '#FFFFFF',
     black: '#1B1B1E ',
     gray: '#C0C0C1',
-    graySecondary: '#F2F0F0'
+    graySecondary: '#F2F0F0',
+    green: '#29BF12',
+    google: '#DC483C',
+    facebook: '#3B5998'
   },
   media: {
     laptop: (...args) => css`
@@ -32,10 +36,16 @@ export default {
     `
   },
   zIndex: {
-    default: 0,
-    bottom: 1,
-    middle: 2,
-    top: 3
+    base: 0,
+    tierOne: 1000,
+    tierTwo: 2000,
+    tierThree: 3000,
+    tierFour: 4000,
+    tierFive: 5000,
+    tierSix: 6000,
+    tierSeven: 7000,
+    tierEight: 8000,
+    tierNine: 9000
   },
   transition: (property, time, delay = 0) => {
     return `${property} ${time}s cubic-bezier(0.4, 0, 0.2, 1) ${delay}s`;

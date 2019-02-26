@@ -6,7 +6,8 @@ import { GlobalStyle } from './helpers/GlobalStyle';
 import Theme from './helpers/Theme';
 
 // Components
-import Routes from './components/Routes';
+import AuthPage from './components/pages/AuthPage';
+// import Routes from './components/Routes';
 
 // Run Helper Functions
 InitializeFirebase();
@@ -17,7 +18,7 @@ class App extends Component {
     return (
       <ThemeProvider theme={Theme}>
         <React.Fragment>
-          <Routes />
+          <AuthPage />
           <GlobalStyle />
         </React.Fragment>
       </ThemeProvider>
