@@ -10,20 +10,11 @@ import { useStore } from '../../../../state/store';
 import AuthDivider from '../AuthDivider/AuthDivider';
 import AuthSocialButton from '../AuthSocialButton/AuthSocialButton';
 
-const AuthSignUpForm = ({}) => {
+const AuthSignInForm = ({}) => {
   const { state, actions } = useStore();
   return (
     <Fragment>
-      <AuthFormTitle title="Sign up." />
-      <AuthInput
-        icon="user"
-        placeholder="Name"
-        type="text"
-        value={state.name}
-        onChange={e => actions.changeName(e.target.value)}
-        valueConfirmed={state.nameConfirmed}
-        valueErrorMessage="Please provide your full name."
-      />
+      <AuthFormTitle title="Sign in." />
       <AuthInput
         icon="envelope"
         placeholder="Email"
@@ -31,7 +22,6 @@ const AuthSignUpForm = ({}) => {
         value={state.email}
         onChange={e => actions.changeEmail(e.target.value)}
         valueConfirmed={state.emailConfirmed}
-        valueErrorMessage="Please provide a valid email address."
       />
       <AuthInput
         icon="lock"
@@ -40,18 +30,9 @@ const AuthSignUpForm = ({}) => {
         value={state.password}
         onChange={e => actions.changePassword(e.target.value)}
         valueConfirmed={state.passwordConfirmed}
-        valueErrorMessage="At least 6 characters with 1 uppercase and 1 numeric character."
       />
-      <AuthInput
-        icon="unlock"
-        placeholder="Confirm Password"
-        type="password"
-        value={state.confirmPassword}
-        onChange={e => actions.changeConfirmPassword(e.target.value)}
-        valueConfirmed={state.confirmPasswordMatch}
-        valueErrorMessage="Please confirm your password."
-      />
-      <AuthButton text="Sign Up" onClick={() => null} />
+      <AuthTextWithLink text="Forgot your Password?" linkText="Recover it." topPadding="0px" />
+      <AuthButton text="Sign In" onClick={() => null} />
       <AuthDivider text="or" />
       <AuthSocialButton isFacebook>
         <span>
@@ -64,14 +45,14 @@ const AuthSignUpForm = ({}) => {
         </span>
       </AuthSocialButton>
       <AuthTextWithLink
-        text="Already have an account?"
-        linkText="Sign in"
+        text="Don't have an account?"
+        linkText="Sign up"
         isCentered
       />
     </Fragment>
   );
 };
 
-AuthSignUpForm.propTypes = {};
+AuthSignInForm.propTypes = {};
 
-export default AuthSignUpForm;
+export default AuthSignInForm;

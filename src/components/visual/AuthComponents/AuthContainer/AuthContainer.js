@@ -5,6 +5,7 @@ import StringMatcher from '../../../functional/StringMatcher';
 import ResetLogoWhite from '../../../../img/ResetLogoWhite.png';
 import AuthDesktopTitle from '../AuthDesktopTitle/AuthDesktopTitle';
 import AuthSignUpForm from '../AuthSignUpForm/AuthSignUpForm';
+import AuthSignInForm from '../AuthSignInForm/AuthSignInForm';
 
 const AuthContainer = ({ isDesktop, isSignUpPage }) => {
   return (
@@ -30,12 +31,12 @@ const AuthContainer = ({ isDesktop, isSignUpPage }) => {
             />
           </LeftContainerBlock>
           <RightContainerBlock>
-            {isSignUpPage ? <AuthSignUpForm /> : <div>Sign In</div>}
+            {isSignUpPage ? <AuthSignUpForm /> : <AuthSignInForm />}
           </RightContainerBlock>
         </Fragment>
       ) : (
         <Fragment>
-          <div>Hey</div>
+          {isSignUpPage ? <AuthSignUpForm /> : <AuthSignInForm />}
         </Fragment>
       )}
     </Container>

@@ -13,8 +13,12 @@ export const Button = styled.button`
       border-radius: 5px;
       transition: all 0.1s ${theme.ease};
       margin: 18px 0px;
+      &:hover {
+        background-color: ${theme.colors.hoverPrimary};
+      }
       &:active {
         box-shadow: ${theme.shadowPressed};
+        background-color: ${theme.colors.primary};
       }
     `;
   }}

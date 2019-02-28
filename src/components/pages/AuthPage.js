@@ -1,15 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import useMediaQuery from '../functional/useMediaQuery';
-import DesktopBackground from '../visual/CommonComponents/DesktopBackground/DesktopBackground';
+import Background from '../visual/CommonComponents/Background/Background';
 import AuthContainer from '../visual/AuthComponents/AuthContainer/AuthContainer';
 
 const AuthPage = ({}) => {
-  const isDesktop = useMediaQuery(700);
+  const isDesktop = useMediaQuery(800);
   return (
-    <DesktopBackground>
-      <AuthContainer isDesktop={isDesktop} isSignUpPage={true} />
-    </DesktopBackground>
+    <Background>
+      <AuthContainer isDesktop={isDesktop} isSignUpPage={false} />
+    </Background>
   );
 };
 

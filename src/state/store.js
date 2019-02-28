@@ -12,7 +12,7 @@ const store = new Overmind({
     passwordConfirmed: false,
     confirmPasswordMatch: false,
     isSignUpPage: false,
-    isAuthenticated: false
+    isAuthenticated: false,
   },
   effects: {},
   actions: {

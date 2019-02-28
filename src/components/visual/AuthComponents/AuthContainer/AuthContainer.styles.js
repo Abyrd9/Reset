@@ -7,13 +7,14 @@ export const Container = styled.div`
       width: 100%;
       height: 100%;
       max-width: 920px;
-      max-height: 600px;
+      max-height: ${isDesktop ? '600px' : 'none'};
       background-color: ${theme.colors.white};
       display: flex;
       flex-direction: ${isDesktop ? 'row' : 'column'};
       justify-content: center;
       align-items: center;
       box-shadow: ${theme.shadow};
+      padding: ${isDesktop ? '0' : '0px 15px'};
     `;
   }}
 `;

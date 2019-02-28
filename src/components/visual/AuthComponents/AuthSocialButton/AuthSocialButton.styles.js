@@ -16,8 +16,14 @@ export const SocialButton = styled.button`
       box-shadow: ${theme.shadow};
       border-radius: 5px;
       transition: all 0.1s ${theme.ease};
+      &:hover {
+        ${isGoogle && `background-color: ${theme.colors.hoverGoogle}`};
+        ${isFacebook && `background-color: ${theme.colors.hoverFacebook}`};
+      }
       &:active {
         box-shadow: ${theme.shadowPressed};
+        ${isGoogle && `background-color: ${theme.colors.google}`};
+        ${isFacebook && `background-color: ${theme.colors.facebook}`};
       }
     `;
   }}

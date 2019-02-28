@@ -8,6 +8,7 @@ const StringMatcher = ({ string, pattern, replacement }) => {
   // Need to make sure the pattern passed in is a string,
   // If it isn't, simply return the string
   const patternIsString = !!pattern && typeof pattern === 'string';
+
   if (patternIsString && !pattern.includes('^')) {
     // Need to make sure the pattern is an even number so that the matchers
     // make sense. ex "{{}}", "<<>>", {""}
@@ -27,12 +28,12 @@ const StringMatcher = ({ string, pattern, replacement }) => {
 
     // using the replace method, pull the content out of the patterns
     // leaving only the patterns themselves, rather than having "{{text here}}",
-    // you will now have "^{{}}^" with the added ^ character
-    newString = newString.replace(regex, `^${pattern}^`);
+    // you will now have "##{{}}##" with the added # character
+    newString = newString.replace(regex, `##${pattern}##`);
 
-    // Now split the string by ^, map over the array of strings
+    // Now split the string by #, map over the array of strings
     // and replace the patterns with the replacement
-    newString = newString.split('^');
+    newString = newString.split('##');
     newString = newString.map(string => {
       if (string === pattern) {
         string = replacement;
@@ -43,6 +44,10 @@ const StringMatcher = ({ string, pattern, replacement }) => {
   return <Fragment>{newString}</Fragment>;
 };
 
-StringMatcher.propTypes = {};
+StringMatcher.propTypes = {
+  string: PropTypes.string,
+  pattern: PropTypes.string,
+  replace: PropTypes.node,
+};
 
 export default StringMatcher;

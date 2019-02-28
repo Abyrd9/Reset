@@ -16,7 +16,10 @@ export default {
     graySecondary: '#F2F0F0',
     green: '#29BF12',
     google: '#DC483C',
-    facebook: '#3B5998'
+    facebook: '#3B5998',
+    hoverPrimary: '#1EC3C3',
+    hoverGoogle: '#DF584D',
+    hoverFacebook: '#4C68A1'
   },
   media: {
     laptop: (...args) => css`
