@@ -1,43 +1,96 @@
 import { Overmind } from 'overmind';
 import { createHook } from 'overmind-react';
+import firebase from 'firebase';
+import { text } from '@fortawesome/fontawesome-svg-core';
 
 const store = new Overmind({
   state: {
-    name: '',
-    email: '',
-    password: '',
-    confirmPassword: '',
-    nameConfirmed: false,
-    emailConfirmed: false,
-    passwordConfirmed: false,
-    confirmPasswordMatch: false,
-    isSignUpPage: false,
-    isAuthenticated: false,
-  },
-  effects: {},
-  actions: {
-    changeName: ({ value: name, state }) => {
-      state.name = name;
-      state.nameConfirmed = name.length > 1 ? true : false;
+    signUp: {
+      name: '',
+      email: '',
+      password: '',
+      confirmPassword: '',
+      nameConfirmed: false,
+      emailConfirmed: false,
+      passwordConfirmed: false,
+      confirmPasswordMatch: false
     },
-    changeEmail: ({ value: email, state }) => {
-      state.email = email;
+    signIn: {
+      email: '',
+      password: ''
+    },
+    isSignUpPage: false,
+    isAuthenticationLoading: false,
+    authErrorMessage: '',
+    isAuthenticated: false,
+    userId: ''
+  },
+  effects: {
+    firebaseAuth: {
+      handleSignIn: (email, password) => {
+        return new Promise((resolve, reject) => {
+          try {
+            const res = firebase.auth().signInWithEmailAndPassword(email, password);
+            resolve(res);
+          } catch (err) {
+            reject(err);
+          }
+        });
+      },
+      handleSignOut: async () => {}
+    }
+  },
+  actions: {
+    changeSignUpName: ({ value: name, state }) => {
+      state.signUp.name = name;
+      state.signUp.nameConfirmed = name.length > 1 ? true : false;
+    },
+    changeSignUpEmail: ({ value: email, state }) => {
+      state.signUp.email = email;
       const emailRegex = /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
       const isValidated = emailRegex.test(email);
-      state.emailConfirmed = isValidated ? true : false;
+      state.signUp.emailConfirmed = isValidated ? true : false;
     },
-    changePassword: ({ value: password, state }) => {
-      state.password = password;
+    changeSignUpPassword: ({ value: password, state }) => {
+      state.signUp.password = password;
       const passwordRegex = /^(((?=.*[a-z])(?=.*[A-Z]))|((?=.*[a-z])(?=.*[0-9]))|((?=.*[A-Z])(?=.*[0-9])))(?=.{6,})/;
       const isValidated = passwordRegex.test(password);
-      state.passwordConfirmed = isValidated ? true : false;
-      const isMatchingPassword = state.confirmPassword === password && password !== '';
-      state.confirmPasswordMatch = isMatchingPassword ? true : false;
+      state.signUp.passwordConfirmed = isValidated ? true : false;
+      const isMatchingPassword = state.signUp.confirmPassword === password && password !== '';
+      state.signUp.confirmPasswordMatch = isMatchingPassword ? true : false;
     },
-    changeConfirmPassword: ({ value: confirmPassword, state }) => {
-      state.confirmPassword = confirmPassword;
-      const isMatchingPassword = confirmPassword === state.password && state.password !== '';
-      state.confirmPasswordMatch = isMatchingPassword ? true : false;
+    changeSignUpConfirmPassword: ({ value: confirmPassword, state }) => {
+      state.signUp.confirmPassword = confirmPassword;
+      const isMatchingPassword =
+        confirmPassword === state.signUp.password && state.signUp.password !== '';
+      state.signUp.confirmPasswordMatch = isMatchingPassword ? true : false;
+    },
+    changeSignInEmail: ({ value: email, state }) => {
+      state.signIn.email = email;
+    },
+    changeSignInPassword: ({ value: password, state }) => {
+      state.signIn.password = password;
+    },
+    toggleIsSignUpPage: ({ value, state }) => {
+      state.isSignUpPage = value;
+    },
+    handleSignIn: async ({ state, effects }) => {
+      const { email, password } = state.signIn;
+      try {
+        state.isAuthenticationLoading = true;
+        const userObject = await effects.firebaseAuth.handleSignIn(email, password);
+        console.log(userObject);
+        state.isAuthenticationLoading = false;
+        state.isAuthenticated = true;
+        state.userId = userObject.user.uid;
+      } catch (err) {
+        console.error(err.code);
+        console.error(err.message);
+        state.authErrorMessage = err.message;
+      }
+    },
+    changeAuthErrorMessage: ({ value: text, state }) => {
+      state.authErrorMessage = text;
     }
   }
 });

@@ -20,7 +20,7 @@ const AuthSignUpForm = ({}) => {
         placeholder="Name"
         type="text"
         value={state.name}
-        onChange={e => actions.changeName(e.target.value)}
+        onChange={e => actions.changeSignUpName(e.target.value)}
         valueConfirmed={state.nameConfirmed}
         valueErrorMessage="Please provide your full name."
       />
@@ -29,7 +29,7 @@ const AuthSignUpForm = ({}) => {
         placeholder="Email"
         type="email"
         value={state.email}
-        onChange={e => actions.changeEmail(e.target.value)}
+        onChange={e => actions.changeSignUpEmail(e.target.value)}
         valueConfirmed={state.emailConfirmed}
         valueErrorMessage="Please provide a valid email address."
       />
@@ -38,7 +38,7 @@ const AuthSignUpForm = ({}) => {
         placeholder="Password"
         type="password"
         value={state.password}
-        onChange={e => actions.changePassword(e.target.value)}
+        onChange={e => actions.changeSignUpPassword(e.target.value)}
         valueConfirmed={state.passwordConfirmed}
         valueErrorMessage="At least 6 characters with 1 uppercase and 1 numeric character."
       />
@@ -47,7 +47,7 @@ const AuthSignUpForm = ({}) => {
         placeholder="Confirm Password"
         type="password"
         value={state.confirmPassword}
-        onChange={e => actions.changeConfirmPassword(e.target.value)}
+        onChange={e => actions.changeSignUpConfirmPassword(e.target.value)}
         valueConfirmed={state.confirmPasswordMatch}
         valueErrorMessage="Please confirm your password."
       />
@@ -66,6 +66,7 @@ const AuthSignUpForm = ({}) => {
       <AuthTextWithLink
         text="Already have an account?"
         linkText="Sign in"
+        onClick={() => actions.toggleIsSignUpPage(false)}
         isCentered
       />
     </Fragment>

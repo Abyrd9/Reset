@@ -9,6 +9,7 @@ import AuthTextWithLink from '../AuthTextWithLink/AuthTextWithLink';
 import { useStore } from '../../../../state/store';
 import AuthDivider from '../AuthDivider/AuthDivider';
 import AuthSocialButton from '../AuthSocialButton/AuthSocialButton';
+import ErrorPopup from '../../CommonComponents/ErrorPopup/ErrorPopup';
 
 const AuthSignInForm = ({}) => {
   const { state, actions } = useStore();
@@ -19,20 +20,20 @@ const AuthSignInForm = ({}) => {
         icon="envelope"
         placeholder="Email"
         type="email"
-        value={state.email}
-        onChange={e => actions.changeEmail(e.target.value)}
+        value={state.signIn.email}
+        onChange={e => actions.changeSignInEmail(e.target.value)}
         valueConfirmed={state.emailConfirmed}
       />
       <AuthInput
         icon="lock"
         placeholder="Password"
         type="password"
-        value={state.password}
-        onChange={e => actions.changePassword(e.target.value)}
+        value={state.signIn.password}
+        onChange={e => actions.changeSignInPassword(e.target.value)}
         valueConfirmed={state.passwordConfirmed}
       />
       <AuthTextWithLink text="Forgot your Password?" linkText="Recover it." topPadding="0px" />
-      <AuthButton text="Sign In" onClick={() => null} />
+      <AuthButton text="Sign In" onClick={() => actions.handleSignIn()} />
       <AuthDivider text="or" />
       <AuthSocialButton isFacebook>
         <span>
@@ -47,8 +48,15 @@ const AuthSignInForm = ({}) => {
       <AuthTextWithLink
         text="Don't have an account?"
         linkText="Sign up"
+        onClick={() => actions.toggleIsSignUpPage(true)}
         isCentered
       />
+      {state.authErrorMessage && (
+        <ErrorPopup
+          message={state.authErrorMessage}
+          handleClosePopup={() => actions.changeAuthErrorMessage('')}
+        />
+      )}
     </Fragment>
   );
 };
