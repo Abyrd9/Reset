@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 const useMediaQuery = maxWidth => {
   // max-width should be an integer, do a check to make sure
   if (Number.isInteger(maxWidth)) {
-    const [windowMatches, setWindowMatches] = useState(null);
+    const [windowMatches, setWindowMatches] = useState(true);
 
     const checkMediaWidth = query => {
       if (query.matches) {

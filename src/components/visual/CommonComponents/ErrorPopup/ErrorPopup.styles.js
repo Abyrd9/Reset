@@ -1,9 +1,28 @@
 import styled, { css, keyframes } from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
+const errorAnimation = keyframes`
+  0% {
+    transform: translateY(10px);
+    opacity: 0;
+  }
+  5% {
+    transform: translateY(0px);
+    opacity: 1;
+  }
+  95% {
+    transform: translateY(0px);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(10px);
+    opacity: 0;
+  }
+`;
+
 export const ErrorPopupContainer = styled.div`
   ${props => {
-    const { theme, timer } = props;
+    const { theme } = props;
     return css`
       position: absolute;
       bottom: 15px;
@@ -16,30 +35,9 @@ export const ErrorPopupContainer = styled.div`
       border: 2px solid #f8333c;
       display: flex;
       align-items: baseline;
-      animation-name: ${popupAnimation};
-      animation-duration: ${`${timer.toString()}s`};
-      animation-timing-function: ${theme.ease};
+      animation: ${errorAnimation} 5s ${theme.ease};
     `;
   }}
-`;
-
-const popupAnimation = keyframes`
-	0% {
-		transform: translateY(10px);
-		opacity: 0;
-	}
-	5% {
-		transform: translateY(0px);
-		opacity: 1;
-	}
-	95% {
-		transform: translateY(0px);
-		opacity: 1;
-	}
-	100% {
-		transform: translateY(10px);
-		opacity: 0;
-	}
 `;
 
 export const ErrorMessage = styled.p`

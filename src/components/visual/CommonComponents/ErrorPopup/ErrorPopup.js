@@ -1,47 +1,63 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 import { ErrorPopupContainer, ErrorMessage, ExitIcon } from './ErrorPopup.styles';
+import { useStore } from '../../../../state/store';
 
-const ErrorPopup = ({ message, handleClosePopup }) => {
+const ErrorPopup = React.memo(() => {
+  const {
+    state: {
+      errorHandling: { errorMessage, errorActive },
+    },
+    actions: { clearErrorMessage },
+  } = useStore();
+
+  // create dom portal container
   const targetElement = document.createElement('div');
+  targetElement.id = 'error-message-container';
 
-  let timer = 5000;
-  let closeTimer;
-  const startCloseTimer = () => {
-    closeTimer = setTimeout(() => {
-      handleClosePopup();
-    }, timer);
+  let timer;
+  const errorTimer = () => {
+    timer = setTimeout(() => {
+      setTimeout(() => {
+        clearErrorMessage();
+      }, 500);
+    }, 4500);
   };
 
-  const stopCloseTimer = () => {
-    clearTimeout(closeTimer);
+  const stopTimer = () => {
+    clearTimeout(timer);
+    clearErrorMessage();
   };
 
   useEffect(() => {
-    document.body.appendChild(targetElement);
-    startCloseTimer();
-    return () => document.body.removeChild(targetElement);
-  }, []);
+    if (errorMessage && errorMessage.length > 0) {
+      document.body.appendChild(targetElement);
+      errorTimer();
+    }
+    return () => {
+      const container = document.getElementById('error-message-container');
+      if (!!container) {
+        document.body.removeChild(targetElement);
+      }
+    };
+  }, [errorMessage]);
 
-  return ReactDOM.createPortal(
-    <ErrorPopupContainer timer={timer / 1000}>
-      <ErrorMessage>{message}</ErrorMessage>
-      <ExitIcon
-        icon="times"
-        onClick={() => {
-          stopCloseTimer();
-          handleClosePopup();
-        }}
-      />
-    </ErrorPopupContainer>,
-    targetElement
-  );
-};
+  if (errorMessage && errorMessage.length > 0) {
+    return ReactDOM.createPortal(
+      <ErrorPopupContainer>
+        <ErrorMessage>{errorMessage}</ErrorMessage>
+        <ExitIcon icon="times" onClick={() => stopTimer()} />
+      </ErrorPopupContainer>,
+      targetElement
+    );
+  }
+  return null;
+});
 
 ErrorPopup.propTypes = {
   message: PropTypes.string,
-  handleClosePopup: PropTypes.func
+  handleClosePopup: PropTypes.func,
 };
 
 export default ErrorPopup;

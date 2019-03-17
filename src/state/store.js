@@ -13,17 +13,20 @@ const store = new Overmind({
       nameConfirmed: false,
       emailConfirmed: false,
       passwordConfirmed: false,
-      confirmPasswordMatch: false
+      confirmPasswordMatch: false,
     },
     signIn: {
       email: '',
-      password: ''
+      password: '',
+    },
+    errorHandling: {
+      errorActive: false,
+      errorMessage: '',
     },
     isSignUpPage: false,
     isAuthenticationLoading: false,
-    authErrorMessage: '',
     isAuthenticated: false,
-    userId: ''
+    userId: '',
   },
   effects: {
     firebaseAuth: {
@@ -37,8 +40,8 @@ const store = new Overmind({
           }
         });
       },
-      handleSignOut: async () => {}
-    }
+      handleSignOut: async () => {},
+    },
   },
   actions: {
     changeSignUpName: ({ value: name, state }) => {
@@ -79,20 +82,24 @@ const store = new Overmind({
       try {
         state.isAuthenticationLoading = true;
         const userObject = await effects.firebaseAuth.handleSignIn(email, password);
-        console.log(userObject);
         state.isAuthenticationLoading = false;
         state.isAuthenticated = true;
         state.userId = userObject.user.uid;
       } catch (err) {
-        console.error(err.code);
-        console.error(err.message);
-        state.authErrorMessage = err.message;
+        if (state.errorHandling.errorMessage === '') {
+          state.errorHandling.errorMessage = err.message;
+        }
       }
     },
-    changeAuthErrorMessage: ({ value: text, state }) => {
-      state.authErrorMessage = text;
-    }
-  }
+    setErrorMessage: ({ value: text, state }) => {
+      if (state.errorHandling.errorMessage === '') {
+        state.errorHandling.errorMessage = text;
+      }
+    },
+    clearErrorMessage: ({ state }) => {
+      state.errorHandling.errorMessage = '';
+    },
+  },
 });
 
 export const useStore = createHook(store);

@@ -12,7 +12,9 @@ import AuthSocialButton from '../AuthSocialButton/AuthSocialButton';
 import ErrorPopup from '../../CommonComponents/ErrorPopup/ErrorPopup';
 
 const AuthSignInForm = ({}) => {
+  console.log('re-render sign in')
   const { state, actions } = useStore();
+
   return (
     <Fragment>
       <AuthFormTitle title="Sign in." />
@@ -51,12 +53,6 @@ const AuthSignInForm = ({}) => {
         onClick={() => actions.toggleIsSignUpPage(true)}
         isCentered
       />
-      {state.authErrorMessage && (
-        <ErrorPopup
-          message={state.authErrorMessage}
-          handleClosePopup={() => actions.changeAuthErrorMessage('')}
-        />
-      )}
     </Fragment>
   );
 };

@@ -7,6 +7,7 @@ import Theme from './helpers/Theme';
 
 // Components
 import AuthPage from './components/pages/AuthPage';
+import ErrorPopup from './components/visual/CommonComponents/ErrorPopup/ErrorPopup';
 // import Routes from './components/Routes';
 
 // Run Helper Functions
@@ -19,6 +20,7 @@ class App extends Component {
       <ThemeProvider theme={Theme}>
         <React.Fragment>
           <AuthPage />
+          <ErrorPopup />
           <GlobalStyle />
         </React.Fragment>
       </ThemeProvider>

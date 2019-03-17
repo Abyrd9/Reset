@@ -14,6 +14,7 @@ const AuthPage = ({}) => {
   const {
     state: { isSignUpPage }
   } = useStore();
+  console.log('re-render authpage', isDesktop)
   return (
     <Background>
       <AuthContainer isDesktop={isDesktop} isSignUpPage={isSignUpPage} />
