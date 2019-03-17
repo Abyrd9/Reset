@@ -1,7 +1,6 @@
 import { Overmind } from 'overmind';
 import { createHook } from 'overmind-react';
 import firebase from 'firebase';
-import { text } from '@fortawesome/fontawesome-svg-core';
 
 const store = new Overmind({
   state: {
@@ -34,6 +33,16 @@ const store = new Overmind({
         return new Promise((resolve, reject) => {
           try {
             const res = firebase.auth().signInWithEmailAndPassword(email, password);
+            resolve(res);
+          } catch (err) {
+            reject(err);
+          }
+        });
+      },
+      handleSignUp: (name, email, password) => {
+        return new Promise((resolve, reject) => {
+          try {
+            const res = firebase.auth().createUserWithEmailAndPassword(email, password);
             resolve(res);
           } catch (err) {
             reject(err);
@@ -85,9 +94,67 @@ const store = new Overmind({
         state.isAuthenticationLoading = false;
         state.isAuthenticated = true;
         state.userId = userObject.user.uid;
+        state.signIn = {
+          email: '',
+          password: '',
+        };
+        state.signUp = {
+          name: '',
+          email: '',
+          password: '',
+          confirmPassword: '',
+          nameConfirmed: false,
+          emailConfirmed: false,
+          passwordConfirmed: false,
+          confirmPasswordMatch: false,
+        };
       } catch (err) {
         if (state.errorHandling.errorMessage === '') {
           state.errorHandling.errorMessage = err.message;
+        }
+      }
+    },
+    handleSignUp: async ({ state, effects }) => {
+      const {
+        name,
+        email,
+        password,
+        nameConfirmed,
+        emailConfirmed,
+        passwordConfirmed,
+        confirmPasswordMatch,
+      } = state.signUp;
+
+      if (!nameConfirmed || !emailConfirmed || !passwordConfirmed || !confirmPasswordMatch) {
+        if (state.errorHandling.errorMessage === '') {
+          state.errorHandling.errorMessage =
+            "One or more input fields aren't filled out correctly.";
+        }
+      } else {
+        try {
+          state.isAuthenticationLoading = true;
+          const userObject = await effects.firebaseAuth.handleSignUp(name, email, password);
+          state.isAuthenticationLoading = false;
+          state.isAuthenticated = true;
+          state.userId = userObject.user.uid;
+          state.signIn = {
+            email: '',
+            password: '',
+          };
+          state.signUp = {
+            name: '',
+            email: '',
+            password: '',
+            confirmPassword: '',
+            nameConfirmed: false,
+            emailConfirmed: false,
+            passwordConfirmed: false,
+            confirmPasswordMatch: false,
+          };
+        } catch (err) {
+          if (state.errorHandling.errorMessage === '') {
+            state.errorHandling.errorMessage = err.message;
+          }
         }
       }
     },

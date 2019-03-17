@@ -19,39 +19,39 @@ const AuthSignUpForm = ({}) => {
         icon="user"
         placeholder="Name"
         type="text"
-        value={state.name}
+        value={state.signUp.name}
         onChange={e => actions.changeSignUpName(e.target.value)}
-        valueConfirmed={state.nameConfirmed}
+        valueConfirmed={state.signUp.nameConfirmed}
         valueErrorMessage="Please provide your full name."
       />
       <AuthInput
         icon="envelope"
         placeholder="Email"
         type="email"
-        value={state.email}
+        value={state.signUp.email}
         onChange={e => actions.changeSignUpEmail(e.target.value)}
-        valueConfirmed={state.emailConfirmed}
+        valueConfirmed={state.signUp.emailConfirmed}
         valueErrorMessage="Please provide a valid email address."
       />
       <AuthInput
         icon="lock"
         placeholder="Password"
         type="password"
-        value={state.password}
+        value={state.signUp.password}
         onChange={e => actions.changeSignUpPassword(e.target.value)}
-        valueConfirmed={state.passwordConfirmed}
+        valueConfirmed={state.signUp.passwordConfirmed}
         valueErrorMessage="At least 6 characters with 1 uppercase and 1 numeric character."
       />
       <AuthInput
         icon="unlock"
         placeholder="Confirm Password"
         type="password"
-        value={state.confirmPassword}
+        value={state.signUp.confirmPassword}
         onChange={e => actions.changeSignUpConfirmPassword(e.target.value)}
-        valueConfirmed={state.confirmPasswordMatch}
+        valueConfirmed={state.signUp.confirmPasswordMatch}
         valueErrorMessage="Please confirm your password."
       />
-      <AuthButton text="Sign Up" onClick={() => null} />
+      <AuthButton text="Sign Up" onClick={() => actions.handleSignUp()} />
       <AuthDivider text="or" />
       <AuthSocialButton isFacebook>
         <span>

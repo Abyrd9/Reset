@@ -1,13 +1,11 @@
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { Container, LeftContainerBlock, RightContainerBlock } from './AuthContainer.styles';
-import StringMatcher from '../../../functional/StringMatcher';
+import StringMatcher from '../../../helpers/StringMatcher';
 import ResetLogoWhite from '../../../../img/ResetLogoWhite.png';
 import AuthDesktopTitle from '../AuthDesktopTitle/AuthDesktopTitle';
-import AuthSignUpForm from '../AuthSignUpForm/AuthSignUpForm';
-import AuthSignInForm from '../AuthSignInForm/AuthSignInForm';
 
-const AuthContainer = ({ isDesktop, isSignUpPage }) => {
+const AuthContainer = ({ isDesktop, children }) => {
   return (
     <Container isDesktop={isDesktop}>
       {isDesktop ? (
@@ -30,14 +28,10 @@ const AuthContainer = ({ isDesktop, isSignUpPage }) => {
               }
             />
           </LeftContainerBlock>
-          <RightContainerBlock>
-            {isSignUpPage ? <AuthSignUpForm /> : <AuthSignInForm />}
-          </RightContainerBlock>
+          <RightContainerBlock>{children}</RightContainerBlock>
         </Fragment>
       ) : (
-        <Fragment>
-          {isSignUpPage ? <AuthSignUpForm /> : <AuthSignInForm />}
-        </Fragment>
+        <Fragment>{children}</Fragment>
       )}
     </Container>
   );
@@ -45,7 +39,7 @@ const AuthContainer = ({ isDesktop, isSignUpPage }) => {
 
 AuthContainer.propTypes = {
   isDesktop: PropTypes.bool,
-  isSignUpPage: PropTypes.bool
+  children: PropTypes.node,
 };
 
 export default AuthContainer;
